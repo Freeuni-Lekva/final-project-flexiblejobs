@@ -1,4 +1,33 @@
 package accounts;
 
+import jobs.Job;
+
+import java.util.ArrayList;
+
 public interface Account {
+
+    public String getUserName();
+
+    public String getPassword();
+
+    public String changePassword(String newPassword);
+
+    public int getBalance();
+
+    public void deposit(int amount);
+
+    public void withdraw(int amount);
+
+    public PersonalData getPersonalData();
+
+    public void setPersonalData(PersonalData data);
+
+    public ArrayList<Job> getWorkHistory();
+
+    public void addJob(Job job);
+
+    public double getRating();
+
+    public void updateRating(double rate);
+
 }
