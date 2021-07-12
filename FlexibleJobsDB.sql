@@ -2,16 +2,16 @@ CREATE DATABASE FlexibleJobs;
 USE FlexibleJobs;
 
 CREATE TABLE messages (
-    sender VARCHAR(60),
-    receiver VARCHAR(60),
+    sender VARCHAR(30),
+    receiver VARCHAR(30),
     message VARCHAR(1000),
     timesent VARCHAR(25)
 );
 
 CREATE TABLE personal_info(
-	username VARCHAR(60),
-	firstname VARCHAR(60),
-    lastname VARCHAR(60),
+	username VARCHAR(30),
+	firstname VARCHAR(30),
+    lastname VARCHAR(30),
     imagefile VARCHAR(60),
     livingplace VARCHAR(60),
     profileheading VARCHAR(100),
@@ -19,15 +19,15 @@ CREATE TABLE personal_info(
 );
 
 CREATE TABLE accounts(
-	username VARCHAR(60),
-    pass VARCHAR(60),
+	username VARCHAR(30),
+    pass VARCHAR(30),
     balance INT,
     rating DECIMAL(3,2)
 );
 
 CREATE TABLE jobs(
 	jobid INT NOT NULL AUTO_INCREMENT,
-    employee VARCHAR(60),
+    employer VARCHAR(30),
     heading VARCHAR(100),
     jobdescription VARCHAR(5000),
     budget INT,
@@ -40,12 +40,22 @@ CREATE TABLE jobs(
 
 CREATE TABLE applications(
 	jobid INT,
-    usename VARCHAR(60),
+    usename VARCHAR(30),
     datesent VARCHAR(25),
     letter VARCHAR(5000)
 );
 
 CREATE TABLE hires(
 	jobid INT,
-    username VARCHAR(60)
+    username VARCHAR(30)
+);
+
+CREATE TABLE jobskills(
+	jobid INT,
+    skill VARCHAR(30)
+);
+
+CREATE TABLE employeeskills(
+	username VARCHAR(30),
+    skill VARCHAR(30)
 );
