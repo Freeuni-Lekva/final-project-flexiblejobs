@@ -2,6 +2,7 @@ package accounts;
 
 import jobs.Job;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public interface Account {
@@ -26,8 +27,10 @@ public interface Account {
 
     public void addJob(Job job);
 
-    public double getRating();
+    public BigDecimal getRating();
 
     public void updateRating(double rate);
+
+    public String getType();
 
 }

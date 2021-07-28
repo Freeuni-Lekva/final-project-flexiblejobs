@@ -2,6 +2,7 @@ package accounts;
 
 import jobs.Job;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class Employee implements Account{
@@ -10,8 +11,19 @@ public class Employee implements Account{
     private String password;
     private int balance;
     private PersonalData data;
+    private String type;
+    private BigDecimal rating;
 
-    public Employee() {
+    public Employee(String username,String password, int balance,String type, BigDecimal rating) {
+        this.username=username;
+        this.password=password;
+        this.balance=balance;
+        this.type=type;
+        this.rating=rating;
+    }
+
+    public Employee(String username, String password, String type){
+        this(username,password,0,type,BigDecimal.valueOf(0));
     }
 
     @Override
@@ -65,12 +77,17 @@ public class Employee implements Account{
     }
 
     @Override
-    public double getRating() {
-        return 0;
+    public BigDecimal getRating() {
+        return null;
     }
 
     @Override
     public void updateRating(double rate) {
 
+    }
+
+    @Override
+    public String getType() {
+        return null;
     }
 }

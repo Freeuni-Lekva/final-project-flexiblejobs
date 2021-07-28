@@ -8,4 +8,8 @@ public class FlexibleJobsConstants {
     public static final String USER="root";
     public static final String PASSWORD="rootroot";
 
+    public static final String ACCOUNT_ROLE_EMPLOYEE="employee";
+    public static final String ACCOUNT_ROLE_EMPLOYER="employer";
+    public static final String ACCOUNT_ROLE_ADMINISTRATOR="administrator";
+
 }

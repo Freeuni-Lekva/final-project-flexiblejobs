@@ -22,7 +22,8 @@ CREATE TABLE accounts(
 	username VARCHAR(30),
     pass VARCHAR(30),
     balance INT,
-    rating DECIMAL(3,2)
+    rating DECIMAL(3,2),
+    acctype VARCHAR(15)
 );
 
 CREATE TABLE jobs(
