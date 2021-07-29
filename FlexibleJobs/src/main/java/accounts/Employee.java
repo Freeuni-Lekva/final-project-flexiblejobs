@@ -1,6 +1,7 @@
 package accounts;
 
 import jobs.Job;
+import servlets.FlexibleJobsConstants;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -11,19 +12,18 @@ public class Employee implements Account{
     private String password;
     private int balance;
     private PersonalData data;
-    private String type;
+    private final String type= FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE;
     private BigDecimal rating;
 
-    public Employee(String username,String password, int balance,String type, BigDecimal rating) {
+    public Employee(String username,String password, int balance,BigDecimal rating) {
         this.username=username;
         this.password=password;
         this.balance=balance;
-        this.type=type;
         this.rating=rating;
     }
 
-    public Employee(String username, String password, String type){
-        this(username,password,0,type,BigDecimal.valueOf(0));
+    public Employee(String username, String password){
+        this(username,password,0,BigDecimal.valueOf(0));
     }
 
     @Override

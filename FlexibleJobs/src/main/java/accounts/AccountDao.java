@@ -1,8 +1,10 @@
 package accounts;
 
 import jobs.Job;
+import servlets.FlexibleJobsConstants;
 
 import javax.sql.DataSource;
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,31 +22,95 @@ public class AccountDao {
         addPersonalData(acc.getPersonalData(), acc.getUserName());
     }
 
-    public List<Account> selectAccounts(String filter) {
-//        List<Account> result = new ArrayList<>();
-//        try {
-//            Statement stm = conn.createStatement();
-//            ResultSet rs = stm.executeQuery(
-//                    "SELECT id, first_name, last_name, enrollment_year FROM students");
-//            while (rs.next()) {
-//                ret.add(new Student(
-//                        rs.getInt(1),
-//                        rs.getString(2),
-//                        rs.getString(3),
-//                        rs.getInt(4)));
-//            }
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-//        return ret;
-return null;
+    public List<Account> selectAllByType(String type) {
+        Connection connection=null;
+        List<Account> result = new ArrayList<>();
+        try {
+            connection=dataSource.getConnection();
+            Statement stm = connection.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT* FROM accounts WHERE acctype="+type);
+            while (rs.next()) {
+                String username=rs.getString(1);
+                String password=rs.getString(2);
+                int balance=rs.getInt(3);
+                BigDecimal rating=rs.getBigDecimal(4);
+                Account acc=null;
+                if(type.equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE))
+                    acc=new Employee(username,password,balance,rating);
+                else if(type.equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER))
+                    acc=new Employer(username,password,balance,rating);
+                result.add(acc);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if(connection!=null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return result;
+
     }
 
     public void delete(String username) {
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            PreparedStatement stm = connection.prepareStatement(
+                    "DELETE FROM accounts WHERE username = ?");
+            stm.setString(1, username);
+            stm.executeUpdate();
+            stm = connection.prepareStatement(
+                    "DELETE FROM personal_info WHERE username = ?");
+            stm.setString(1, username);
+            stm.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
     }
 
-    public List<Account> SelectBySkills(Job job) {
-        return null;
+    public Account SelectByUsername(String username) {
+        Connection connection = null;
+        Account result=null;
+        try {
+            connection = dataSource.getConnection();
+            PreparedStatement stm = connection.prepareStatement(
+                    "SELECT FROM accounts WHERE username = ?");
+            stm.setString(1, username);
+            ResultSet rs = stm.executeQuery();
+            String password=rs.getString(2);
+            int balance=rs.getInt(3);
+            BigDecimal rating=rs.getBigDecimal(4);
+            String type=rs.getString(5);
+            if(type.equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER)){
+                result=new Employer(username,password,balance,rating);
+            }else if(type.equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE)) {
+                result = new Employee(username, password, balance, rating);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return result;
     }
 
 
@@ -80,16 +146,15 @@ return null;
         try {
             connection = dataSource.getConnection();
             stm = connection.prepareStatement(
-                    "INSERT INTO personal_info (username, firstname, lastname,imagefile,livingplace" +
+                    "INSERT INTO personal_info (username, firstname, lastname,livingplace" +
                             "profileheading,profiledescription) " +
                             "VALUES (?, ?, ?, ?, ?, ?, ?);");
             stm.setString(1, username);
             stm.setString(2, data.getFirstName());
             stm.setString(3, data.getLastName());
-            stm.setString(4, data.getImageFile());
             stm.setString(4, data.getLivingPlace());
-            stm.setString(4, data.getProfileHeading());
-            stm.setString(4, data.getProfileDescription());
+            stm.setString(5, data.getProfileHeading());
+            stm.setString(6, data.getProfileDescription());
             stm.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

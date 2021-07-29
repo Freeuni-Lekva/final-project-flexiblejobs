@@ -12,7 +12,6 @@ CREATE TABLE personal_info(
 	username VARCHAR(30),
 	firstname VARCHAR(30),
     lastname VARCHAR(30),
-    imagefile VARCHAR(60),
     livingplace VARCHAR(60),
     profileheading VARCHAR(100),
     profiledescription VARCHAR(5000)

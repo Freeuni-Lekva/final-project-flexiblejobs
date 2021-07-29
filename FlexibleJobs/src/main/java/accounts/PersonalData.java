@@ -6,10 +6,6 @@ public interface PersonalData {
 
     public String getLastName();
 
-    public void setImageFile(String image);
-
-    public String getImageFile();
-
     public void setLivingPlace(String country);
 
     public String getLivingPlace();
