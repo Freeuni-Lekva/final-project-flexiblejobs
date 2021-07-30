@@ -11,7 +11,7 @@ public interface Account {
 
     public String getPassword();
 
-    public String changePassword(String newPassword);
+    public void changePassword(String newPassword);
 
     public int getBalance();
 

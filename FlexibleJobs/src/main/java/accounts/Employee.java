@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Employee implements Account{
 
-    private String username;
+    private final String username;
     private String password;
     private int balance;
     private PersonalData data;
@@ -28,42 +28,43 @@ public class Employee implements Account{
 
     @Override
     public String getUserName() {
-        return null;
+        return username;
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override
-    public String changePassword(String newPassword) {
-        return null;
+    public void changePassword(String newPassword) {
+        password=newPassword;
+        AccountDao.updatePassword(username,password);
     }
 
     @Override
     public int getBalance() {
-        return 0;
+        return balance;
     }
 
     @Override
-    public void deposit(int amount) {
-
+    public synchronized void deposit(int amount) {
+        balance+=amount;
+        AccountDao.updateBalance(username,balance);
     }
 
     @Override
-    public void withdraw(int amount) {
-
+    public synchronized void withdraw(int amount) {
+        balance-=amount;
+        AccountDao.updateBalance(username,balance);
     }
 
     @Override
-    public void setPersonalData(PersonalData data) {
-
-    }
+    public void setPersonalData(PersonalData data) { this.data=data; }
 
     @Override
     public PersonalData getPersonalData() {
-        return null;
+        return data;
     }
 
     @Override
@@ -78,7 +79,7 @@ public class Employee implements Account{
 
     @Override
     public BigDecimal getRating() {
-        return null;
+        return rating;
     }
 
     @Override
@@ -88,6 +89,6 @@ public class Employee implements Account{
 
     @Override
     public String getType() {
-        return null;
+        return type;
     }
 }

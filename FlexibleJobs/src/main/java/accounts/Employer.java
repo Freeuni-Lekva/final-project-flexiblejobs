@@ -38,8 +38,8 @@ public class Employer implements Account{
     }
 
     @Override
-    public String changePassword(String newPassword) {
-        return null;
+    public void changePassword(String newPassword) {
+
     }
 
     @Override

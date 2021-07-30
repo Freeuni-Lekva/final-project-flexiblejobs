@@ -11,10 +11,56 @@ import java.util.List;
 
 public class AccountDao {
 
-    private DataSource dataSource;
+    private static DataSource dataSource;
 
     public AccountDao(DataSource dataSource) {
         this.dataSource = dataSource;
+    }
+
+    public static void updateBalance(String username, int balance){
+        Connection connection=null;
+        try {
+            connection=dataSource.getConnection();
+            Statement stm=connection.createStatement();
+            stm.executeQuery("UPDATE accounts");
+            PreparedStatement statement = connection.prepareStatement(
+                    "SET balance="+balance+" WHERE username = ?");
+            statement.setString(1, username);
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            if(connection!=null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public static void updatePassword(String username, String password){
+        Connection connection=null;
+        try {
+            connection=dataSource.getConnection();
+            Statement stm=connection.createStatement();
+            stm.executeQuery("UPDATE accounts");
+            PreparedStatement statement = connection.prepareStatement(
+                    "SET pass="+password+" WHERE username = ?");
+            statement.setString(1, username);
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            if(connection!=null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
     }
 
     public void addAccount(Account acc) throws SQLException {
