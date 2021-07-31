@@ -136,6 +136,7 @@ public class AccountDao {
                     "SELECT FROM accounts WHERE username = ?");
             stm.setString(1, username);
             ResultSet rs = stm.executeQuery();
+            rs.next();
             String password=rs.getString(2);
             int balance=rs.getInt(3);
             BigDecimal rating=rs.getBigDecimal(4);
@@ -187,7 +188,7 @@ public class AccountDao {
     }
 
     private void addPersonalData(PersonalData data, String username) {
-        PreparedStatement stm = null;
+        PreparedStatement stm;
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
