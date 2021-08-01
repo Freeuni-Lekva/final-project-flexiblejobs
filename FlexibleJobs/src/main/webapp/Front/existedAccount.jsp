@@ -22,6 +22,8 @@
     <input name="username" type="text" placeholder="Enter username" id="usernameInput" value="<%= username%>">
     <br>
     <br>
+    <label for="passwordInput">Password: </label>
+    <input name="password" id="passwordInput" placeholder="Enter password" type="password">
     <input type="submit" value="Login">
     <br>
     <br>
