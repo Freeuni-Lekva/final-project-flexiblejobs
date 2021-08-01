@@ -18,7 +18,7 @@ public class LoginHandler extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        AccountDao accountDao = (AccountDao) req.getServletContext().getAttribute("accountDatabase");
+        AccountDao accountDao = (AccountDao) req.getServletContext().getAttribute("datasource");
 
         String username = req.getParameter("username");
 
