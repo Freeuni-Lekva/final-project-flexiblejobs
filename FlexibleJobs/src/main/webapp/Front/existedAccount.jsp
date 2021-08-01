@@ -16,7 +16,7 @@
     String username = request.getParameter("username");
 %>
 
-<form action="/loginHandler" method="post">
+<form action="/existedAccLogin" method="post">
     <h3 align="center"> Please enter password </h3>
     <label for="usernameInput">User Name: </label>
     <input name="username" type="text" placeholder="Enter username" id="usernameInput" value="<%= username%>">
