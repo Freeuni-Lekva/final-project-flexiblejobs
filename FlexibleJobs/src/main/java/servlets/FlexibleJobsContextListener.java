@@ -1,5 +1,6 @@
 package servlets;
 
+import accounts.AccountDao;
 import com.mysql.cj.jdbc.MysqlConnectionPoolDataSource;
 
 import javax.servlet.ServletContextEvent;
@@ -19,7 +20,8 @@ public class FlexibleJobsContextListener implements ServletContextListener {
         datasource.setUser(FlexibleJobsConstants.USER);
         datasource.setPassword(FlexibleJobsConstants.PASSWORD);
         datasource.setDatabaseName(FlexibleJobsConstants.DB_NAME);
-        sce.getServletContext().setAttribute("datasource",datasource);
+        AccountDao accountDao = new AccountDao(datasource);
+        sce.getServletContext().setAttribute("accountDao",accountDao);
     }
 
     @Override
