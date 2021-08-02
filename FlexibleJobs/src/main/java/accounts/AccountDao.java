@@ -133,7 +133,7 @@ public class AccountDao {
         try {
             connection = dataSource.getConnection();
             PreparedStatement stm = connection.prepareStatement(
-                    "SELECT FROM accounts WHERE username = ?");
+                    "SELECT * FROM accounts WHERE username = ?");
             stm.setString(1, username);
             ResultSet rs = stm.executeQuery();
             rs.next();
