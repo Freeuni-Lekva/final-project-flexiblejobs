@@ -14,7 +14,7 @@ import java.io.IOException;
 public class ExistedAccountLogin extends HttpServlet{
         @Override
         protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            AccountDao accountDao = new AccountDao((DataSource) req.getServletContext().getAttribute("datasource"));
+            AccountDao accountDao = (AccountDao) req.getServletContext().getAttribute("accountDao");
 
             String username = req.getParameter("username");
             String password = req.getParameter("password");
