@@ -67,13 +67,13 @@ public class Administrator implements Account{
 
     @Override
     public ArrayList<Job> getWorkHistory() {
-        //IMPLEMENT
+        // TODO
         return null;
     }
 
     @Override
     public void addJob(Job job) {
-//IMPLEMENT
+        // TODO
     }
 
     @Override
@@ -83,7 +83,7 @@ public class Administrator implements Account{
 
     @Override
     public void updateRating(double rate) {
-    //IMPLEMENT
+       // TODO
     }
 
     @Override
@@ -102,5 +102,5 @@ public class Administrator implements Account{
     public void deleteEmployer(Employer employer){
         // TODO
     }
-    
+
 }

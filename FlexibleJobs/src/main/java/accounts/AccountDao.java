@@ -145,6 +145,8 @@ public class AccountDao {
                 result=new Employer(username,password,balance,rating);
             }else if(type.equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE)) {
                 result = new Employee(username, password, balance, rating);
+            } else if(type.equals(FlexibleJobsConstants.ACCOUNT_ROLE_ADMINISTRATOR)){
+                result = new Administrator(username, password, balance, rating);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
