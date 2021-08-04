@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/FlexibleJobs/FlexibleJobs.iml" filepath="$PROJECT_DIR$/FlexibleJobs/FlexibleJobs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/final-project-flexiblejobs.iml" filepath="$PROJECT_DIR$/.idea/final-project-flexiblejobs.iml" />
+    </modules>
+  </component>
+</project>

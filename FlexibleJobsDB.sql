@@ -26,16 +26,16 @@ CREATE TABLE accounts(
 );
 
 CREATE TABLE jobs(
-	jobid INT NOT NULL AUTO_INCREMENT,
-    employer VARCHAR(30),
-    heading VARCHAR(100),
-    jobdescription VARCHAR(5000),
-    budget INT,
-    dateposted VARCHAR(25),
-    -- numapplications INT,
-     numinterviews INT,
---     numhires INT,
-    PRIMARY KEY(jobid)
+     jobid INT NOT NULL AUTO_INCREMENT,
+     employer VARCHAR(30),
+     heading VARCHAR(100),
+     jobdescription VARCHAR(5000),
+     budget INT,
+     dateposted VARCHAR(100),
+     numapplications INT,
+     jobduration VARCHAR(30),
+     jobstatus VARCHAR (20),
+     PRIMARY KEY(jobid)
 );
 
 CREATE TABLE applications(
@@ -59,3 +59,7 @@ CREATE TABLE employeeskills(
 	username VARCHAR(30),
     skill VARCHAR(30)
 );
+
+drop table jobs;
+
+select * from jobs;
