@@ -6,7 +6,7 @@
   <display-name>Archetype Created Web Application</display-name>
 
   <welcome-file-list>
-    <welcome-file>/WEB-INF/Jobcreation.jsp</welcome-file>
+    <welcome-file>/WEB-INF/adding_application.jsp</welcome-file>
   </welcome-file-list>
 
 </web-app>

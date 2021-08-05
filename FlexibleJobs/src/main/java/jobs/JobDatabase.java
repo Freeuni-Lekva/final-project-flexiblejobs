@@ -14,6 +14,35 @@ public class JobDatabase {
         this.dataSource = dataSource;
     }
 
+    public void addApplication(Application application){
+        PreparedStatement stm = null;
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+
+            stm = connection.prepareStatement(
+                    "INSERT INTO applications (jobid, employee, datesent, " +
+                            "letter, bid) " +
+                            "VALUES (?,?,?,?,?);");
+            stm.setInt(1, application.getJobId());
+            stm.setString(2, application.getEmployee());
+            stm.setString(3, application.getDate().toString());
+            stm.setString(4, application.getLetter());
+            stm.setDouble(5, application.getBid());
+            stm.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+    }
+
     public void saveJob(Job job) {
         PreparedStatement stm = null;
         Connection connection = null;

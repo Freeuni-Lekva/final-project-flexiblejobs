@@ -40,9 +40,10 @@ CREATE TABLE jobs(
 
 CREATE TABLE applications(
 	jobid INT,
-    usename VARCHAR(30),
-    datesent VARCHAR(25),
-    letter VARCHAR(5000)
+    employee VARCHAR(30),
+    datesent VARCHAR(100),
+    letter VARCHAR(5000),
+    bid INT
 );
 
 CREATE TABLE hires(
