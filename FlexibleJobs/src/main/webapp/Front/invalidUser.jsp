@@ -10,9 +10,27 @@
 <head>
     <title>FlexibleJobs | World's best freelancing Webpage</title>
 </head>
-<body>
+<body style="background-color: darkseagreen">
+<nav class = "menu">
+    <a href="/webapp/index.jsp">
+        <img src="/Front/logo.png" style="width:100px;height:40px;">
+    </a>
+</nav>
+<hr style="border-color: darkslategray">
+<hr style="border-color: darkslategray">
+<div style="border-radius: 15px; position: absolute; left:30%; margin-left: 150px; width:500px;height:300px;
+border:0px solid #000; background-color: mediumseagreen" align="center">
+    <b>
 <p> Entered information is not correct</p>
 <br>
-<p> Please try again </p>
+        <a href="/Front/login.jsp">
+            <input style="border-radius: 15px; background-color: palegreen" type="submit" value="Login">
+        </a>
+        <p> or </p>
+        <a href="">
+            <input style="border-radius: 15px; background-color: palegreen" type="submit" value="Sign Up">
+        </a>
+    </b>
+</div>
 </body>
 </html>

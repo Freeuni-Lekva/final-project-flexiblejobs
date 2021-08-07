@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 
 @WebServlet("/existedAccLogin")
@@ -19,6 +21,19 @@ public class ExistedAccountLogin extends HttpServlet{
             AccountDao accountDao = (AccountDao) req.getServletContext().getAttribute("accountDao");
 
             String username = req.getParameter("username");
+/*
+            String receivedPassword = req.getParameter("password");
+
+            MessageDigest messageDigest = null;
+            try {
+                messageDigest = MessageDigest.getInstance("SHA-256");
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+            messageDigest.update(receivedPassword.getBytes());
+            String password = new String(messageDigest.digest());
+
+ */
             String password = req.getParameter("password");
 
             Account account = accountDao.SelectByUsername(username);
