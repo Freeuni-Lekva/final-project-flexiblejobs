@@ -64,3 +64,7 @@
 0:0:0:0:0:0:0:1 - - [03/Aug/2021:14:56:18 +0400] "GET /css/style.css HTTP/1.1" 404 977 http-bio-8080-exec-4 3
 0:0:0:0:0:0:0:1 - - [03/Aug/2021:14:56:24 +0400] "POST /loginHandler HTTP/1.1" 200 619 http-bio-8080-exec-5 1643
 0:0:0:0:0:0:0:1 - - [03/Aug/2021:14:56:32 +0400] "POST /existedAccLogin HTTP/1.1" 200 97 http-bio-8080-exec-6 906
+0:0:0:0:0:0:0:1 - - [03/Aug/2021:23:59:18 +0400] "GET / HTTP/1.1" 200 79 http-bio-8080-exec-9 149
+0:0:0:0:0:0:0:1 - - [03/Aug/2021:23:59:21 +0400] "GET /Front/login.jsp HTTP/1.1" 200 653 http-bio-8080-exec-10 525
+0:0:0:0:0:0:0:1 - - [03/Aug/2021:23:59:21 +0400] "GET /css/style.css HTTP/1.1" 404 977 http-bio-8080-exec-10 5
+0:0:0:0:0:0:0:1 - - [03/Aug/2021:23:59:25 +0400] "GET /Front/index.jsp HTTP/1.1" 404 981 http-bio-8080-exec-10 3
