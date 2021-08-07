@@ -14,8 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class AccountDaoTest {
@@ -26,10 +25,6 @@ public class AccountDaoTest {
     private Account test2;
     private Account test3;
     private Account test4;
-    private PersonalData data1;
-    private PersonalData data2;
-    private PersonalData data3;
-    private PersonalData data4;
 
 
     @BeforeAll
@@ -45,7 +40,7 @@ public class AccountDaoTest {
     }
 
     @Test
-    void test1(){
+    void testInsert(){
         assertEquals(0,dao.selectAllByType(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE).size());
         assertEquals(0,dao.selectAllByType(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER).size());
         dao.addAccount(test1);
@@ -60,6 +55,52 @@ public class AccountDaoTest {
     }
 
 
+    @Test
+    void testDelete(){
+        dao.addAccount(test4);
+        dao.addAccount(test1);
+        Account acc=dao.selectByUsername("jemal12");
+        assertFalse(acc==null);
+        dao.delete("jemal12");
+        acc=dao.selectByUsername("jemal12");
+        assertTrue(acc==null);
+        acc=dao.selectByUsername("jemal1234");
+        assertTrue(acc==null);
+    }
+
+    @Test
+    void testSelect(){
+        dao.addAccount(test1);
+        dao.addAccount(test2);
+        dao.addAccount(test3);
+        dao.addAccount(test4);
+        List<Account> list=dao.selectAllByType(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE);
+        List<Account> list2=dao.selectAllByType(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER);
+        assertTrue(list.get(0).equals(test1)||list.get(0).equals(test2));
+        assertTrue(list.get(1).equals(test1)||list.get(1).equals(test2));
+        assertTrue(list2.get(0).equals(test3)||list2.get(0).equals(test4));
+        assertTrue(list2.get(1).equals(test3)||list2.get(1).equals(test4));
+        Account acc=dao.selectByUsername("jemal1234");
+        Account shmacc=dao.selectByUsername("justjemal");
+        assertEquals(acc,test3);
+        assertEquals(null,shmacc);
+    }
+
+    @Test
+    void testUpdateBalance(){
+        dao.addAccount(test3);
+        AccountDao.updateBalance("jemal1234",1225);
+        Account acc=dao.selectByUsername("jemal1234");
+        assertEquals(1225,acc.getBalance());
+    }
+
+    @Test
+    void testUpdatePassword(){
+        dao.addAccount(test2);
+        AccountDao.updatePassword("jemal123","hidroeleqtrosadguri");
+        Account acc=dao.selectByUsername("jemal123");
+        assertEquals("hidroeleqtrosadguri",acc.getPassword());
+    }
 
     @AfterEach
     void clearTables(){
@@ -83,14 +124,14 @@ public class AccountDaoTest {
     }
 
     private void createTestObjects(){
-        data1=new EmployeePersonalData("jemal","jiquri","jinvali",
-                "kacuri kaci","random long string uhncjfhndfjgnjkngjf");
-        data2=new EmployeePersonalData("gaidzvera","guram","tye",
-                "tyis kaci","qreba chndeba");
-        data3=new EmployeePersonalData("dennis","dennisovich","transylvania",
-                "grrrrrrr","imiromtom testebze gaiaros");
-        data4=new EmployeePersonalData("tikso","rogorc aseti","shig gldani",
-                "The Boss","oghondatsa riaaaaa");
+        PersonalData data1 = new EmployeePersonalData("jemal", "jiquri", "jinvali",
+                "kacuri kaci", "random long string uhncjfhndfjgnjkngjf");
+        PersonalData data2 = new EmployeePersonalData("gaidzvera", "guram", "tye",
+                "tyis kaci", "qreba chndeba");
+        PersonalData data3 = new EmployeePersonalData("dennis", "dennisovich", "transylvania",
+                "grrrrrrr", "imiromtom testebze gaiaros");
+        PersonalData data4 = new EmployeePersonalData("tikso", "rogorc aseti", "shig gldani",
+                "The Boss", "oghondatsa riaaaaa");
 
         test1=new Employee("jemal12","jinvalirules");
         test2=new Employee("jemal123","jinvalirules");

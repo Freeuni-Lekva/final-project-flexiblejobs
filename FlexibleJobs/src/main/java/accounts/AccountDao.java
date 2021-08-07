@@ -21,11 +21,10 @@ public class AccountDao {
         Connection connection=null;
         try {
             connection=dataSource.getConnection();
-            Statement stm=connection.createStatement();
-            stm.executeQuery("UPDATE accounts");
             PreparedStatement statement = connection.prepareStatement(
-                    "SET balance="+balance+" WHERE username = ?;");
-            statement.setString(1, username);
+                    "UPDATE accounts SET balance=? WHERE username = ?;");
+            statement.setInt(1,balance);
+            statement.setString(2, username);
             statement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -44,11 +43,10 @@ public class AccountDao {
         Connection connection=null;
         try {
             connection=dataSource.getConnection();
-            Statement stm=connection.createStatement();
-            stm.executeQuery("UPDATE accounts");
             PreparedStatement statement = connection.prepareStatement(
-                    "SET pass="+password+" WHERE username = ?;");
-            statement.setString(1, username);
+                    "UPDATE accounts SET pass=? WHERE username = ?;");
+            statement.setString(1,password);
+            statement.setString(2, username);
             statement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -132,16 +130,17 @@ public class AccountDao {
         }
     }
 
-    public Account SelectByUsername(String username) {
+    public Account selectByUsername(String username) {
         Connection connection = null;
         Account result=null;
         try {
             connection = dataSource.getConnection();
             PreparedStatement stm = connection.prepareStatement(
-                    "SELECT FROM accounts WHERE username = ?;");
+                    "SELECT* FROM accounts WHERE username = ?;");
             stm.setString(1, username);
             ResultSet rs = stm.executeQuery();
-            rs.next();
+            if(!rs.next())
+                return null;
             String password=rs.getString(2);
             int balance=rs.getInt(3);
             BigDecimal rating=rs.getBigDecimal(4);
