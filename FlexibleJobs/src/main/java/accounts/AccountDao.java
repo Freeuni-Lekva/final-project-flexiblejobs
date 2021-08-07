@@ -21,11 +21,10 @@ public class AccountDao {
         Connection connection=null;
         try {
             connection=dataSource.getConnection();
-            Statement stm=connection.createStatement();
-            stm.executeQuery("UPDATE accounts");
             PreparedStatement statement = connection.prepareStatement(
-                    "SET balance="+balance+" WHERE username = ?");
-            statement.setString(1, username);
+                    "UPDATE accounts SET balance=? WHERE username = ?;");
+            statement.setInt(1,balance);
+            statement.setString(2, username);
             statement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -44,11 +43,10 @@ public class AccountDao {
         Connection connection=null;
         try {
             connection=dataSource.getConnection();
-            Statement stm=connection.createStatement();
-            stm.executeQuery("UPDATE accounts");
             PreparedStatement statement = connection.prepareStatement(
-                    "SET pass="+password+" WHERE username = ?");
-            statement.setString(1, username);
+                    "UPDATE accounts SET pass=? WHERE username = ?;");
+            statement.setString(1,password);
+            statement.setString(2, username);
             statement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -63,9 +61,12 @@ public class AccountDao {
         }
     }
 
-    public void addAccount(Account acc) throws SQLException {
+    public boolean addAccount(Account acc){
+        if(acc==null||acc.getPersonalData()==null)
+            return false;
         addAccountDb(acc);
         addPersonalData(acc.getPersonalData(), acc.getUserName());
+        return true;
     }
 
     public List<Account> selectAllByType(String type) {
@@ -73,8 +74,10 @@ public class AccountDao {
         List<Account> result = new ArrayList<>();
         try {
             connection=dataSource.getConnection();
-            Statement stm = connection.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT* FROM accounts WHERE acctype="+type);
+            PreparedStatement stm = connection.prepareStatement(
+                    "SELECT* FROM accounts WHERE acctype=?;");
+            stm.setString(1,type);
+            ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 String username=rs.getString(1);
                 String password=rs.getString(2);
@@ -107,11 +110,11 @@ public class AccountDao {
         try {
             connection = dataSource.getConnection();
             PreparedStatement stm = connection.prepareStatement(
-                    "DELETE FROM accounts WHERE username = ?");
+                    "DELETE FROM accounts WHERE username = ?;");
             stm.setString(1, username);
             stm.executeUpdate();
             stm = connection.prepareStatement(
-                    "DELETE FROM personal_info WHERE username = ?");
+                    "DELETE FROM personal_info WHERE username = ?;");
             stm.setString(1, username);
             stm.executeUpdate();
         } catch (SQLException throwables) {
@@ -127,16 +130,17 @@ public class AccountDao {
         }
     }
 
-    public Account SelectByUsername(String username) {
+    public Account selectByUsername(String username) {
         Connection connection = null;
         Account result=null;
         try {
             connection = dataSource.getConnection();
             PreparedStatement stm = connection.prepareStatement(
-                    "SELECT * FROM accounts WHERE username = ?");
+                    "SELECT* FROM accounts WHERE username = ?;");
             stm.setString(1, username);
             ResultSet rs = stm.executeQuery();
-            rs.next();
+            if(!rs.next())
+                return null;
             String password=rs.getString(2);
             int balance=rs.getInt(3);
             BigDecimal rating=rs.getBigDecimal(4);
@@ -167,12 +171,13 @@ public class AccountDao {
         try {
             connection = dataSource.getConnection();
             stm = connection.prepareStatement(
-                    "INSERT INTO accounts (username, pass, balance,rating) " +
-                            "VALUES (?, ?, ?, ?);");
+                    "INSERT INTO accounts (username, pass, balance,rating,acctype) " +
+                            "VALUES (?, ?, ?, ?, ?);");
             stm.setString(1, acc.getUserName());
             stm.setString(2, acc.getPassword());
             stm.setInt(3, acc.getBalance());
             stm.setDouble(4, acc.getRating().doubleValue());
+            stm.setString(5,acc.getType());
             stm.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -193,9 +198,9 @@ public class AccountDao {
         try {
             connection = dataSource.getConnection();
             stm = connection.prepareStatement(
-                    "INSERT INTO personal_info (username, firstname, lastname,livingplace" +
+                    "INSERT INTO personal_info (username, firstname, lastname,livingplace," +
                             "profileheading,profiledescription) " +
-                            "VALUES (?, ?, ?, ?, ?, ?, ?);");
+                            "VALUES (?, ?, ?, ?, ?, ?);");
             stm.setString(1, username);
             stm.setString(2, data.getFirstName());
             stm.setString(3, data.getLastName());

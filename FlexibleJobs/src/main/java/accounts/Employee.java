@@ -91,4 +91,9 @@ public class Employee implements Account{
     public String getType() {
         return type;
     }
+
+    @Override
+    public boolean equals(Object other){
+        return username.equals(((Account)other).getUserName());
+    }
 }
