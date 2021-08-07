@@ -59,3 +59,10 @@ CREATE TABLE employeeskills(
 	username VARCHAR(30),
     skill VARCHAR(30)
 );
+
+CREATE TABLE reviews(
+    fromuser VARCHAR(30),
+    touser VARCHAR(30),
+    points INT,
+    jobid INT
+);

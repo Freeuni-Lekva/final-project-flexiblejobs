@@ -60,6 +60,9 @@ CREATE TABLE employeeskills(
     skill VARCHAR(30)
 );
 
-drop table jobs;
-
-select * from jobs;
+CREATE TABLE reviews(
+    fromuser VARCHAR(30),
+    touser VARCHAR(30),
+    points INT,
+    jobid INT
+);

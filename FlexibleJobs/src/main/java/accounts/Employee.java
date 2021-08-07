@@ -83,7 +83,7 @@ public class Employee implements Account{
     }
 
     @Override
-    public void updateRating(double rate) {
+    public void updateRating(int rate) {
 
     }
 

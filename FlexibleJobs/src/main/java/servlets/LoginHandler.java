@@ -23,7 +23,7 @@ public class LoginHandler extends HttpServlet{
 
         String username = req.getParameter("username");
 
-        if(accountDao.SelectByUsername(username)!=null){
+        if(accountDao.selectByUsername(username)!=null){
             req.getRequestDispatcher("/Front/existedAccount.jsp").forward(req,resp);
         } else{
             req.getRequestDispatcher("/Front/invalidUser.jsp").forward(req,resp);
