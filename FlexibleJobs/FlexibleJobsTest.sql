@@ -17,7 +17,6 @@ CREATE TABLE conversation(
 
 
 CREATE TABLE personal_info(
-	id int auto_increment key,
 	username VARCHAR(30),
 	firstname VARCHAR(30),
     lastname VARCHAR(30),
@@ -27,8 +26,6 @@ CREATE TABLE personal_info(
 );
 
 CREATE TABLE accounts(
-	id int auto_increment key,
-	pid int,
 	username VARCHAR(30),
     pass VARCHAR(30),
     balance INT,
@@ -37,7 +34,7 @@ CREATE TABLE accounts(
 );
 
 CREATE TABLE online_users(
-    user_id int
+    username varchar(30)
 );
 
 CREATE TABLE jobs(

@@ -22,7 +22,7 @@
 border:0px solid #000; background-color: mediumseagreen" align="center">
 <form action="/loginHandler" method="post">
     <h3 align="center"> Please log in </h3>
-    <label for="usernameInput">userame: </label>
+    <label for="usernameInput">username: </label>
     <input style="background-color: palegreen; border-radius: 15px" name="username" type="text" placeholder="Enter username" id="usernameInput">
     <br>
     <br>
@@ -30,6 +30,9 @@ border:0px solid #000; background-color: mediumseagreen" align="center">
     <br>
     <br>
 </form>
+    <a href="/Front/register.jsp">
+        <input style="border-radius: 15px; background-color: palegreen" type="submit" value="Sign up">
+    </a>
 </div>
 </body>
 </html>

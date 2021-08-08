@@ -219,15 +219,72 @@ public class AccountDao {
 
     }
 
-    public void logIn(int userId){
-
+    public void logIn(String username){
+        PreparedStatement stm;
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            stm = connection.prepareStatement(
+                    "INSERT INTO online_users (username) " +
+                            "VALUES (?);");
+            stm.setString(1, username);
+            stm.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
     }
 
-    public void signOut(int userId){
-
+    public void signOut(String username){
+        PreparedStatement stm;
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            stm = connection.prepareStatement(
+                    "DELETE FROM online_users (username) " +
+                            "VALUES (?);");
+            stm.setString(1, username);
+            stm.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
     }
 
-    public boolean isOnline(int userId){
-    return true;
+    public boolean isOnline(String username){
+        Connection connection = null;
+        ResultSet rs = null;
+        try {
+            connection = dataSource.getConnection();
+            PreparedStatement stm = connection.prepareStatement(
+                    "SELECT * FROM online_users WHERE username = ?");
+            stm.setString(1, username);
+             rs = stm.executeQuery();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return rs!=null;
     }
 }

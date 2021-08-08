@@ -36,7 +36,8 @@ public class ExistedAccountLogin extends HttpServlet{
             Account account = accountDao.SelectByUsername(username);
 
             if(account!=null && account.getPassword().equals(password)){
-                accountDao.logIn(account.getId());
+                accountDao.logIn(account.getUserName());
+                req.getSession().setAttribute( "loggedUser", account);
                 switch (account.getType()) {
                     case FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE:
                         req.getRequestDispatcher("/Front/successfulLoginEmployee.jsp").forward(req, resp);
