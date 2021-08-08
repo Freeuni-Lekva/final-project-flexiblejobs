@@ -26,7 +26,7 @@ border:0px solid #000; background-color: mediumseagreen" align="center">
 <form action="/existedAccLogin" method="post">
     <h3 align="center"> Please enter password </h3>
     <label for="usernameInput">User Name: </label>
-    <input style="background-color: palegreen; border-radius: 15px" name="username" type="text" placeholder="Enter username" id="usernameInput" value="<%= username%>">
+    <input style="background-color: grey; border-radius: 15px" name="username" type="text" placeholder="Enter username" id="usernameInput" value="<%= username%>" readonly>
     <br>
     <br>
     <label for="passwordInput">Password: </label>

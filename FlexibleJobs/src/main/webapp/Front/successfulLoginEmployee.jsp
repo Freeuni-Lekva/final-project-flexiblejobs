@@ -1,4 +1,5 @@
-<%--
+<%@ page import="accounts.Account" %>
+<%@ page import="accounts.AccountDao" %><%--
   Created by IntelliJ IDEA.
   User: User
   Date: 02.08.2021
@@ -13,11 +14,11 @@
 <body>
 <nav class = "menu">
     <a href="/webapp/index.jsp">
-        <img src="/Front/logo.png" style="width:100px;height:40px;">
+        <img src="/Front/logo.png" style="width:100px;height:40px; float: left">
     </a>
 
     <a href="">
-        <p> Find Job</p>
+        <p style="float: left"> Find Job</p>
     </a>
 
     <%
@@ -26,15 +27,26 @@
     <p style="float: right"> Welcome, <%= username%> </p>
 
 </nav>
+<hr style="border-color: darkslategray">
+<hr style="border-color: darkslategray">
 
-<div style="border-radius: 15px; position: absolute; left:30%; margin-left: 150px; width:1000px;height:900px;
-border:0px solid #000; background-color: mediumseagreen" align="center">
+<div style="border-radius: 15px; position: absolute; margin: 150px; width:50%;height:70%; border-color: darkslategray;
+ background-color: antiquewhite" align="center">
 
+    <div style="border-radius: 15px">
+        <% AccountDao accountDao = (AccountDao) request.getServletContext().getAttribute("accountDao");
+        Account account = accountDao.SelectByUsername(username);
+        %>
+    </div>
 
+    <div style="border-radius: 15px">
+    </div>
+
+    <div style="border-radius: 15px">
+    </div>
 
 </div>
 
-<hr style="border-color: darkslategray">
-<hr style="border-color: darkslategray">
+
 </body>
 </html>

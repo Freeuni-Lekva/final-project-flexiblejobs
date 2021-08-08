@@ -218,4 +218,16 @@ public class AccountDao {
         }
 
     }
+
+    public void logIn(int userId){
+
+    }
+
+    public void signOut(int userId){
+
+    }
+
+    public boolean isOnline(int userId){
+    return true;
+    }
 }

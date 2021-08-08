@@ -33,4 +33,6 @@ public interface Account {
 
     public String getType();
 
+    public int getId();
+
 }

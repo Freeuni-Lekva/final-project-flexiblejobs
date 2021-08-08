@@ -2,13 +2,22 @@ CREATE DATABASE FlexibleJobs_test;
 USE FlexibleJobs_test;
 
 CREATE TABLE messages (
+	chatId int,
     sender VARCHAR(30),
     receiver VARCHAR(30),
     message VARCHAR(1000),
     timesent VARCHAR(25)
 );
 
+CREATE TABLE conversation(
+	chatId int auto_increment key,
+    user_1 varchar(30),
+    user_2 varchar(30)
+);
+
+
 CREATE TABLE personal_info(
+	id int auto_increment key,
 	username VARCHAR(30),
 	firstname VARCHAR(30),
     lastname VARCHAR(30),
@@ -18,11 +27,17 @@ CREATE TABLE personal_info(
 );
 
 CREATE TABLE accounts(
+	id int auto_increment key,
+	pid int,
 	username VARCHAR(30),
     pass VARCHAR(30),
     balance INT,
     rating DECIMAL(3,2),
     acctype VARCHAR(15)
+);
+
+CREATE TABLE online_users(
+    user_id int
 );
 
 CREATE TABLE jobs(
@@ -61,8 +76,10 @@ CREATE TABLE employeeskills(
 );
 
 INSERT INTO accounts VALUES
-("dasakmebuli", "123", 50, 0, "administrator"),
-("damsakmebeli", "563", 10, 0, "administrator"),
-("saxeli", "345", 90, 0, "administrator");
+("dasakmebuli", "123", 0, 0, "employee"),
+("damsakmebeli", "563", 0, 0, "employer"),
+("saxeli", "345", 0, 0, "employee");
 
-SELECT * FROM accounts;
+INSERT INTO accounts VALUES
+("admin", "123", 110, 0, "administrator"),
+("employer", "563", 60, 0, "employer");

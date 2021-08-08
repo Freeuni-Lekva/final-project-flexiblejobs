@@ -8,10 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+
 
 
 @WebServlet("/existedAccLogin")
@@ -35,15 +33,20 @@ public class ExistedAccountLogin extends HttpServlet{
 
  */
             String password = req.getParameter("password");
-
             Account account = accountDao.SelectByUsername(username);
+
             if(account!=null && account.getPassword().equals(password)){
-                if(account.getType().equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE)) {
-                    req.getRequestDispatcher("/Front/successfulLoginEmployee.jsp").forward(req, resp);
-                } else if(account.getType().equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER)){
-                    req.getRequestDispatcher("/Front/successfulLoginEmployer.jsp").forward(req, resp);
-                } else if(account.getType().equals(FlexibleJobsConstants.ACCOUNT_ROLE_ADMINISTRATOR)){
-                    req.getRequestDispatcher("/Front/successfulLoginAdmin.jsp").forward(req, resp);
+                accountDao.logIn(account.getId());
+                switch (account.getType()) {
+                    case FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE:
+                        req.getRequestDispatcher("/Front/successfulLoginEmployee.jsp").forward(req, resp);
+                        break;
+                    case FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER:
+                        req.getRequestDispatcher("/Front/successfulLoginEmployer.jsp").forward(req, resp);
+                        break;
+                    case FlexibleJobsConstants.ACCOUNT_ROLE_ADMINISTRATOR:
+                        req.getRequestDispatcher("/Front/successfulLoginAdmin.jsp").forward(req, resp);
+                        break;
                 }
 
             } else{
