@@ -164,17 +164,18 @@ public class AccountDao {
 
 
     private void addAccountDb(Account acc) {
-        PreparedStatement stm = null;
+        PreparedStatement stm;
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
             stm = connection.prepareStatement(
-                    "INSERT INTO accounts (username, pass, balance,rating) " +
-                            "VALUES (?, ?, ?, ?);");
+                    "INSERT INTO accounts (username, pass, balance,rating,acctype) " +
+                            "VALUES (?, ?, ?, ?, ?);");
             stm.setString(1, acc.getUserName());
             stm.setString(2, acc.getPassword());
             stm.setInt(3, acc.getBalance());
             stm.setDouble(4, acc.getRating().doubleValue());
+            stm.setString(5,acc.getType());
             stm.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -195,9 +196,9 @@ public class AccountDao {
         try {
             connection = dataSource.getConnection();
             stm = connection.prepareStatement(
-                    "INSERT INTO personal_info (username, firstname, lastname,livingplace" +
+                    "INSERT INTO personal_info (username, firstname, lastname,livingplace," +
                             "profileheading,profiledescription) " +
-                            "VALUES (?, ?, ?, ?, ?, ?, ?);");
+                            "VALUES (?, ?, ?, ?, ?, ?);");
             stm.setString(1, username);
             stm.setString(2, data.getFirstName());
             stm.setString(3, data.getLastName());

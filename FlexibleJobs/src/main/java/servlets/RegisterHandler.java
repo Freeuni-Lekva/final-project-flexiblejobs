@@ -23,6 +23,11 @@ public class RegisterHandler extends HttpServlet {
         String username = req.getParameter("username");
         String receivedPassword = req.getParameter("password");
         String type = req.getParameter("type");
+        String firstname = req.getParameter("firstname");
+        String lastname = req.getParameter("lastname");
+        String livingPlace = req.getParameter("livingPlace");
+        String profileHeading = req.getParameter("profileHeading");
+        String profileDescription = req.getParameter("profileDescription");
 
 
         if (accountDao.SelectByUsername(username) != null) {
@@ -38,6 +43,8 @@ public class RegisterHandler extends HttpServlet {
             String password = new String(messageDigest.digest());
 
             Account account = null;
+            PersonalData personalData = new PersonalData(username, firstname, lastname, livingPlace, profileHeading, profileDescription);
+
 
             switch (type) {
                 case FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE:
@@ -52,9 +59,22 @@ public class RegisterHandler extends HttpServlet {
             }
 
             try {
+                account.setPersonalData(personalData);
                 accountDao.addAccount(account);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
+            }
+
+            switch (type) {
+                case FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE:
+                    req.getRequestDispatcher("/Front/successfulLoginEmployee.jsp").forward(req, resp);
+                    break;
+                case FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER:
+                    req.getRequestDispatcher("/Front/successfulLoginEmployer.jsp").forward(req, resp);
+                    break;
+                case FlexibleJobsConstants.ACCOUNT_ROLE_ADMINISTRATOR:
+                    req.getRequestDispatcher("/Front/successfulLoginAdmin.jsp").forward(req, resp);
+                    break;
             }
 
         }
