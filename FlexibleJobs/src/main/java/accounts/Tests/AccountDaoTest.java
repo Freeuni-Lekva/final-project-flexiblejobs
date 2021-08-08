@@ -2,19 +2,14 @@ package accounts.Tests;
 
 import accounts.*;
 import com.mysql.cj.jdbc.MysqlConnectionPoolDataSource;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 import servlets.FlexibleJobsConstants;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class AccountDaoTest {
@@ -41,17 +36,17 @@ public class AccountDaoTest {
 
     @Test
     void testInsert(){
-        assertEquals(0,dao.selectAllByType(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE).size());
-        assertEquals(0,dao.selectAllByType(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER).size());
+        Assertions.assertEquals(0,dao.selectAllByType(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE).size());
+        Assertions.assertEquals(0,dao.selectAllByType(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER).size());
         dao.addAccount(test1);
         dao.addAccount(test2);
         dao.addAccount(test3);
         List<Account> list=dao.selectAllByType(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE);
         List<Account> list2=dao.selectAllByType(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER);
-        assertEquals(2,list.size());
-        assertEquals(1,list2.size());
-        assertTrue(list.get(0).equals(test1)||list.get(0).equals(test2));
-        assertTrue(list.get(1).equals(test1)||list.get(1).equals(test2));
+        Assertions.assertEquals(2,list.size());
+        Assertions.assertEquals(1,list2.size());
+        Assertions.assertTrue(list.get(0).equals(test1)||list.get(0).equals(test2));
+        Assertions.assertTrue(list.get(1).equals(test1)||list.get(1).equals(test2));
     }
 
 
@@ -60,12 +55,12 @@ public class AccountDaoTest {
         dao.addAccount(test4);
         dao.addAccount(test1);
         Account acc=dao.selectByUsername("jemal12");
-        assertFalse(acc==null);
+        Assertions.assertNotNull(acc);
         dao.delete("jemal12");
         acc=dao.selectByUsername("jemal12");
-        assertTrue(acc==null);
+        Assertions.assertNull(acc);
         acc=dao.selectByUsername("jemal1234");
-        assertTrue(acc==null);
+        Assertions.assertNull(acc);
     }
 
     @Test
@@ -76,14 +71,14 @@ public class AccountDaoTest {
         dao.addAccount(test4);
         List<Account> list=dao.selectAllByType(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE);
         List<Account> list2=dao.selectAllByType(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER);
-        assertTrue(list.get(0).equals(test1)||list.get(0).equals(test2));
-        assertTrue(list.get(1).equals(test1)||list.get(1).equals(test2));
-        assertTrue(list2.get(0).equals(test3)||list2.get(0).equals(test4));
-        assertTrue(list2.get(1).equals(test3)||list2.get(1).equals(test4));
+        Assertions.assertTrue(list.get(0).equals(test1)||list.get(0).equals(test2));
+        Assertions.assertTrue(list.get(1).equals(test1)||list.get(1).equals(test2));
+        Assertions.assertTrue(list2.get(0).equals(test3)||list2.get(0).equals(test4));
+        Assertions.assertTrue(list2.get(1).equals(test3)||list2.get(1).equals(test4));
         Account acc=dao.selectByUsername("jemal1234");
         Account shmacc=dao.selectByUsername("justjemal");
-        assertEquals(acc,test3);
-        assertEquals(null,shmacc);
+        Assertions.assertEquals(acc,test3);
+        Assertions.assertNull(shmacc);
     }
 
     @Test
@@ -91,7 +86,7 @@ public class AccountDaoTest {
         dao.addAccount(test3);
         AccountDao.updateBalance("jemal1234",1225);
         Account acc=dao.selectByUsername("jemal1234");
-        assertEquals(1225,acc.getBalance());
+        Assertions.assertEquals(1225,acc.getBalance());
     }
 
     @Test
@@ -99,7 +94,7 @@ public class AccountDaoTest {
         dao.addAccount(test2);
         AccountDao.updatePassword("jemal123","hidroeleqtrosadguri");
         Account acc=dao.selectByUsername("jemal123");
-        assertEquals("hidroeleqtrosadguri",acc.getPassword());
+        Assertions.assertEquals("hidroeleqtrosadguri",acc.getPassword());
     }
 
     @AfterEach

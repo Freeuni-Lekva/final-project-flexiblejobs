@@ -1,5 +1,9 @@
+servlets\JobCreationServlet.class
 servlets\ExistedAccountLogin.class
 servlets\FlexibleJobsContextListener.class
+accounts\Review.class
+servlets\ChatHandler.class
 accounts\MessageDao.class
 accounts\AccountDao.class
+accounts\ReviewDao.class
 servlets\FlexibleJobsConstants.class

@@ -19,7 +19,7 @@ public class ExistedAccountLogin extends HttpServlet{
             String username = req.getParameter("username");
             String password = req.getParameter("password");
 
-            if(accountDao.SelectByUsername(username)!=null && accountDao.SelectByUsername(username).getPassword().equals(password)){
+            if(accountDao.selectByUsername(username)!=null && accountDao.selectByUsername(username).getPassword().equals(password)){
                 req.getRequestDispatcher("/Front/successfulLogin.jsp").forward(req,resp);
             } else{
                 req.getRequestDispatcher("/Front/invalidUser.jsp").forward(req,resp);

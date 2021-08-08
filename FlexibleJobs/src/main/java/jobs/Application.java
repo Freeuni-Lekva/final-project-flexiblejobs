@@ -1,7 +1,5 @@
 package jobs;
 
-import accounts.Employee;
-
 import java.util.Date;
 
 public class Application {

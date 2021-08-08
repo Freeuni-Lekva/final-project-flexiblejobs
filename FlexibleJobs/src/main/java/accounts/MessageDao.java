@@ -48,7 +48,7 @@ public class MessageDao {
         try {
             connection=dataSource.getConnection();
             PreparedStatement stm=connection.prepareStatement(
-                    "SELECT FROM messages WHERE (sender= ? AND receiver=?)OR(" +
+                    "SELECT* FROM messages WHERE (sender= ? AND receiver=?)OR(" +
                             "sender=? AND receiver=?);");
             stm.setString(1,username1);
             stm.setString(2,username2);

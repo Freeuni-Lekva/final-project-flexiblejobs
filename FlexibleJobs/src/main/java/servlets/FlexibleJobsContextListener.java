@@ -19,7 +19,7 @@ public class FlexibleJobsContextListener implements ServletContextListener {
         datasource.setServerName(FlexibleJobsConstants.SERVER_NAME);
         datasource.setUser(FlexibleJobsConstants.USER);
         datasource.setPassword(FlexibleJobsConstants.PASSWORD);
-        datasource.setDatabaseName(FlexibleJobsConstants.DB_NAME);
+        datasource.setDatabaseName(FlexibleJobsConstants.DB_NAME_TEST);
         AccountDao accountDao = new AccountDao(datasource);
         sce.getServletContext().setAttribute("accountDao",accountDao);
         sce.getServletContext().setAttribute("datasource", datasource);
