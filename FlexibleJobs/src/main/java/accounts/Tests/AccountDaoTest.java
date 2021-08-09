@@ -119,13 +119,13 @@ public class AccountDaoTest {
     }
 
     private void createTestObjects(){
-        PersonalData data1 = new EmployeePersonalData("jemal", "jiquri", "jinvali",
+        PersonalData data1 = new PersonalData("jemal12","jemal", "jiquri", "jinvali",
                 "kacuri kaci", "random long string uhncjfhndfjgnjkngjf");
-        PersonalData data2 = new EmployeePersonalData("gaidzvera", "guram", "tye",
+        PersonalData data2 = new PersonalData("jemal123","gaidzvera", "guram", "tye",
                 "tyis kaci", "qreba chndeba");
-        PersonalData data3 = new EmployeePersonalData("dennis", "dennisovich", "transylvania",
+        PersonalData data3 = new PersonalData("jemal1234","dennis", "dennisovich", "transylvania",
                 "grrrrrrr", "imiromtom testebze gaiaros");
-        PersonalData data4 = new EmployeePersonalData("tikso", "rogorc aseti", "shig gldani",
+        PersonalData data4 = new PersonalData("jemal12345","tikso", "rogorc aseti", "shig gldani",
                 "The Boss", "oghondatsa riaaaaa");
 
         test1=new Employee("jemal12","jinvalirules");

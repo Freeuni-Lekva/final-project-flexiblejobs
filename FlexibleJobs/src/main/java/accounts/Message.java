@@ -9,7 +9,7 @@ public class Message implements Comparable{
     private String text;
     private String timeCreated;
 
-    public Message(String from,String to, String text,String timeCreated){
+    public Message( String from,String to, String text,String timeCreated){
         this.from=from;
         this.to=to;
         this.text=text;

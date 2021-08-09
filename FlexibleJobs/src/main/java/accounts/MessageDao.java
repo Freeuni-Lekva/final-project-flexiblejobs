@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-public class MessageDao {
+public class  MessageDao {
     private static DataSource dataSource;
 
     public MessageDao(DataSource dataSource) {
@@ -20,7 +20,7 @@ public class MessageDao {
             connection = dataSource.getConnection();
             PreparedStatement stm = connection.prepareStatement(
                     "INSERT INTO messages (sender, receiver, message,timesent)" +
-                            "VALUES (?, ?, ?, ?);");
+                            "VALUES ( ?, ?, ?, ?);");
             stm.setString(1, msg.getSender());
             stm.setString(2, msg.getReceiver());
             stm.setString(3, msg.getText());
@@ -53,7 +53,8 @@ public class MessageDao {
             stm.setString(4,username1);
             ResultSet rs=stm.executeQuery();
             while(rs.next()){
-                Message msg=new Message(rs.getString(1),
+                Message msg=new Message(
+                        rs.getString(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4));
@@ -74,31 +75,32 @@ public class MessageDao {
         return result;
     }
 
-    public Set<String> getAllContacts(String username){
-        Connection connection=null;
-        Set<String> result=new HashSet<>();
+
+    public Set<String> getAllContacts(String username) {
+        Connection connection = null;
+        Set<String> result = new HashSet<>();
         try {
-            connection=dataSource.getConnection();
-            PreparedStatement stm=connection.prepareStatement(
+            connection = dataSource.getConnection();
+            PreparedStatement stm = connection.prepareStatement(
                     "SELECT DISTINCT sender FROM messages WHERE receiver=?;");
-            stm.setString(1,username);
-            ResultSet rs=stm.executeQuery();
-            while(rs.next()){
-                String str=rs.getString(1);
+            stm.setString(1, username);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                String str = rs.getString(1);
                 result.add(str);
             }
-            stm=connection.prepareStatement(
+            stm = connection.prepareStatement(
                     "SELECT DISTINCT receiver FROM messages WHERE sender=?;");
-            stm.setString(1,username);
-            ResultSet resultSets=stm.executeQuery();
-            while(resultSets.next()){
-                String str=resultSets.getString(1);
+            stm.setString(1, username);
+            ResultSet resultSets = stm.executeQuery();
+            while (resultSets.next()) {
+                String str = resultSets.getString(1);
                 result.add(str);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }finally {
-            if(connection!=null) {
+        } finally {
+            if (connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException throwables) {
@@ -108,5 +110,4 @@ public class MessageDao {
         }
         return result;
     }
-
 }
