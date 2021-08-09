@@ -23,7 +23,6 @@ public class FlexibleJobsContextListener implements ServletContextListener {
         AccountDao accountDao = new AccountDao(datasource);
         sce.getServletContext().setAttribute("accountDao",accountDao);
         sce.getServletContext().setAttribute("datasource", datasource);
-
     }
 
     @Override
