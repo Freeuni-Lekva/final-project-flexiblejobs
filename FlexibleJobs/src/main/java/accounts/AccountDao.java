@@ -21,10 +21,11 @@ public class AccountDao {
         Connection connection=null;
         try {
             connection=dataSource.getConnection();
+            Statement stm=connection.createStatement();
+            stm.executeQuery("UPDATE accounts");
             PreparedStatement statement = connection.prepareStatement(
-                    "UPDATE accounts SET balance=? WHERE username = ?;");
-            statement.setInt(1,balance);
-            statement.setString(2, username);
+                    "SET balance="+balance+" WHERE username = ?");
+            statement.setString(1, username);
             statement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -43,10 +44,11 @@ public class AccountDao {
         Connection connection=null;
         try {
             connection=dataSource.getConnection();
+            Statement stm=connection.createStatement();
+            stm.executeQuery("UPDATE accounts");
             PreparedStatement statement = connection.prepareStatement(
-                    "UPDATE accounts SET pass=? WHERE username = ?;");
-            statement.setString(1,password);
-            statement.setString(2, username);
+                    "SET pass="+password+" WHERE username = ?");
+            statement.setString(1, username);
             statement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -61,12 +63,9 @@ public class AccountDao {
         }
     }
 
-    public boolean addAccount(Account acc){
-        if(acc==null||acc.getPersonalData()==null)
-            return false;
+    public void addAccount(Account acc) throws SQLException {
         addAccountDb(acc);
         addPersonalData(acc.getPersonalData(), acc.getUserName());
-        return true;
     }
 
     public List<Account> selectAllByType(String type) {
@@ -74,10 +73,8 @@ public class AccountDao {
         List<Account> result = new ArrayList<>();
         try {
             connection=dataSource.getConnection();
-            PreparedStatement stm = connection.prepareStatement(
-                    "SELECT* FROM accounts WHERE acctype=?;");
-            stm.setString(1,type);
-            ResultSet rs = stm.executeQuery();
+            Statement stm = connection.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT* FROM accounts WHERE acctype="+type);
             while (rs.next()) {
                 String username=rs.getString(1);
                 String password=rs.getString(2);
@@ -110,11 +107,11 @@ public class AccountDao {
         try {
             connection = dataSource.getConnection();
             PreparedStatement stm = connection.prepareStatement(
-                    "DELETE FROM accounts WHERE username = ?;");
+                    "DELETE FROM accounts WHERE username = ?");
             stm.setString(1, username);
             stm.executeUpdate();
             stm = connection.prepareStatement(
-                    "DELETE FROM personal_info WHERE username = ?;");
+                    "DELETE FROM personal_info WHERE username = ?");
             stm.setString(1, username);
             stm.executeUpdate();
         } catch (SQLException throwables) {
@@ -130,17 +127,16 @@ public class AccountDao {
         }
     }
 
-    public Account selectByUsername(String username) {
+    public Account SelectByUsername(String username) {
         Connection connection = null;
         Account result=null;
         try {
             connection = dataSource.getConnection();
             PreparedStatement stm = connection.prepareStatement(
-                    "SELECT* FROM accounts WHERE username = ?;");
+                    "SELECT * FROM accounts WHERE username = ?");
             stm.setString(1, username);
             ResultSet rs = stm.executeQuery();
-            if(!rs.next())
-                return null;
+            rs.next();
             String password=rs.getString(2);
             int balance=rs.getInt(3);
             BigDecimal rating=rs.getBigDecimal(4);
@@ -149,6 +145,8 @@ public class AccountDao {
                 result=new Employer(username,password,balance,rating);
             }else if(type.equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE)) {
                 result = new Employee(username, password, balance, rating);
+            } else if(type.equals(FlexibleJobsConstants.ACCOUNT_ROLE_ADMINISTRATOR)){
+                result = new Administrator(username, password, balance, rating);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -166,7 +164,7 @@ public class AccountDao {
 
 
     private void addAccountDb(Account acc) {
-        PreparedStatement stm = null;
+        PreparedStatement stm;
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
@@ -220,5 +218,74 @@ public class AccountDao {
             }
         }
 
+    }
+
+    public void logIn(String username){
+        PreparedStatement stm;
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            stm = connection.prepareStatement(
+                    "INSERT INTO online_users (username) " +
+                            "VALUES (?);");
+            stm.setString(1, username);
+            stm.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void signOut(String username){
+        PreparedStatement stm;
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            stm = connection.prepareStatement(
+                    "DELETE FROM online_users (username) " +
+                            "VALUES (?);");
+            stm.setString(1, username);
+            stm.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public boolean isOnline(String username){
+        Connection connection = null;
+        ResultSet rs = null;
+        try {
+            connection = dataSource.getConnection();
+            PreparedStatement stm = connection.prepareStatement(
+                    "SELECT * FROM online_users WHERE username = ?");
+            stm.setString(1, username);
+            rs = stm.executeQuery();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return rs!=null;
     }
 }
