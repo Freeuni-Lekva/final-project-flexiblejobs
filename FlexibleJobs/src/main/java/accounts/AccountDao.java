@@ -149,6 +149,8 @@ public class AccountDao {
                 result=new Employer(username,password,balance,rating);
             }else if(type.equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE)) {
                 result = new Employee(username, password, balance, rating);
+            } else if(type.equals(FlexibleJobsConstants.ACCOUNT_ROLE_ADMINISTRATOR)){
+                result = new Administrator(username, password, balance, rating);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -166,7 +168,7 @@ public class AccountDao {
 
 
     private void addAccountDb(Account acc) {
-        PreparedStatement stm = null;
+        PreparedStatement stm;
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
@@ -220,5 +222,74 @@ public class AccountDao {
             }
         }
 
+    }
+
+    public void logIn(String username){
+        PreparedStatement stm;
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            stm = connection.prepareStatement(
+                    "INSERT INTO online_users (username) " +
+                            "VALUES (?);");
+            stm.setString(1, username);
+            stm.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void signOut(String username){
+        PreparedStatement stm;
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            stm = connection.prepareStatement(
+                    "DELETE FROM online_users (username) " +
+                            "VALUES (?);");
+            stm.setString(1, username);
+            stm.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public boolean isOnline(String username){
+        Connection connection = null;
+        ResultSet rs = null;
+        try {
+            connection = dataSource.getConnection();
+            PreparedStatement stm = connection.prepareStatement(
+                    "SELECT * FROM online_users WHERE username = ?");
+            stm.setString(1, username);
+             rs = stm.executeQuery();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return rs!=null;
     }
 }

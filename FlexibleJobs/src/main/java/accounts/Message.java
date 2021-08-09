@@ -4,21 +4,24 @@ import java.time.LocalDateTime;
 
 public class Message implements Comparable{
 
+    private int chatId;
     private String from;
     private String to;
     private String text;
     private String timeCreated;
 
-    public Message(String from,String to, String text,String timeCreated){
+    public Message(int chatId, String from,String to, String text,String timeCreated){
+        this.chatId=chatId;
         this.from=from;
         this.to=to;
         this.text=text;
         this.timeCreated=timeCreated;
     }
 
-    public Message(String from,String to, String text){
-        this(from,to,text,LocalDateTime.now().toString());
+    public Message(int chatId, String from,String to, String text){
+        this(chatId, from,to,text,LocalDateTime.now().toString());
     }
+    public int getChatId(){ return chatId; }
 
     public String getSender() {
         return from;
