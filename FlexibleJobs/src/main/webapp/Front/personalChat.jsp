@@ -17,7 +17,7 @@
     List<Message> messages=dao.getConversation(active.getUserName(),addressee);
 %>
 <head>
-    <title>Title</title>
+    <title>Personal Chat with <%=addressee%></title>
 </head>
 <body>
 <ul>
