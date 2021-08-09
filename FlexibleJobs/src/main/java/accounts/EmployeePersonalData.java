@@ -1,6 +1,6 @@
 package accounts;
 
-public class EmployeePersonalData implements PersonalData{
+public class EmployeePersonalData extends PersonalData {
 
     private String firstname;
     private String lastname;

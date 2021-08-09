@@ -82,8 +82,8 @@ public class Administrator implements Account{
     }
 
     @Override
-    public void updateRating(double rate) {
-       // TODO
+    public void updateRating(int rate) {
+
     }
 
     @Override

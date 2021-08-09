@@ -18,6 +18,9 @@ public class PersonalData {
         this.profileDescription = profileDescription;
     }
 
+    protected PersonalData() {
+    }
+
     public String getFirstName() {
         return firstname;
     }

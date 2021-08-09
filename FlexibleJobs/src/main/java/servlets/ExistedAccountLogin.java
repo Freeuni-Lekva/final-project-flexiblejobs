@@ -33,7 +33,7 @@ public class ExistedAccountLogin extends HttpServlet{
 
  */
             String password = req.getParameter("password");
-            Account account = accountDao.SelectByUsername(username);
+            Account account = accountDao.selectByUsername(username);
 
             if(account!=null && account.getPassword().equals(password)){
                 accountDao.logIn(account.getUserName());

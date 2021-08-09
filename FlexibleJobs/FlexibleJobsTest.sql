@@ -1,3 +1,4 @@
+
 CREATE DATABASE FlexibleJobs_test;
 USE FlexibleJobs_test;
 
