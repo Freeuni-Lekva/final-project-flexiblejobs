@@ -29,12 +29,12 @@ public class Employer implements Account{
 
     @Override
     public String getUserName() {
-        return null;
+        return username;
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class Employer implements Account{
 
     @Override
     public int getBalance() {
-        return 0;
+        return balance;
     }
 
     @Override
@@ -59,12 +59,12 @@ public class Employer implements Account{
 
     @Override
     public PersonalData getPersonalData() {
-        return null;
+        return data;
     }
 
     @Override
     public void setPersonalData(PersonalData data) {
-
+        this.data=data;
     }
 
     @Override
@@ -79,16 +79,21 @@ public class Employer implements Account{
 
     @Override
     public BigDecimal getRating() {
-        return null;
+        return rating;
     }
 
     @Override
-    public void updateRating(double rate) {
+    public void updateRating(int rate) {
 
     }
 
     @Override
     public String getType() {
-        return null;
+        return type;
+    }
+
+    @Override
+    public boolean equals(Object other){
+        return username.equals(((Account)other).getUserName());
     }
 }

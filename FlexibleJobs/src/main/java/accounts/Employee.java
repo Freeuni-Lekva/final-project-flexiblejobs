@@ -83,12 +83,17 @@ public class Employee implements Account{
     }
 
     @Override
-    public void updateRating(double rate) {
+    public void updateRating(int rate) {
 
     }
 
     @Override
     public String getType() {
         return type;
+    }
+
+    @Override
+    public boolean equals(Object other){
+        return username.equals(((Account)other).getUserName());
     }
 }

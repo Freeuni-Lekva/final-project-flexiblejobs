@@ -29,7 +29,7 @@ public interface Account {
 
     public BigDecimal getRating();
 
-    public void updateRating(double rate);
+    public void updateRating(int rate);
 
     public String getType();
 
