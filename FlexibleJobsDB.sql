@@ -39,11 +39,14 @@ CREATE TABLE jobs(
 );
 
 CREATE TABLE applications(
+    applicationId INT NOT NULL AUTO_INCREMENT,
 	jobid INT,
     employee VARCHAR(30),
     datesent VARCHAR(100),
     letter VARCHAR(5000),
-    bid INT
+    bid INT,
+    applicationstatus VARCHAR (10),
+    PRIMARY KEY (applicationId)
 );
 
 CREATE TABLE hires(

@@ -1,4 +1,3 @@
-C:\Users\Toko\Desktop\OOP Project\pro\final-project-flexiblejobs\FlexibleJobs\src\main\java\servlets\ApplicationCreationServlet.java
 C:\Users\Toko\Desktop\OOP Project\pro\final-project-flexiblejobs\FlexibleJobs\src\main\java\servlets\LoginHandler.java
 C:\Users\Toko\Desktop\OOP Project\pro\final-project-flexiblejobs\FlexibleJobs\src\main\java\jobs\Application.java
 C:\Users\Toko\Desktop\OOP Project\pro\final-project-flexiblejobs\FlexibleJobs\src\main\java\servlets\FlexibleJobsContextListener.java
@@ -7,6 +6,9 @@ C:\Users\Toko\Desktop\OOP Project\pro\final-project-flexiblejobs\FlexibleJobs\sr
 C:\Users\Toko\Desktop\OOP Project\pro\final-project-flexiblejobs\FlexibleJobs\src\main\java\jobs\JobDatabase.java
 C:\Users\Toko\Desktop\OOP Project\pro\final-project-flexiblejobs\FlexibleJobs\src\main\java\accounts\AccountDao.java
 C:\Users\Toko\Desktop\OOP Project\pro\final-project-flexiblejobs\FlexibleJobs\src\main\java\accounts\Account.java
+C:\Users\Toko\Desktop\OOP Project\pro\final-project-flexiblejobs\FlexibleJobs\src\main\java\jobs\ApplicationDAO.java
+C:\Users\Toko\Desktop\OOP Project\pro\final-project-flexiblejobs\FlexibleJobs\src\main\java\servlets\ApplicationsServlet.java
+C:\Users\Toko\Desktop\OOP Project\pro\final-project-flexiblejobs\FlexibleJobs\src\main\java\servlets\JobsServlet.java
 C:\Users\Toko\Desktop\OOP Project\pro\final-project-flexiblejobs\FlexibleJobs\src\main\java\servlets\FlexibleJobsConstants.java
 C:\Users\Toko\Desktop\OOP Project\pro\final-project-flexiblejobs\FlexibleJobs\src\main\java\accounts\Employer.java
 C:\Users\Toko\Desktop\OOP Project\pro\final-project-flexiblejobs\FlexibleJobs\src\main\java\accounts\Employee.java
@@ -14,4 +16,3 @@ C:\Users\Toko\Desktop\OOP Project\pro\final-project-flexiblejobs\FlexibleJobs\sr
 C:\Users\Toko\Desktop\OOP Project\pro\final-project-flexiblejobs\FlexibleJobs\src\main\java\accounts\PersonalData.java
 C:\Users\Toko\Desktop\OOP Project\pro\final-project-flexiblejobs\FlexibleJobs\src\main\java\accounts\Message.java
 C:\Users\Toko\Desktop\OOP Project\pro\final-project-flexiblejobs\FlexibleJobs\src\main\java\jobs\Job.java
-C:\Users\Toko\Desktop\OOP Project\pro\final-project-flexiblejobs\FlexibleJobs\src\main\java\servlets\JobCreationServlet.java

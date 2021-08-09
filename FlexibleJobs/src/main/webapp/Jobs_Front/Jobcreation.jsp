@@ -13,7 +13,7 @@
 <body>
 <h1>Enter following information</h1>
 
-<form action = "JobCreationServlet" method="post">
+<form action = "/JobsServlet" method="post">
     <label for = "Jobtitle">Job Title: </label>
     <input type  = "text" id = "Jobtitle" name = "title" size = "50">
     <br> <br>

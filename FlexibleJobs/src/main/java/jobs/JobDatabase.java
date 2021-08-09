@@ -2,6 +2,7 @@ package jobs;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,21 +15,41 @@ public class JobDatabase {
         this.dataSource = dataSource;
     }
 
-    public void addApplication(Application application){
+    public void addEmployeeToJob(String username, int jobid){
         PreparedStatement stm = null;
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
 
             stm = connection.prepareStatement(
-                    "INSERT INTO applications (jobid, employee, datesent, " +
-                            "letter, bid) " +
-                            "VALUES (?,?,?,?,?);");
-            stm.setInt(1, application.getJobId());
-            stm.setString(2, application.getEmployee());
-            stm.setString(3, application.getDate().toString());
-            stm.setString(4, application.getLetter());
-            stm.setDouble(5, application.getBid());
+                    "INSERT INTO hires (jobid, employee) " +
+                            "VALUES (?,?);");
+            stm.setInt(1, jobid);
+            stm.setString(2,username);
+            stm.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void removeEmployeeFromJob(String username, int jobid){
+        PreparedStatement stm = null;
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+
+            stm = connection.prepareStatement(
+                    "DELETE FROM hires WHERE jobid = ? employee = ?;");
+            stm.setInt(1, jobid);
+            stm.setString(2,username);
             stm.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -58,7 +79,6 @@ public class JobDatabase {
             stm.setString(3, job.getDescription());
             stm.setDouble(4, job.getBudget());
             String date = job.getDate().toString();
-            System.out.println(date);
             stm.setString(5, date);
             stm.setInt(6, 0);
             stm.setString(7, job.getJobDuration());
@@ -98,6 +118,42 @@ public class JobDatabase {
         }
     }
 
+    public Set<Job> getJobs(){
+        Set<Job> jobs = new HashSet<>();
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(
+                    "select * from jobs;");
+            while (result.next()) {
+                int jobid = result.getInt("jobid");
+                String jobHeader = result.getString("heading");
+                String description = result.getString("jobdescription");
+                double budget = result.getDouble("budget");
+                String duration = result.getString("jobduration");
+                String date = result.getString("dateposted");
+                int numApplications = result.getInt("numapplications");
+                String employer = result.getString("employer");
+                String status = result.getString("jobstatus");
+                Job job = new Job(jobid, numApplications, status, employer, jobHeader, description,
+                        budget, duration, date);
+                jobs.add(job);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return jobs;
+    }
+
     public Set<Job> getJobsByEmployer(String employer){
         Set<Job> jobs = new HashSet<>();
         Connection connection = null;
@@ -112,11 +168,14 @@ public class JobDatabase {
                 String description = result.getString("jobdescription");
                 double budget = result.getDouble("budget");
                 String duration = result.getString("jobduration");
-                Date date = new Date(result.getString("dateposted"));
+                String dateString = result.getString("dateposted");
+                @Deprecated
+                Date date = new Date(dateString);
+                String dateToString = date.toString();
                 int numApplications = result.getInt("numapplications");
                 String status = result.getString("jobstatus");
                 Job job = new Job(jobid, numApplications, status, employer, jobHeader, description,
-                        budget, duration, date);
+                        budget, duration, dateToString);
                 jobs.add(job);
             }
         } catch (SQLException throwables) {
@@ -147,7 +206,7 @@ public class JobDatabase {
                 String description = result.getString("jobdescription");
                 double budget = result.getDouble("budget");
                 String duration = result.getString("jobduration");
-                Date date = new Date(result.getString("dateposted"));
+                String date = result.getString("dateposted");
                 int numApplications = result.getInt("numapplications");
                 String status = result.getString("jobstatus");
                 job = new Job(jobid, numApplications, status, employer, jobHeader, description,

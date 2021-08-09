@@ -2,6 +2,7 @@ package jobs;
 
 import accounts.Employee;
 import accounts.Employer;
+import servlets.FlexibleJobsConstants;
 
 import javax.activation.DataSource;
 import javax.naming.ldap.PagedResultsControl;
@@ -22,31 +23,32 @@ public class Job {
     private double budget;
     private int numApplications;
     private String jobDuration;
-    private Date date;
+    private String date;
+    private String jobStatus;
     private Set<String> hashtags;
     private Set<String> requiredSkills;
-    private String jobStatus;
     private Set<Application> applications;
     private Set<Employee> employees;
 
     public Job(String employer, String header, String description,
-               double budget, String jobDuration, Date date){
+               double budget, String jobDuration, String date){
         this.employer = employer;
         this.header = header;
         this.description = description;
         this.budget = budget;
         this.jobDuration = jobDuration;
         this.date = date;
+        jobStatus = FlexibleJobsConstants.JOB_STATUS_ACTIVE;
         hashtags = new HashSet<>();
         requiredSkills = new HashSet<>();
         employees = new HashSet<>();
         numApplications = 0;
-        jobStatus = "active";
         applications = new HashSet<>();
 
     }
-    public Job(int jobid, int numApplications, String jobStatus, String employer, String header, String description,
-               double budget, String jobDuration, Date date){
+    public Job(int jobid, int numApplications, String jobStatus, String employer,
+               String header, String description,
+               double budget, String jobDuration, String date){
         this.jobId = jobid;
         this.numApplications = numApplications;
         this.jobStatus = jobStatus;
@@ -60,21 +62,10 @@ public class Job {
         requiredSkills = new HashSet<>();
         employees = new HashSet<>();
         applications = new HashSet<>();
+
     }
 
     public Job(){
-
-    }
-    public void addEmployee(Employee employee){
-        employees.add(employee);
-    }
-
-    public void removeEmployee(Employee employee){
-        employees.remove(employee);
-    }
-
-    public String getHashtagsToString(){
-        return setToString(getHashTags());
     }
 
     public String getSkillsToString(){
@@ -197,11 +188,11 @@ public class Job {
         this.jobDuration = jobDuration;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
