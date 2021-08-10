@@ -16,7 +16,7 @@ public class JobDatabase {
 
     public Set<String> getEmployeesNames(int jobId){
         Set<String> names = new HashSet<>();
-        Connection connection;
+        Connection connection = null;
         try {
             connection = dataSource.getConnection();
             Statement statement = connection.createStatement();
@@ -28,12 +28,20 @@ public class JobDatabase {
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }finally {
+            if(connection != null){
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
         }
         return  names;
     }
 
     public void addEmployeeToJob(String username, int jobid){
-        PreparedStatement stm;
+        PreparedStatement stm = null;
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
@@ -60,7 +68,7 @@ public class JobDatabase {
     }
 
     public void removeEmployeeFromJob(String username, int jobid){
-        PreparedStatement stm;
+        PreparedStatement stm = null;
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
@@ -241,5 +249,56 @@ public class JobDatabase {
             }
         }
         return job;
+    }
+
+    public void addJobSkills(Set<String> jobSkills, int jobId){
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = dataSource.getConnection();
+            for(String s : jobSkills) {
+                statement = connection.prepareStatement("INSERT INTO jobskills(jobid, skill)" +
+                        "VALUES(?,?)");
+                statement.setInt(1, jobId);
+                statement.setString(2, s);
+                statement.executeUpdate();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            if(connection != null){
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public Set<String> getJobSkills(int jobId){
+        Set<String> skills = new HashSet<>();
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM jobskills " +
+                    "WHERE jobid = '"+ jobId + "'");
+            while (result.next()){
+                String skill = result.getString("skill");
+                skills.add(skill);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            if(connection != null){
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return  skills;
     }
 }
