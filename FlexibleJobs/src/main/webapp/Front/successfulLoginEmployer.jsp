@@ -15,15 +15,16 @@
 <html>
 <%
     Account acc=(Account) request.getSession().getAttribute("loggedUser");
-    JobDatabase dao=(JobDatabase) request.getServletContext().getAttribute("JobDao");
+    JobDatabase dao=(JobDatabase) request.getServletContext().getAttribute("jobDao");
     Set<Job> jobs=dao.getJobsByEmployer(acc.getUserName());
 %>
 <head>
 
     <title>FlexibleJobs | World's best freelancing Webpage</title>
-
+    <a href="/updateData">Settings</a>
 </head>
 <body>
+
 <ul>
     <%
         for (Job job:jobs) {
