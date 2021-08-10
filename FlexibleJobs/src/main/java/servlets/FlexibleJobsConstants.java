@@ -13,4 +13,12 @@ public class FlexibleJobsConstants {
     public static final String ACCOUNT_ROLE_EMPLOYER="employer";
     public static final String ACCOUNT_ROLE_ADMINISTRATOR="administrator";
 
+    public static final String JOB_STATUS_ACTIVE = "Active";
+    public static final String JOB_STATUS_IN_PROCESS = "Hired";
+    public static final String JOB_STATUS_FINISHED = "Finished";
+
+    public static final String APPLICATION_STATUS_WAITING = "Waiting";
+    public static final String APPLICATION_STATUS_HIRED = "Hired";
+    public static final String APPLICATION_STATUS_REJECTED = "Rejected";
+
 }
