@@ -32,9 +32,7 @@ public class JobsServlet extends HttpServlet {
         Job job = new Job(employer, jobHeader, description, budget, duration, currDate);
 
         jobDatabase.saveJob(job);
-        //jobDatabase.removeJob(1);
-        // RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/egaris.jsp");
-        // dispatcher.forward(req, resp);
+
     }
 
 }

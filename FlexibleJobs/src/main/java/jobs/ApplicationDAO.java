@@ -100,4 +100,61 @@ public class ApplicationDAO {
         return applications;
     }
 
+    public Set<Application> getApplicationsByEmployee(String employee){
+        Set<Application> applications = new HashSet<>();
+        Connection connection = null;
+
+        try {
+            connection = dataSource.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery
+                    ("SELECT * FROM applications WHERE employee = \"" + employee + "\"");
+            while(result.next()){
+               int jobId = result.getInt("jobid");
+                String letter = result.getString("letter");
+                String date = result.getString("datesent");
+                double bid = result.getDouble("bid");
+                String status = result.getString("applicationstatus");
+                Application application = new Application(jobId, employee, letter, date, bid,status);
+                applications.add(application);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            if(connection != null){
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return applications;
+    }
+
+    public void changeApplicationStatus(String newStatus, String employee, int jobId){
+        Connection connection=null;
+        try {
+            connection=dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE applications SET applicationstatus=? " +
+                            "WHERE employee = ? and jobid = ?;");
+            statement.setString(1,newStatus);
+            statement.setString(2, employee);
+            statement.setInt(3,jobId);
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            if(connection!=null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+    }
+
 }
