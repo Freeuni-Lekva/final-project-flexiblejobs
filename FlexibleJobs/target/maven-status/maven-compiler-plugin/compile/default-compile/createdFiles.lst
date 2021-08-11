@@ -2,9 +2,12 @@ servlets\ExistedAccountLogin.class
 accounts\Review.class
 servlets\ChatHandler.class
 accounts\MessageDao.class
+jobs\ApplicationDAO.class
+servlets\JobsServlet.class
 servlets\FlexibleJobsConstants.class
 servlets\PersonalDataUpdater.class
-servlets\JobCreationServlet.class
 servlets\FlexibleJobsContextListener.class
+servlets\ApplicationsServlet.class
+servlets\PasswordUpdater.class
 accounts\AccountDao.class
 accounts\ReviewDao.class

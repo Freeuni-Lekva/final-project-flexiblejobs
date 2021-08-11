@@ -21,12 +21,20 @@
 <head>
 
     <title>FlexibleJobs | World's best freelancing Webpage</title>
-    <a href="/updateData">Settings</a>
+    Welcome <%=acc.getPersonalData().getFirstName()%>
+    <a href="/updateData">Settings</a><br>
+    <a href="/Front/updatePassword.jsp">Change Password</a><br>
+
 </head>
 <body>
 
 <ul>
     <%
+        if(jobs.size()==0){
+    %>
+        <h1>You have not posted a job yet</h1>
+    <%
+        }
         for (Job job:jobs) {
     %>
             <li>
