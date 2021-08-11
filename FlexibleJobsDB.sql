@@ -17,6 +17,10 @@ CREATE TABLE personal_info(
     profiledescription VARCHAR(5000)
 );
 
+CREATE TABLE online_users(
+    username varchar(30)
+);
+
 CREATE TABLE accounts(
 	username VARCHAR(30),
     pass VARCHAR(30),

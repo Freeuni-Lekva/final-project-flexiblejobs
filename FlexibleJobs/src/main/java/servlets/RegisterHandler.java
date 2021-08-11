@@ -30,7 +30,7 @@ public class RegisterHandler extends HttpServlet {
         String profileDescription = req.getParameter("profileDescription");
 
 
-        if (accountDao.SelectByUsername(username) != null) {
+        if (accountDao.selectByUsername(username) != null) {
             req.getRequestDispatcher("/Front/registeredProblem.jsp").forward(req, resp);
         } else {
             MessageDigest messageDigest = null;
@@ -58,12 +58,8 @@ public class RegisterHandler extends HttpServlet {
                     break;
             }
 
-            try {
-                account.setPersonalData(personalData);
-                accountDao.addAccount(account);
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+            account.setPersonalData(personalData);
+            accountDao.addAccount(account);
 
             switch (type) {
                 case FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE:
