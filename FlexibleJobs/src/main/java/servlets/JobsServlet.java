@@ -14,8 +14,8 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.Date;
 
-@WebServlet ("/JobCreationServlet")
-public class JobCreationServlet extends HttpServlet {
+@WebServlet ("/JobsServlet")
+public class JobsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -28,7 +28,7 @@ public class JobCreationServlet extends HttpServlet {
         String description = req.getParameter("description");
         double budget = Double.parseDouble(req.getParameter("budget"));
         String duration = req.getParameter("jobduration");
-        Date currDate = new Date();
+        String currDate = new Date().toString();
         Job job = new Job(employer, jobHeader, description, budget, duration, currDate);
 
         jobDatabase.saveJob(job);
