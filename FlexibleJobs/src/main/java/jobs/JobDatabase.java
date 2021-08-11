@@ -15,6 +15,7 @@ public class JobDatabase {
         this.dataSource = dataSource;
     }
 
+
     public Set<String> getEmployeesNames(int jobId){
         Set<String> names = new HashSet<>();
         Connection connection = null;
@@ -48,7 +49,7 @@ public class JobDatabase {
             connection = dataSource.getConnection();
 
             stm = connection.prepareStatement(
-                    "INSERT INTO hires (jobid, employee, datehire) " +
+                    "INSERT INTO hires (jobid, username, datehire) " +
                             "VALUES (?,?,?);");
             stm.setInt(1, jobid);
             stm.setString(2,username);
@@ -75,7 +76,7 @@ public class JobDatabase {
             connection = dataSource.getConnection();
 
             stm = connection.prepareStatement(
-                    "DELETE FROM hires WHERE jobid = ? and employee = ?;");
+                    "DELETE FROM hires WHERE jobid = ? and username = ?;");
             stm.setInt(1, jobid);
             stm.setString(2,username);
             stm.executeUpdate();
@@ -189,7 +190,7 @@ public class JobDatabase {
             connection = dataSource.getConnection();
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(
-                    "select FROM jobs WHERE employer = \"" + employer + "\"");
+                    "select * FROM jobs WHERE employer = \"" + employer + "\"");
             while (result.next()) {
                 int jobid = result.getInt("jobid");
                 String jobHeader = result.getString("heading");
@@ -224,7 +225,7 @@ public class JobDatabase {
             connection = dataSource.getConnection();
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(
-                    "select FROM jobs WHERE jobid = \"" + jobid + "\"");
+                    "select * FROM jobs WHERE jobid = \"" + jobid + "\"");
             while (result.next()) {
                 String employer = result.getString("employer");
                 String jobHeader = result.getString("heading");
