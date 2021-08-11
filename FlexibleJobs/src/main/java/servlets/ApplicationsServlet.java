@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Set;
 
 @WebServlet ("/ApplicationsServlet")
 public class ApplicationsServlet extends HttpServlet {
@@ -18,7 +19,7 @@ public class ApplicationsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ServletContext servletContext = req.getServletContext();
         DataSource dataSource = (DataSource) servletContext.getAttribute("datasource");
-        ApplicationDAO database = new ApplicationDAO(dataSource);
+        ApplicationDAO database = (ApplicationDAO) servletContext.getAttribute("appDao");
         int jobId = Integer.parseInt(req.getParameter("id"));
         String employeeName = req.getParameter("employee_name");
         System.out.println(employeeName);

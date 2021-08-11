@@ -75,3 +75,7 @@ CREATE TABLE reviews(
     points INT,
     jobid INT
 );
+
+CREATE TABLE recomendedjobskills(
+    jobskill VARCHAR (30)
+);
