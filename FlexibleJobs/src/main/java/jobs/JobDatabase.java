@@ -1,5 +1,6 @@
 package jobs;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.Date;
@@ -301,4 +302,31 @@ public class JobDatabase {
         }
         return  skills;
     }
+
+    public Set<Integer> getJobsBySkill(String skill){
+        Set<Integer> jobs = new HashSet<>();
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM jobskills " +
+                    "WHERE skill = \""+ skill + "\"");
+            while (result.next()){
+                int jobId = result.getInt("jobid");
+                jobs.add(jobId);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            if(connection != null){
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return  jobs;
+    }
+
 }
