@@ -39,10 +39,10 @@
     %>
             <li>
                 <hr>
-                <h1>jobis dasaxeleba</h1>
-                <label>statusi<%="                       "%> tarigi</label><br>
-                <label>Applications:<%=12%></label><br>
-                <label>Hires:<%=12%></label><br>
+                <h1><%=job.getHeader()%></h1>
+                <label><%=job.getJobStatus()+"                       "+job.getDate()%></label><br>
+                <label>Applications:<%=job.getNumApplications()%></label><br>
+                <label>Hires:<%=0%></label><br>
                 <a href="EmployerJob?id=<%=job.getJobId()%>">See More</a>
                 <hr>
             </li>

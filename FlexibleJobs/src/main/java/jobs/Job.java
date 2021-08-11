@@ -212,8 +212,6 @@ public class Job {
         jobStatus = status;
     }
 
-    public static void main(String[] args) {
-        Job job = new Job();
-    }
+    public static void main(String[] args) { Job job = new Job(); }
 
 }
