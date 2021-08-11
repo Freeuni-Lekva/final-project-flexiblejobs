@@ -21,4 +21,6 @@ public class FlexibleJobsConstants {
     public static final String APPLICATION_STATUS_HIRED = "Hired";
     public static final String APPLICATION_STATUS_REJECTED = "Rejected";
 
+    public static final int MAX_SKILLS = 10;
+
 }

@@ -31,10 +31,17 @@ public class JobsServlet extends HttpServlet {
         String duration = req.getParameter("jobduration");
         String currDate = new Date().toString();
         Job job = new Job(employer, jobHeader, description, budget, duration, currDate);
+        Set<String> skills = new HashSet<>();
+        for(int i = 1; i <= FlexibleJobsConstants.MAX_SKILLS; i++){
+            String skill = req.getParameter("skill" + i);
+            if(skill != null && !skill.equals("")) {
+                skills.add(skill);
+            }
+        }
 
         jobDatabase.saveJob(job);
-
-
+        Job j = jobDatabase.getJobByEmployerAndDate(employer, currDate);
+        jobDatabase.addJobSkills(skills, j.getJobId());
     }
 
 }

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="servlets.FlexibleJobsConstants" %><%--
   Created by IntelliJ IDEA.
   User: Toko
   Date: 8/4/2021
@@ -26,7 +26,17 @@
     <label for = "jobduration">Estimated Time: </label>
     <input type="text" id = "jobduration" name="jobduration">
     <br> <br>
-
+    <p>Enter Job Skills:</p>
+    <%
+        for(int i = 1; i <= FlexibleJobsConstants.MAX_SKILLS; i++){
+            out.print("<input type=\"text\" id = \"jobskill" + i +"\" " +
+                    "name = \"skill"+i+"\" placeholder = \"skill " + i + "\">");
+            if(i == 5){
+                out.print("<br><br>");
+            }
+        }
+    %>
+    <br><br>
     <label for = "description">Job Description: </label>
     <br>
     <textarea id="description" name="description" rows="10" cols="100">
