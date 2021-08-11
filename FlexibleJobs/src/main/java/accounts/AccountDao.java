@@ -131,7 +131,6 @@ public class AccountDao {
         Connection connection = null;
         Account result=null;
         try {
-            String str="s";
             connection = dataSource.getConnection();
             PreparedStatement stm = connection.prepareStatement(
                     "SELECT* FROM accounts WHERE username = ?;");
