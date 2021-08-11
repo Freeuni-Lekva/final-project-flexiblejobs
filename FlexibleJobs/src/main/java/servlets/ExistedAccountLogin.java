@@ -2,6 +2,8 @@ package servlets;
 
 import accounts.Account;
 import accounts.AccountDao;
+import accounts.PersonalData;
+import accounts.PersonalDataDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +19,7 @@ public class ExistedAccountLogin extends HttpServlet{
         @Override
         protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             AccountDao accountDao = (AccountDao) req.getServletContext().getAttribute("accountDao");
+            PersonalDataDao personalDataDao=(PersonalDataDao) req.getServletContext().getAttribute("personalDataDao");
 
             String username = req.getParameter("username");
 /*
@@ -33,7 +36,9 @@ public class ExistedAccountLogin extends HttpServlet{
 
  */
             String password = req.getParameter("password");
-            Account account = accountDao.SelectByUsername(username);
+            Account account = accountDao.selectByUsername(username);
+            PersonalData data=personalDataDao.selectByUsername(username);
+            account.setPersonalData(data);
 
             if(account!=null && account.getPassword().equals(password)){
                 accountDao.logIn(account.getUserName());

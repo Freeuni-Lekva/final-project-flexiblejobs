@@ -35,7 +35,7 @@
 
     <div style="border-radius: 15px">
         <% AccountDao accountDao = (AccountDao) request.getServletContext().getAttribute("accountDao");
-        Account account = accountDao.SelectByUsername(username);
+        Account account = accountDao.selectByUsername(username);
         %>
     </div>
 
