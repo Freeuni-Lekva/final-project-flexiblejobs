@@ -9,72 +9,28 @@
 <html>
 <head>
     <title>Register - FlexibleJobs</title>
-    <link rel="stylesheet" href="/FlexibleJobs/Front/css/login.css">
+    <link rel="stylesheet" href="/FlexibleJobs/Front/css/register.css">
     <link href = "/FlexibleJobs/Front/logo.png" rel="icon" type="image/gif">
+    <script>
+        function goToLogin(){
+            this.window.location.href = "/FlexibleJobs/Front/login.jsp"
+        }
+    </script>
 </head>
 <body>
-<form action="/registerHandler" method="post">
-    <label for="usernameInput">username: </label>
-    <input style="background-color: palegreen; border-radius: 15px" name="username" type="text"
-           placeholder="Enter username" id="usernameInput">
-    <br>
-    <br>
+    <nav class="register-header">
+        <img class="register-header-logo" src="/FlexibleJobs/Front/logo.png">
+    </nav>
 
-    <label for="firstnameInput">firstname: </label>
-    <input style="background-color: palegreen; border-radius: 15px" name="firstname" type="text"
-           placeholder="Enter firstname" id="firstnameInput">
-
-    <br>
-    <br>
-
-    <label for="lastnameInput">lastname: </label>
-    <input style="background-color: palegreen; border-radius: 15px" name="lastname" type="text"
-           placeholder="Enter lastname" id="lastnameInput">
-
-    <br>
-    <br>
-
-    <label for="livingPlaceInput">living place: </label>
-    <input style="background-color: palegreen; border-radius: 15px" name="livingPlace" type="text"
-           placeholder="Enter living place" id="livingPlaceInput">
-
-    <br>
-    <br>
-
-    <label for="profileHeadingInput">profile heading: </label>
-    <input style="background-color: palegreen; border-radius: 15px" name="profileHeading" type="text"
-           placeholder="Enter profile heading" id="profileHeadingInput">
-
-    <br>
-    <br>
-
-    <label for="profileDescriptionInput">profile description: </label>
-    <input style="background-color: palegreen; border-radius: 15px" name="profileDescription" type="text"
-           placeholder="Enter profile description" id="profileDescriptionInput">
-
-    <br>
-    <br>
-
-    <label for="passwordInput">password: </label>
-    <input style="background-color: palegreen; border-radius: 15px" name="password" type="password"
-           placeholder="Enter password" id="passwordInput">
-
-    <br>
-    <br>
-
-    <label for="typeChoice"> choose type:</label>
-    <select name="type" id="typeChoice">
-        <option value="employee"> Employee</option>
-        <option value="employer"> Employer</option>
-        <option value="administrator"> Administrator</option>
-    </select>
-
-    <br>
-    <br>
-
-    <input style="border-radius: 15px; background-color: palegreen" type="submit" value="Login">
-    <br>
-    <br>
-</form>
+    <div class="register-wrapper">
+        <form class="register-form" action="/FlexibleJobs/existedAccregister" method="post">
+            <label class="register-label" for="username">Register to FlexibleJobs</label>
+            <input class="register-username-input" id="username" name="username" type="text" placeholder="Enter Username"/>
+            <input class="register-password-input" id="password" name="password" type="password" placeholder="Enter Password"/>
+            <input class="register-submit-button" type="submit" value="Continue with Username">
+        </form>
+        <div>--- Already have a FlexibleJobs account? --- </div>
+        <button class="login-button" onclick="goToLogin()">Log In</button>
+    </div>
 </body>
 </html>

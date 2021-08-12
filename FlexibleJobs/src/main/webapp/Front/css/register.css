@@ -1,0 +1,85 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.register-header {
+    height: 7vh;
+    border-bottom: 2px solid lightgray;
+    display: flex;
+}
+
+.register-header-logo {
+    width: 150px;
+    height: 40px;
+    margin: auto auto auto 20%;
+}
+
+.register-header-logo:hover {
+    cursor: pointer;
+}
+
+.register-wrapper {
+    text-align: center;
+    border: 1px solid lightgray;
+    width: 30vw;
+    height: 50vh;
+    margin: 6vh auto auto;
+    border-radius: 10px;
+}
+
+.register-form {
+    text-align: center;
+    border-bottom: 1px solid lightgray;
+    height: 30vh;
+}
+
+.register-label {
+    font-size: 2em;
+    display: block;
+    margin-top: 2vh;
+}
+
+.register-username-input {
+    border: none;
+    outline: none;
+    width: 85%;
+}
+
+.register-password-input {
+    border: none;
+    outline: none;
+    width: 85%;
+}
+
+.register-submit-button {
+    font-size: 1em;
+    margin-top: 3vh;
+    height: 5vh;
+    width: 70%;
+    border-radius: 30px;
+    color: white;
+    background-color: #029a02;
+    border: 1px solid #029a02;
+}
+
+.register-submit-button:hover {
+    background-color: green;
+    cursor: pointer;
+}
+
+.login-button {
+    font-size: 1em;
+    margin-top: 3vh;
+    height: 5vh;
+    width: 40%;
+    border-radius: 30px;
+    color: #029a02;
+    background-color: white;
+    border: 1px solid #029a02;
+}
+
+.login-button:hover {
+    background-color: rgba(0, 128, 0, 0.08);
+    cursor: pointer;
+}
