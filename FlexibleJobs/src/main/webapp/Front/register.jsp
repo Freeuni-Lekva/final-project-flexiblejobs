@@ -1,4 +1,5 @@
-<%@ page import="servlets.FlexibleJobsConstants" %><%--
+<%@ page import="servlets.FlexibleJobsConstants" %>
+<%@ page import="states.State" %><%--
   Created by IntelliJ IDEA.
   User: User
   Date: 08.08.2021
@@ -12,6 +13,17 @@
     <link rel="stylesheet" href="/FlexibleJobs/Front/css/register.css">
     <link href = "/FlexibleJobs/Front/logo.png" rel="icon" type="image/gif">
     <script>
+        <%State state = (State) request.getSession().getAttribute("state");%>
+
+        <%if(state != null && state.getLoggedUser() != null){%>
+        <%if (state.getLoggedUser().getType().equals("employee")){%>
+        window.location.href = "/FlexibleJobs/Front/successfulLoginEmployee.jsp"
+        <%} else if(state.getLoggedUser().getType().equals("employer")){%>
+        window.location.href = "/FlexibleJobs/Front/successfulLoginEmployer.jsp"
+        <%} else if(state.getLoggedUser().getType().equals("administrator")){%>
+        window.location.href = "/FlexibleJobs/Front/successfulLoginAdmin.jsp"
+        <%}%>
+        <%}%>
         function goToLogin(){
             this.window.location.href = "/FlexibleJobs/Front/login.jsp"
         }
