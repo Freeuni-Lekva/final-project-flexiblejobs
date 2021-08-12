@@ -23,10 +23,10 @@
     </nav>
 
     <div class="register-wrapper">
-        <form class="register-form" action="/FlexibleJobs/existedAccregister" method="post">
+        <form class="register-form" action="/FlexibleJobs/registerHandler" method="post">
             <label class="register-label" for="username">Register to FlexibleJobs</label>
-            <input class="register-username-input" id="username" name="username" type="text" placeholder="Enter Username"/>
-            <input class="register-password-input" id="password" name="password" type="password" placeholder="Enter Password"/>
+            <input class="register-firstname-input" id="username" name="firstname" type="text" placeholder="First Name"/>
+            <input class="register-lastname-input" id="password" name="lastname" type="text" placeholder="Last Name"/>
             <input class="register-submit-button" type="submit" value="Continue with Username">
         </form>
         <div>--- Already have a FlexibleJobs account? --- </div>
