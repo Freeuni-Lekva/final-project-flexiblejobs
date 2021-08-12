@@ -20,11 +20,11 @@
         <form class="login-form">
             <label class="login-label" for="username">Log in to FlexibleJobs</label>
             <div class="login-username-input-wrapper">
-                <input class="login-username-input" id="username" type="text" placeholder="Enter Username"/>
+                <span class="login-username-input-span">&#128271;</span>
+                <input class="login-username-input" id="username" type="text" placeholder="Username"/>
             </div>
             <input class="login-submit-button" type="submit" value="Continue with Username">
         </form>
-
     </div>
 </body>
 </html>

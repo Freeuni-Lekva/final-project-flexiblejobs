@@ -33,3 +33,37 @@ body {
     border-bottom: 1px solid lightgray;
     height: 30vh;
 }
+
+.login-label {
+    font-size: 2em;
+    display: block;
+    margin-top: 2vh;
+}
+
+.login-username-input-wrapper {
+    display: flex;
+    width: 70%;
+    height: 5vh;
+    margin: 3vh auto auto;
+    border: 1px solid lightgray;
+}
+
+.login-username-input-span {
+    margin: auto auto auto 1vw;
+}
+
+.login-username-input {
+    border: none;
+    outline: none;
+    width: 85%;
+}
+
+.login-submit-button {
+    font-size: 1em;
+    margin-top: 3vh;
+    height: 5vh;
+    width: 70%;
+    border-radius: 30px;
+    color: white;
+}
+
