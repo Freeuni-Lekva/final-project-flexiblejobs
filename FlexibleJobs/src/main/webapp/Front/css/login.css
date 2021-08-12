@@ -63,6 +63,29 @@ body {
     border: 1px solid #029a02;
 }
 
+.login-password-input-wrapper {
+    display: flex;
+    width: 70%;
+    height: 5vh;
+    margin: 3vh auto auto;
+    border: 1px solid lightgray;
+    outline-color: #029a02;
+}
+
+.login-password-input-span {
+    margin: auto auto auto 1vw;
+}
+
+.login-password-input {
+    border: none;
+    outline: none;
+    width: 85%;
+}
+
+.login-password-input-wrapper:hover {
+    border: 1px solid #029a02;
+}
+
 .login-submit-button {
     font-size: 1em;
     margin-top: 3vh;

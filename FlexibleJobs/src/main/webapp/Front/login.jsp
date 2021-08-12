@@ -10,7 +10,7 @@
 <head>
     <title>Log In - FlexibleJobs</title>
     <link rel="stylesheet" href="/FlexibleJobs/Front/css/login.css">
-
+    <link href = "/FlexibleJobs/Front/logo.png" rel="icon" type="image/gif">
 </head>
 <body>
     <nav class="login-header">
@@ -18,11 +18,15 @@
     </nav>
 
     <div class="login-wrapper">
-        <form class="login-form">
+        <form class="login-form" action="/FlexibleJobs/existedAccLogin" method="post">
             <label class="login-label" for="username">Log in to FlexibleJobs</label>
             <div class="login-username-input-wrapper">
-                <span class="login-username-input-span">&#128271;</span>
+                <span class="login-username-input-span">&#128231;</span>
                 <input class="login-username-input" id="username" name="username" type="text" placeholder="Enter Username"/>
+            </div>
+            <div class="login-password-input-wrapper">
+                <span class="login-password-input-span">&#128271;</span>
+                <input class="login-password-input" id="password" name="password" type="password" placeholder="Enter Password"/>
             </div>
             <input class="login-submit-button" type="submit" value="Continue with Username">
         </form>
