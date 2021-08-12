@@ -1,6 +1,7 @@
 package servlets;
 
 import accounts.*;
+import states.State;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +12,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
 
 @WebServlet("/registerHandler")
 public class RegisterHandler extends HttpServlet {
@@ -61,8 +61,8 @@ public class RegisterHandler extends HttpServlet {
             account.setPersonalData(personalData);
             accountDao.addAccount(account);
 
-            req.getSession().setAttribute("loggedUser", username);
-            req.getServletContext().setAttribute("lastLoggedUser", username);
+            State state = new State(account);
+            req.getSession().setAttribute("state", state);
             switch (type) {
                 case FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE:
                     req.getRequestDispatcher("/Front/successfulLoginEmployee.jsp").forward(req, resp);

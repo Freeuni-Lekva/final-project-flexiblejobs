@@ -2,10 +2,10 @@ package states;
 
 import accounts.Account;
 
-public class EmployeeState {
+public class State {
     private Account loggedUser;
 
-    public EmployeeState(Account loggedUser) {
+    public State(Account loggedUser) {
         this.loggedUser = loggedUser;
     }
 

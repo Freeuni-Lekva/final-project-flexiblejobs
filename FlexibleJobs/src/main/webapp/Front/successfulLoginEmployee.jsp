@@ -1,4 +1,4 @@
-<%@ page import="states.EmployeeState" %><%--
+<%@ page import="states.State" %><%--
   Created by IntelliJ IDEA.
   User: User
   Date: 02.08.2021
@@ -13,7 +13,7 @@
     <link href = "/FlexibleJobs/Front/logo.png" rel="icon" type="image/gif">
 </head>
 <body>
-    <%EmployeeState state = (EmployeeState) request.getSession().getAttribute("state");%>
+    <%State state = (State) request.getSession().getAttribute("state");%>
     <div class="employee-name-wrapper">
         <%=state.getLoggedUser().getUserName()%>
     </div>
