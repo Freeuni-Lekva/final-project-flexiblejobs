@@ -15,5 +15,16 @@
     <nav class="login-header">
         <img class="login-header-logo" src="/FlexibleJobs/Front/logo.png">
     </nav>
+
+    <div class="login-wrapper">
+        <form class="login-form">
+            <label class="login-label" for="username">Log in to FlexibleJobs</label>
+            <div class="login-username-input-wrapper">
+                <input class="login-username-input" id="username" type="text" placeholder="Enter Username"/>
+            </div>
+            <input class="login-submit-button" type="submit" value="Continue with Username">
+        </form>
+
+    </div>
 </body>
 </html>

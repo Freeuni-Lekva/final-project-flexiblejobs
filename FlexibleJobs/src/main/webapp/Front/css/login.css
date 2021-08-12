@@ -18,3 +18,18 @@ body {
 .login-header-logo:hover {
     cursor: pointer;
 }
+
+.login-wrapper {
+    text-align: center;
+    border: 1px solid lightgray;
+    width: 30vw;
+    height: 50vh;
+    margin: 6vh auto auto;
+    border-radius: 10px;
+}
+
+.login-form {
+    text-align: center;
+    border-bottom: 1px solid lightgray;
+    height: 30vh;
+}
