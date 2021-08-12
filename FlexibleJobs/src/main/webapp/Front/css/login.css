@@ -1,0 +1,20 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.login-header {
+    height: 7vh;
+    border-bottom: 2px solid lightgray;
+    display: flex;
+}
+
+.login-header-logo {
+    width: 150px;
+    height: 40px;
+    margin: auto auto auto 20%;
+}
+
+.login-header-logo:hover {
+    cursor: pointer;
+}

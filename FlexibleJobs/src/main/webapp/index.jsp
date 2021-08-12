@@ -1,5 +1,5 @@
 <html>
 <body>
-<a href="/Front/chat.jsp">Hello World!</a>
+<a href="/FlexibleJobs/Front/login.jsp">Login</a>
 </body>
 </html>
