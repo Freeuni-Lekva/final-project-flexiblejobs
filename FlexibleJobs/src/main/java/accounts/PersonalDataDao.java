@@ -91,7 +91,7 @@ public class PersonalDataDao {
         }
     }
 
-    public PersonalData selectByUsername(String username){
+    public static PersonalData selectByUsername(String username){
         Connection connection = null;
         PersonalData result=null;
         try {

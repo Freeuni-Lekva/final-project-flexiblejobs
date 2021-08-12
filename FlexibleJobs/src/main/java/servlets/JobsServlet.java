@@ -33,7 +33,7 @@ public class JobsServlet extends HttpServlet {
         Job job = new Job(employer, jobHeader, description, budget, duration, currDate);
 
         jobDatabase.saveJob(job);
-
+        req.getRequestDispatcher("/Front/successfulLoginEmployer.jsp").forward(req,resp);
 
     }
 

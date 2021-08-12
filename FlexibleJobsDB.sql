@@ -23,7 +23,7 @@ CREATE TABLE online_users(
 
 CREATE TABLE accounts(
 	username VARCHAR(30),
-    pass VARCHAR(30),
+    pass VARCHAR(256),
     balance INT,
     rating DECIMAL(3,2),
     acctype VARCHAR(15)

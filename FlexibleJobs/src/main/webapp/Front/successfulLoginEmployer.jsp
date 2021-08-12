@@ -21,21 +21,31 @@
 <head>
 
     <title>FlexibleJobs | World's best freelancing Webpage</title>
-    <a href="/updateData">Settings</a>
+    Welcome <%=acc.getPersonalData().getFirstName()%><br>
+    <a href="/updateData">Settings</a><br>
+    <a href="/Front/updatePassword.jsp">Change Password</a><br>
+    <a href="/Jobs_Front/Jobcreation.jsp">Post a job</a><br>
+
+
 </head>
 <body>
 
 <ul>
     <%
+        if(jobs.size()==0){
+    %>
+        <h1>You have not posted a job yet</h1>
+    <%
+        }
         for (Job job:jobs) {
     %>
             <li>
                 <hr>
-                <h1>jobis dasaxeleba</h1>
-                <label>statusi<%="                       "%> tarigi</label><br>
-                <label>Applications:<%=12%></label><br>
-                <label>Hires:<%=12%></label><br>
-                <a href="EmployerJob?id=<%=job.getJobId()%>">See More</a>
+                <h1><%=job.getHeader()%></h1>
+                <label><%=job.getJobStatus()+"                       "+job.getDate()%></label><br>
+                <label>Applications:<%=job.getNumApplications()%></label><br>
+                <label>Hires:<%=0%></label><br>
+                <a href="EmployerJob.jsp?jobId=<%=job.getJobId()%>">See More</a>
                 <hr>
             </li>
     <%
