@@ -23,11 +23,27 @@
     </nav>
 
     <div class="register-wrapper">
-        <form class="register-form" action="/FlexibleJobs/registerHandler" method="post">
-            <label class="register-label" for="username">Register to FlexibleJobs</label>
-            <input class="register-firstname-input" id="username" name="firstname" type="text" placeholder="First Name"/>
-            <input class="register-lastname-input" id="password" name="lastname" type="text" placeholder="Last Name"/>
-            <input class="register-submit-button" type="submit" value="Continue with Username">
+        <form class="register-form" id="register-form" >
+            <label class="register-label" for="firstname">Register to FlexibleJobs</label>
+            <div class="login-sides-wrapper">
+                <div class="register-left-side-wrapper">
+                    <input class="register-common-input" id="firstname" name="firstname" type="text" placeholder="Enter First Name"/>
+                    <input class="register-common-input" id="lastname" name="lastname" type="text" placeholder="Enter Last Name"/>
+                    <input class="register-common-input" id="username" name="username" type="text" placeholder="Enter Username"/>
+                    <input class="register-common-input" id="password" name="password" type="password" placeholder="Enter Password"/>
+                </div>
+                <div class="register-right-side-wrapper">
+                    <select class="register-select-input" id="userTypes" name="userType" form="register-form">
+                        <option class="register-select-option" value="employee">employee</option>
+                        <option class="register-select-option" value="employer">employer</option>
+                        <option class="register-select-option" value="administrator">administrator</option>
+                    </select>
+                    <input class="register-common-input" id="livingPlace" name="livingPlace" type="text" placeholder="Enter Living Place"/>
+                    <input class="register-common-input" id="profileHeading" name="profileHeading" type="text" placeholder="Enter Profile Heading"/>
+                    <input class="register-common-input" id="profileDescription" name="profileDescription" type="text" placeholder="Enter Profile Heading"/>
+                </div>
+            </div>
+            <input class="register-submit-button" type="submit" value="Create Account">
         </form>
         <div>--- Already have a FlexibleJobs account? --- </div>
         <button class="login-button" onclick="goToLogin()">Log In</button>
