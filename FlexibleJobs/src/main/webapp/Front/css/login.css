@@ -46,6 +46,7 @@ body {
     height: 5vh;
     margin: 3vh auto auto;
     border: 1px solid lightgray;
+    outline-color: #029a02;
 }
 
 .login-username-input-span {
@@ -58,6 +59,10 @@ body {
     width: 85%;
 }
 
+.login-username-input-wrapper:hover {
+    border: 1px solid #029a02;
+}
+
 .login-submit-button {
     font-size: 1em;
     margin-top: 3vh;
@@ -65,5 +70,11 @@ body {
     width: 70%;
     border-radius: 30px;
     color: white;
+    background-color: #029a02;
+    border: 1px solid #029a02;
 }
 
+.login-submit-button:hover {
+    background-color: green;
+    cursor: pointer;
+}
