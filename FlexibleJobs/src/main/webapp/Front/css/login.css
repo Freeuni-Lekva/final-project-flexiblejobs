@@ -94,3 +94,28 @@ body {
     background-color: rgba(0, 128, 0, 0.08);
     cursor: pointer;
 }
+
+.login-footer {
+    background-color: #001d00;
+    height: 15vh;
+    margin-top: 21.6vh;
+    text-align: center;
+}
+
+.login-footer-description {
+    padding-top: 3vh;
+    color: white;
+}
+
+.login-footer-terms-of-service {
+    padding-top: 2vh;
+    color: white;
+}
+
+.login-footer-privacy-policy {
+    color: white;
+}
+
+.login-footer-contact {
+    color: white;
+}
