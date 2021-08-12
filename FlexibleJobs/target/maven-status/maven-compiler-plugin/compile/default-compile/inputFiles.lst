@@ -2,7 +2,6 @@ C:\Users\gioch\Desktop\shmroeqt\final-project-flexiblejobs\FlexibleJobs\src\main
 C:\Users\gioch\Desktop\shmroeqt\final-project-flexiblejobs\FlexibleJobs\src\main\java\servlets\PasswordUpdater.java
 C:\Users\gioch\Desktop\shmroeqt\final-project-flexiblejobs\FlexibleJobs\src\main\java\jobs\JobDatabase.java
 C:\Users\gioch\Desktop\shmroeqt\final-project-flexiblejobs\FlexibleJobs\src\main\java\accounts\Tests\PersonalDataDaoTest.java
-C:\Users\gioch\Desktop\shmroeqt\final-project-flexiblejobs\FlexibleJobs\src\main\java\servlets\JobEmployerView.java
 C:\Users\gioch\Desktop\shmroeqt\final-project-flexiblejobs\FlexibleJobs\src\main\java\servlets\ApplicationsServlet.java
 C:\Users\gioch\Desktop\shmroeqt\final-project-flexiblejobs\FlexibleJobs\src\main\java\jobs\Application.java
 C:\Users\gioch\Desktop\shmroeqt\final-project-flexiblejobs\FlexibleJobs\src\main\java\servlets\FlexibleJobsContextListener.java
@@ -19,6 +18,7 @@ C:\Users\gioch\Desktop\shmroeqt\final-project-flexiblejobs\FlexibleJobs\src\main
 C:\Users\gioch\Desktop\shmroeqt\final-project-flexiblejobs\FlexibleJobs\src\main\java\accounts\MessageDao.java
 C:\Users\gioch\Desktop\shmroeqt\final-project-flexiblejobs\FlexibleJobs\src\main\java\accounts\Review.java
 C:\Users\gioch\Desktop\shmroeqt\final-project-flexiblejobs\FlexibleJobs\src\main\java\jobs\Job.java
+C:\Users\gioch\Desktop\shmroeqt\final-project-flexiblejobs\FlexibleJobs\src\main\java\servlets\ApplicationManager.java
 C:\Users\gioch\Desktop\shmroeqt\final-project-flexiblejobs\FlexibleJobs\src\main\java\servlets\ChatHandler.java
 C:\Users\gioch\Desktop\shmroeqt\final-project-flexiblejobs\FlexibleJobs\src\main\java\servlets\FlexibleJobsConstants.java
 C:\Users\gioch\Desktop\shmroeqt\final-project-flexiblejobs\FlexibleJobs\src\main\java\accounts\Tests\MessageDaoTest.java

@@ -11,7 +11,7 @@
 <html>
 <%
     Account acc=(Account) request.getSession().getAttribute("loggedUser");
-    String webpage="successfulLogin";
+    String webpage="/Front/successfulLogin";
     if(acc.getType().equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE))
         webpage += "Employee.jsp";
     else if(acc.getType().equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER))

@@ -21,9 +21,11 @@
 <head>
 
     <title>FlexibleJobs | World's best freelancing Webpage</title>
-    Welcome <%=acc.getPersonalData().getFirstName()%>
+    Welcome <%=acc.getPersonalData().getFirstName()%><br>
     <a href="/updateData">Settings</a><br>
     <a href="/Front/updatePassword.jsp">Change Password</a><br>
+    <a href="/Jobs_Front/Jobcreation.jsp">Post a job</a><br>
+
 
 </head>
 <body>
@@ -43,7 +45,7 @@
                 <label><%=job.getJobStatus()+"                       "+job.getDate()%></label><br>
                 <label>Applications:<%=job.getNumApplications()%></label><br>
                 <label>Hires:<%=0%></label><br>
-                <a href="EmployerJob?id=<%=job.getJobId()%>">See More</a>
+                <a href="EmployerJob.jsp?jobId=<%=job.getJobId()%>">See More</a>
                 <hr>
             </li>
     <%
