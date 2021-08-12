@@ -23,7 +23,7 @@ body {
     text-align: center;
     border: 1px solid lightgray;
     width: 60vw;
-    height: 70vh;
+    height: 68vh;
     margin: 6vh auto auto;
     border-radius: 10px;
 }
@@ -31,7 +31,7 @@ body {
 .register-form {
     text-align: center;
     border-bottom: 1px solid lightgray;
-    height: 50vh;
+    height: 46vh;
 }
 
 .register-label {
@@ -97,6 +97,31 @@ body {
 
 .login-sides-wrapper {
     width: 60vw;
-    height: 35vh;
+    height: 32vh;
     display: flex;
+}
+
+.register-footer {
+    background-color: #001d00;
+    height: 15vh;
+    margin-top: 3.6vh;
+    text-align: center;
+}
+
+.register-footer-description {
+    padding-top: 3vh;
+    color: white;
+}
+
+.register-footer-terms-of-service {
+    padding-top: 2vh;
+    color: white;
+}
+
+.register-footer-privacy-policy {
+    color: white;
+}
+
+.register-footer-contact {
+    color: white;
 }

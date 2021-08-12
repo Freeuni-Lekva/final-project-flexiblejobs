@@ -23,7 +23,7 @@
     </nav>
 
     <div class="register-wrapper">
-        <form class="register-form" id="register-form" >
+        <form class="register-form" id="register-form" action="/FlexibleJobs/registerHandler" method="post" >
             <label class="register-label" for="firstname">Register to FlexibleJobs</label>
             <div class="login-sides-wrapper">
                 <div class="register-left-side-wrapper">
@@ -33,20 +33,27 @@
                     <input class="register-common-input" id="password" name="password" type="password" placeholder="Enter Password"/>
                 </div>
                 <div class="register-right-side-wrapper">
-                    <select class="register-select-input" id="userTypes" name="userType" form="register-form">
+                    <select class="register-select-input" id="userTypes" name="type" form="register-form">
                         <option class="register-select-option" value="employee">employee</option>
                         <option class="register-select-option" value="employer">employer</option>
                         <option class="register-select-option" value="administrator">administrator</option>
                     </select>
                     <input class="register-common-input" id="livingPlace" name="livingPlace" type="text" placeholder="Enter Living Place"/>
                     <input class="register-common-input" id="profileHeading" name="profileHeading" type="text" placeholder="Enter Profile Heading"/>
-                    <input class="register-common-input" id="profileDescription" name="profileDescription" type="text" placeholder="Enter Profile Heading"/>
+                    <input class="register-common-input" id="profileDescription" name="profileDescription" type="text" placeholder="Enter Profile Description"/>
                 </div>
             </div>
             <input class="register-submit-button" type="submit" value="Create Account">
         </form>
         <div>--- Already have a FlexibleJobs account? --- </div>
         <button class="login-button" onclick="goToLogin()">Log In</button>
+    </div>
+
+    <div class="register-footer">
+        <div class="register-footer-description">© 2021 - 2021 FlexibleJobs® National Inc.</div>
+        <div class="register-footer-terms-of-service">Terms of Service</div>
+        <div class="register-footer-privacy-policy">Privacy Policy</div>
+        <div class="register-footer-contact">Contact</div>
     </div>
 </body>
 </html>
