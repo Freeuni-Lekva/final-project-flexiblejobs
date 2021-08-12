@@ -1,5 +1,3 @@
-<%@ page import="accounts.Account" %>
-<%@ page import="accounts.AccountDao" %>
 <%@ page import="states.EmployeeState" %><%--
   Created by IntelliJ IDEA.
   User: User

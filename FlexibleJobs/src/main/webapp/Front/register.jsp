@@ -8,7 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>FlexibleJobs | World's best freelancing Webpage</title>
+    <title>Register - FlexibleJobs</title>
+    <link rel="stylesheet" href="/FlexibleJobs/Front/css/login.css">
+    <link href = "/FlexibleJobs/Front/logo.png" rel="icon" type="image/gif">
 </head>
 <body>
 <form action="/registerHandler" method="post">

@@ -11,6 +11,11 @@
     <title>Log In - FlexibleJobs</title>
     <link rel="stylesheet" href="/FlexibleJobs/Front/css/login.css">
     <link href = "/FlexibleJobs/Front/logo.png" rel="icon" type="image/gif">
+    <script>
+        function goToRegister(){
+            this.window.location.href = "/FlexibleJobs/Front/register.jsp"
+        }
+    </script>
 </head>
 <body>
     <nav class="login-header">
@@ -31,7 +36,7 @@
             <input class="login-submit-button" type="submit" value="Continue with Username">
         </form>
         <div>--- Don't have an FlexibleJobs account? --- </div>
-        <button class="register-button">Sign Up</button>
+        <button class="register-button" onclick="goToRegister()">Sign Up</button>
     </div>
     <div class="login-footer">
         <div class="login-footer-description">© 2021 - 2021 FlexibleJobs® National Inc.</div>
