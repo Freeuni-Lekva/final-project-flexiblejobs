@@ -6,8 +6,7 @@
 <body>
 
 <%
-    DataSource source = (DataSource) application.getAttribute("datasource");
-    JobDatabase database = new JobDatabase(source);
+    JobDatabase database = (JobDatabase) application.getAttribute("jobDao");
     Set<Job> jobs = database.getJobs();
     for(Job job : jobs){
         out.print("<a href=\"Jobs_Front/adding_application.jsp?id=" + job.getJobId() + "\">"

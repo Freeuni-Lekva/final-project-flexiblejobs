@@ -39,7 +39,6 @@ public class Job {
         this.jobDuration = jobDuration;
         this.date = date;
         jobStatus = FlexibleJobsConstants.JOB_STATUS_ACTIVE;
-        hashtags = new HashSet<>();
         requiredSkills = new HashSet<>();
         employees = new HashSet<>();
         numApplications = 0;
@@ -58,7 +57,6 @@ public class Job {
         this.budget = budget;
         this.jobDuration = jobDuration;
         this.date = date;
-        hashtags = new HashSet<>();
         requiredSkills = new HashSet<>();
         employees = new HashSet<>();
         applications = new HashSet<>();
@@ -96,13 +94,6 @@ public class Job {
         return res;
     }
 
-    public void addHashtag(String hashtag){
-        hashtags.add(hashtag);
-    }
-
-    public void removeHashtag(String hashtag){
-        hashtags.remove(hashtag);
-    }
 
     public void addApplication( Application application) {
         applications.add(application);
@@ -196,22 +187,12 @@ public class Job {
         this.date = date;
     }
 
-    public Set<String> getHashTags() {
-        return hashtags;
-    }
-
     public Set<String> getRequiredSkills() {
         return requiredSkills;
     }
 
-    public void setJobId(int jobId) {
-        this.jobId = jobId;
+    public static void main(String[] args) {
+        Job job = new Job();
     }
-
-    public void changeJobStatus(String status){
-        jobStatus = status;
-    }
-
-    public static void main(String[] args) { Job job = new Job(); }
 
 }

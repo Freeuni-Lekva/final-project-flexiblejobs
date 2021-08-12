@@ -55,7 +55,8 @@ CREATE TABLE applications(
 
 CREATE TABLE hires(
 	jobid INT,
-    username VARCHAR(30)
+    username VARCHAR(30),
+    datehire VARCHAR(100)
 );
 
 CREATE TABLE jobskills(
@@ -73,4 +74,8 @@ CREATE TABLE reviews(
     touser VARCHAR(30),
     points INT,
     jobid INT
+);
+
+CREATE TABLE recomendedjobskills(
+    jobskill VARCHAR (30)
 );
