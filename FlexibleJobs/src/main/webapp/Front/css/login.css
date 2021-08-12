@@ -78,3 +78,19 @@ body {
     background-color: green;
     cursor: pointer;
 }
+
+.register-button {
+    font-size: 1em;
+    margin-top: 3vh;
+    height: 5vh;
+    width: 40%;
+    border-radius: 30px;
+    color: #029a02;
+    background-color: white;
+    border: 1px solid #029a02;
+}
+
+.register-button:hover {
+    background-color: rgba(0, 128, 0, 0.08);
+    cursor: pointer;
+}

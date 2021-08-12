@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/FlexibleJobs/Front/css/login.css">
 
 </head>
+<body>
     <nav class="login-header">
         <img class="login-header-logo" src="/FlexibleJobs/Front/logo.png">
     </nav>
@@ -21,10 +22,12 @@
             <label class="login-label" for="username">Log in to FlexibleJobs</label>
             <div class="login-username-input-wrapper">
                 <span class="login-username-input-span">&#128271;</span>
-                <input class="login-username-input" id="username" type="text" placeholder="Username"/>
+                <input class="login-username-input" id="username" type="text" placeholder="Enter Username"/>
             </div>
             <input class="login-submit-button" type="submit" value="Continue with Username">
         </form>
+        <div>--- Don't have an FlexibleJobs account? --- </div>
+        <button class="register-button">Sign Up</button>
     </div>
 </body>
 </html>
