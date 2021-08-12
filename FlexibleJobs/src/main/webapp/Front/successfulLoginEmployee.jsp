@@ -1,5 +1,6 @@
 <%@ page import="accounts.Account" %>
-<%@ page import="accounts.AccountDao" %><%--
+<%@ page import="accounts.AccountDao" %>
+<%@ page import="states.EmployeeState" %><%--
   Created by IntelliJ IDEA.
   User: User
   Date: 02.08.2021
@@ -9,44 +10,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>FlexibleJobs | World's best freelancing Webpage</title>
+    <title>Profile - FlexibleJobs</title>
+    <link rel="stylesheet" href="/FlexibleJobs/Front/css/login.css">
+    <link href = "/FlexibleJobs/Front/logo.png" rel="icon" type="image/gif">
 </head>
 <body>
-<nav class = "menu">
-    <a href="/webapp/index.jsp">
-        <img src="/Front/logo.png" style="width:100px;height:40px; float: left">
-    </a>
-
-    <a href="">
-        <p style="float: left"> Find Job</p>
-    </a>
-
-    <%
-        String username = request.getParameter("username");
-    %>
-    <p style="float: right"> Welcome, <%= username%> </p>
-
-</nav>
-<hr style="border-color: darkslategray">
-<hr style="border-color: darkslategray">
-
-<div style="border-radius: 15px; position: absolute; margin: 150px; width:50%;height:70%; border-color: darkslategray;
- background-color: antiquewhite" align="center">
-
-    <div style="border-radius: 15px">
-        <% AccountDao accountDao = (AccountDao) request.getServletContext().getAttribute("accountDao");
-        Account account = accountDao.SelectByUsername(username);
-        %>
+    <%EmployeeState state = (EmployeeState) request.getSession().getAttribute("state");%>
+    <div class="employee-name-wrapper">
+        <%=state.getLoggedUser().getUserName()%>
     </div>
-
-    <div style="border-radius: 15px">
-    </div>
-
-    <div style="border-radius: 15px">
-    </div>
-
-</div>
-
-
 </body>
 </html>

@@ -2,6 +2,7 @@ package servlets;
 
 import accounts.Account;
 import accounts.AccountDao;
+import states.EmployeeState;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,10 +35,11 @@ public class ExistedAccountLogin extends HttpServlet{
  */
             String password = req.getParameter("password");
             Account account = accountDao.selectByUsername(username);
+            EmployeeState employeeState = new EmployeeState(account);
 
             if(account!=null && account.getPassword().equals(password)){
                 accountDao.logIn(account.getUserName());
-                req.getSession().setAttribute( "loggedUser", account);
+                req.getSession().setAttribute( "state", employeeState);
                 switch (account.getType()) {
                     case FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE:
                         req.getRequestDispatcher("/Front/successfulLoginEmployee.jsp").forward(req, resp);
