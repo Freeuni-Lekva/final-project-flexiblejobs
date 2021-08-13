@@ -102,7 +102,6 @@ public class AccountDao {
             }
         }
         return result;
-
     }
 
     public void delete(String username) {

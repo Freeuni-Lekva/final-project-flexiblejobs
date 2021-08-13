@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class JobDatabase {
 
-    private DataSource dataSource;
+    private static DataSource dataSource;
 
     public JobDatabase(DataSource dataSource) {
         this.dataSource = dataSource;
@@ -183,7 +183,44 @@ public class JobDatabase {
         return jobs;
     }
 
-    public Set<Job> getJobsByEmployer(String employer){
+    public static Set<Job> getJobsByEmployee(String employee) {
+        Set<Job> jobs = new HashSet<>();
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet intResult = statement.executeQuery(
+                    "select jobid FROM hires WHERE employee = \"" + employee + "\"");
+            while (intResult.next()) {
+                ResultSet result = statement.executeQuery(
+                        "select * FROM jobs WHERE jobid = \"" + intResult.getInt(1) + "\"");
+                int jobid = result.getInt("jobid");
+                String jobHeader = result.getString("heading");
+                String description = result.getString("jobdescription");
+                double budget = result.getDouble("budget");
+                String duration = result.getString("jobduration");
+                String dateString = result.getString("dateposted");
+                int numApplications = result.getInt("numapplications");
+                String status = result.getString("jobstatus");
+                Job job = new Job(jobid, numApplications, status, employee, jobHeader, description,
+                        budget, duration, dateString);
+                jobs.add(job);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return jobs;
+    }
+
+    public static Set<Job> getJobsByEmployer(String employer){
         Set<Job> jobs = new HashSet<>();
         Connection connection = null;
         try {

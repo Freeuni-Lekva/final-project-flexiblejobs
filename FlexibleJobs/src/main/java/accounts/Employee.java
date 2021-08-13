@@ -1,10 +1,12 @@
 package accounts;
 
 import jobs.Job;
+import jobs.JobDatabase;
 import servlets.FlexibleJobsConstants;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class Employee implements Account{
 
@@ -68,8 +70,8 @@ public class Employee implements Account{
     }
 
     @Override
-    public ArrayList<Job> getWorkHistory() {
-        return null;
+    public Set<Job> getWorkHistory() {
+        return JobDatabase.getJobsByEmployee(username);
     }
 
     @Override

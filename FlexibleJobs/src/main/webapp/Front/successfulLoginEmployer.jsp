@@ -15,8 +15,7 @@
 <html>
 <%
     Account acc=(Account) request.getSession().getAttribute("loggedUser");
-    JobDatabase dao=(JobDatabase) request.getServletContext().getAttribute("jobDao");
-    Set<Job> jobs=dao.getJobsByEmployer(acc.getUserName());
+    Set<Job> jobs=JobDatabase.getJobsByEmployer(acc.getUserName());
 %>
 <head>
 

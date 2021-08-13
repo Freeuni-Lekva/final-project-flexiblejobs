@@ -4,6 +4,7 @@ import jobs.Job;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Set;
 
 public interface Account {
 
@@ -23,7 +24,7 @@ public interface Account {
 
     public void setPersonalData(PersonalData data);
 
-    public ArrayList<Job> getWorkHistory();
+    public Set<Job> getWorkHistory();
 
     public void addJob(Job job);
 

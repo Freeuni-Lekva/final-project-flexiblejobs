@@ -5,6 +5,8 @@ import servlets.FlexibleJobsConstants;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Administrator implements Account{
 
@@ -66,9 +68,8 @@ public class Administrator implements Account{
     }
 
     @Override
-    public ArrayList<Job> getWorkHistory() {
-        // TODO
-        return null;
+    public Set<Job> getWorkHistory() {
+        return new HashSet<Job>();
     }
 
     @Override

@@ -15,7 +15,6 @@ import java.util.List;
 public class AccountDaoTest {
     private MysqlConnectionPoolDataSource datasource;
     private AccountDao dao;
-
     private Account test1;
     private Account test2;
     private Account test3;
