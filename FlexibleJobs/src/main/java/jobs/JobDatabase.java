@@ -2,6 +2,8 @@ package jobs;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.sql.DataSource;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -365,6 +367,28 @@ public class JobDatabase {
             }
         }
         return  jobs;
+    }
+
+    public void updateJobStatus(int jobId, String status){
+        Connection connection=null;
+        try {
+            connection=dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE jobs SET jobstatus=? WHERE jobid = ?;");
+            statement.setString(1,status);
+            statement.setInt(2, jobId);
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            if(connection!=null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
     }
 
 }

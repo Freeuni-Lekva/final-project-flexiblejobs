@@ -5,6 +5,7 @@ import servlets.FlexibleJobsConstants;
 
 import javax.sql.DataSource;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -258,4 +259,53 @@ public class AccountDao {
         }
         return rs!=null;
     }
+
+    public void updateRating(String username, double rating){
+        Connection connection=null;
+        try {
+            connection=dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE accounts SET rating=? WHERE username = ?;");
+            BigDecimal tmp=new BigDecimal(rating);
+            tmp=tmp.setScale(2, RoundingMode.CEILING);
+            statement.setBigDecimal(1,tmp);
+            statement.setString(2, username);
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            if(connection!=null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public int getCurrentBalance(String username){
+        Connection connection = null;
+        int n=0;
+        try {
+            connection = dataSource.getConnection();
+            PreparedStatement stm = connection.prepareStatement(
+                    "SELECT balance FROM accounts WHERE username = ?");
+            stm.setString(1, username);
+            ResultSet rs = stm.executeQuery();
+            n=rs.getInt("balance");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return n;
+    }
+
 }

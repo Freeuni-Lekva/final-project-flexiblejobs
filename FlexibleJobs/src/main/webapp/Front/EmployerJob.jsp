@@ -31,17 +31,19 @@
 </head>
 <body>
 <a href=/Front/successfulLoginEmployer.jsp>Back</a><br>
-<label><%=job.getJobStatus()+"                       "+job.getDate()%></label><br>
+<label>Status:<%=job.getJobStatus()%></label><br>
+<label>Date posted:<%=job.getDate()%></label><br>
 <label><%=job.getDescription()%></label><br>
-<label>Applications:<%=job.getNumApplications()%></label><br>
-<label>Hires:<%=0%></label><br><br><br>
+<a href=/approve?jobId=<%=jobId%>>Close Job</a><br>
+<label>Applications:<%=apps.size()%></label><br>
+<br><br><br>
 <label>Applications</label><br>
 <%
     for (Application app:apps) {
         Account employee=accDao.selectByUsername(app.getEmployee());
         PersonalData data= employee.getPersonalData();
         %>
-<label><%=data.getFirstName()+" "+data.getLastName()%></label>
+<a href=/Front/UserProfile.jsp?username=<%=employee.getUserName()%>><%=data.getFirstName()+" "+data.getLastName()%></a><br>
         <%
         if(app.getStatus().equals(FlexibleJobsConstants.APPLICATION_STATUS_WAITING)){
             %>

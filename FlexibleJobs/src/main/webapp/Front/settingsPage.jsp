@@ -39,8 +39,6 @@
     <input name="heading" type="text" id="heading" value="<%=data.getProfileHeading()%>"><br>
     <label for="description">Profile Description: </label>
     <input name="description" type="text" id="description" value="<%=data.getProfileDescription()%>"><br>
-    <label for="password">Password: </label>
-    <input name="password" type="password" id="password" value="es cota xans davikidot"><br>
     <input type="submit" value="Update">
 </form>
 </body>

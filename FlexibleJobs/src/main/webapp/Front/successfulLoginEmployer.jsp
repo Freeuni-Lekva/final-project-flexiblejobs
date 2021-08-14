@@ -3,9 +3,7 @@
 
 <%@ page import="java.util.Set" %>
 <%@ page import="jobs.Job" %>
-<%@ page import="java.util.HashSet" %>
-<%@ page import="java.util.Date" %><%--
-  Created by IntelliJ IDEA.
+Created by IntelliJ IDEA.
   User: User
   Date: 03.08.2021
   Time: 14:23
@@ -41,9 +39,8 @@
             <li>
                 <hr>
                 <h1><%=job.getHeader()%></h1>
-                <label><%=job.getJobStatus()+"                       "+job.getDate()%></label><br>
-                <label>Applications:<%=job.getNumApplications()%></label><br>
-                <label>Hires:<%=0%></label><br>
+                <label>Status:<%=job.getJobStatus()%></label><br>
+                <label>Date posted:<%=job.getDate()%></label><br>
                 <a href="EmployerJob.jsp?jobId=<%=job.getJobId()%>">See More</a>
                 <hr>
             </li>

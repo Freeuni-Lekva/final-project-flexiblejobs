@@ -3,6 +3,7 @@ package servlets;
 import accounts.AccountDao;
 import accounts.MessageDao;
 import accounts.PersonalDataDao;
+import accounts.ReviewDao;
 import com.mysql.cj.jdbc.MysqlConnectionPoolDataSource;
 import jobs.ApplicationDAO;
 import jobs.JobDatabase;
@@ -31,11 +32,13 @@ public class FlexibleJobsContextListener implements ServletContextListener {
         PersonalDataDao personalDataDao = new PersonalDataDao(datasource);
         JobDatabase jobDatabase = new JobDatabase(datasource);
         ApplicationDAO appDao = new ApplicationDAO(datasource);
+        ReviewDao reviewDao=new ReviewDao(datasource);
         sce.getServletContext().setAttribute("accountDao",accountDao);
         sce.getServletContext().setAttribute("messageDao",messageDao);
         sce.getServletContext().setAttribute("personalDataDao",personalDataDao);
         sce.getServletContext().setAttribute("jobDao",jobDatabase);
         sce.getServletContext().setAttribute("appDao", appDao);
+        sce.getServletContext().setAttribute("reviewDao",reviewDao);
     }
 
     @Override
