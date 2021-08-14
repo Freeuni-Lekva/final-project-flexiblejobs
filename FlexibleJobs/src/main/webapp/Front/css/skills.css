@@ -22,15 +22,15 @@ body {
 .skills-wrapper {
     text-align: center;
     border: 1px solid lightgray;
-    width: 30vw;
-    height: 60vh;
+    width: 60vw;
+    height: 68vh;
     margin: 6vh auto auto;
     border-radius: 10px;
 }
 
 .skills-form {
-    text-align: center;
     height: 58vh;
+    text-align: center;
 }
 
 .skills-label {
@@ -39,9 +39,33 @@ body {
     margin-top: 2vh;
 }
 
+
+.skills-common-input {
+    width: 70%;
+    height: 5vh;
+    margin: 1vh auto auto;
+    border: 1px solid lightgray;
+    outline-color: #029a02;
+    text-align: center;
+}
+
+.skills-select-input {
+    width: 70%;
+    height: 5vh;
+    margin: 3vh auto auto;
+    border: 1px solid lightgray;
+    outline-color: #029a02;
+    text-align: center;
+    text-align-last: center;
+}
+
+.skills-common-input:hover, .skills-select-input:hover {
+    border-color: #029a02;
+}
+
 .skills-submit-button {
     font-size: 1em;
-    margin-top: 3vh;
+    margin-top: 5vh;
     height: 5vh;
     width: 70%;
     border-radius: 30px;
@@ -55,18 +79,87 @@ body {
     cursor: pointer;
 }
 
-.skills-skip-button {
+.skills-button {
     font-size: 1em;
     margin-top: 3vh;
     height: 5vh;
-    width: 70%;
+    width: 40%;
     border-radius: 30px;
     color: #029a02;
     background-color: white;
     border: 1px solid #029a02;
 }
 
-.skills-skip-button:hover {
+.skills-button:hover {
     background-color: rgba(0, 128, 0, 0.08);
     cursor: pointer;
+}
+
+.skills-footer {
+    background-color: #001d00;
+    height: 15vh;
+    margin-top: 3.6vh;
+    text-align: center;
+}
+
+.skills-footer-description {
+    padding-top: 3vh;
+    color: white;
+}
+
+.skills-footer-terms-of-service {
+    padding-top: 2vh;
+    color: white;
+}
+
+.skills-footer-privacy-policy {
+    color: white;
+}
+
+.skills-footer-contact {
+    color: white;
+}
+
+.skills-sides-wrapper {
+    width: 100%;
+    height: 45vh;
+    display: flex;
+}
+
+.skills-left-side-wrapper {
+    margin: 2.5vw auto;
+    width: 25vw;
+    border: 1px solid lightgray;
+    overflow-y: scroll;
+}
+
+.skills-left-side-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.skills-right-side-wrapper {
+    margin: 2.5vw auto;
+    width: 25vw;
+    border: 1px solid lightgray;
+    overflow-y: scroll;
+}
+
+.skills-right-side-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.skills-sides-labels-wrapper {
+    width: 100%;
+    height: 4vh;
+    display: flex;
+}
+
+.skills-left-side-label {
+    margin: 2.5vw auto;
+    width: 25vw;
+}
+
+.skills-right-side-label {
+    margin: 2.5vw auto;
+    width: 25vw;
 }
