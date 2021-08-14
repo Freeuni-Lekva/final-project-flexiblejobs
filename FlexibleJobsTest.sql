@@ -36,23 +36,28 @@ CREATE TABLE jobs(
                      heading VARCHAR(100),
                      jobdescription VARCHAR(5000),
                      budget INT,
-                     dateposted VARCHAR(25),
-    -- numapplications INT,
-                     numinterviews INT,
---     numhires INT,
+                     dateposted VARCHAR(100),
+                     numapplications INT,
+                     jobduration VARCHAR(30),
+                     jobstatus VARCHAR (20),
                      PRIMARY KEY(jobid)
 );
 
 CREATE TABLE applications(
+                             applicationId INT NOT NULL AUTO_INCREMENT,
                              jobid INT,
-                             usename VARCHAR(30),
-                             datesent VARCHAR(25),
-                             letter VARCHAR(5000)
+                             employee VARCHAR(30),
+                             datesent VARCHAR(100),
+                             letter VARCHAR(5000),
+                             bid INT,
+                             applicationstatus VARCHAR (10),
+                             PRIMARY KEY (applicationId)
 );
 
 CREATE TABLE hires(
                       jobid INT,
-                      username VARCHAR(30)
+                      username VARCHAR(30),
+                      datehire VARCHAR(100)
 );
 
 CREATE TABLE jobskills(
@@ -70,5 +75,9 @@ CREATE TABLE reviews(
                         touser VARCHAR(30),
                         points INT,
                         jobid INT
+);
+
+CREATE TABLE recomendedjobskills(
+    jobskill VARCHAR (30)
 );
 

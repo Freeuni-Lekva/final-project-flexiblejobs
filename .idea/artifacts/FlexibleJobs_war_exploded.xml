@@ -30,6 +30,7 @@
           <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-common:1.4.20" />
           <element id="library" level="project" name="Maven: org.jetbrains:annotations:13.0" />
           <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.20" />
+          <element id="library" level="project" name="Maven: javax.servlet:servlet-api:6.1.7" />
         </element>
       </element>
       <element id="directory" name="META-INF">

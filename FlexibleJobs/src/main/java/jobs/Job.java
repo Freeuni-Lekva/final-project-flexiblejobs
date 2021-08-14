@@ -1,16 +1,8 @@
 package jobs;
 
 import accounts.Employee;
-import accounts.Employer;
 import servlets.FlexibleJobsConstants;
 
-import javax.activation.DataSource;
-import javax.naming.ldap.PagedResultsControl;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextListener;
-import java.nio.charset.StandardCharsets;
-import java.sql.Connection;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 

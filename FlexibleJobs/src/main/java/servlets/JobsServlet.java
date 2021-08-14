@@ -38,10 +38,11 @@ public class JobsServlet extends HttpServlet {
                 skills.add(skill);
             }
         }
-
+        
         jobDatabase.saveJob(job);
-        Job j = jobDatabase.getJobByEmployerAndDate(employer, currDate);
-        jobDatabase.addJobSkills(skills, j.getJobId());
+
+
+
     }
 
 }
