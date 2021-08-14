@@ -3,7 +3,7 @@
 
 <%@ page import="java.util.Set" %>
 <%@ page import="jobs.Job" %>
-Created by IntelliJ IDEA.
+<%--Created by IntelliJ IDEA.
   User: User
   Date: 03.08.2021
   Time: 14:23

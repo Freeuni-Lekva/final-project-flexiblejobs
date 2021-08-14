@@ -1,10 +1,12 @@
 servlets\ExistedAccountLogin.class
 accounts\Review.class
 servlets\ChatHandler.class
+servlets\WorkApproval.class
 accounts\MessageDao.class
 jobs\ApplicationDAO.class
 servlets\JobsServlet.class
 servlets\FlexibleJobsConstants.class
+accounts\Tests\JobDatabaseTest.class
 servlets\PersonalDataUpdater.class
 servlets\FlexibleJobsContextListener.class
 servlets\ApplicationsServlet.class

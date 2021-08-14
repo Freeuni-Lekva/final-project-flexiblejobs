@@ -67,6 +67,7 @@
 </form><br>
             <%
         }
+        %> <a href="/Front/Application.jsp?jobid=<%=jobId%>&?employee=<%=app.getEmployee()%>"Application></a><br><%
     }
             %>
 </body>

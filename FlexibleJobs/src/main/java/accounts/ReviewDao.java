@@ -75,6 +75,37 @@ public class ReviewDao {
         return result;
     }
 
+    public Review selectByJob(String username, int jobId) {
+        Connection connection=null;
+        Review result = null;
+        try {
+            connection=dataSource.getConnection();
+            PreparedStatement stm = connection.prepareStatement(
+                    "SELECT * FROM reviews WHERE touser=? AND jobid=?;");
+            stm.setString(1,username);
+            stm.setInt(2,jobId);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                String from = rs.getString("fromuser");
+                String to = rs.getString("touser");
+                int points = rs.getInt("points");
+                int jobid = rs.getInt("jobid");
+                result = new Review(from, to, points, jobid);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if(connection!=null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return result;
+    }
+
     public double averageReview(String username) {
         List<Review> reviews = selectByEmployee(username);
         double sum = 0;
