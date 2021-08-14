@@ -29,4 +29,8 @@ public class Review {
     public int getJobid() {
         return jobid;
     }
+
+    public boolean equals(Review rev) {
+        return this.from.equals(rev.getFrom()) && this.to.equals(rev.getTo()) && this.points == rev.points && this.jobid == rev.jobid;
+    }
 }

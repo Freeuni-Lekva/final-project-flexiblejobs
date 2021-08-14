@@ -50,14 +50,14 @@ public class ReviewDao {
         try {
             connection=dataSource.getConnection();
             PreparedStatement stm = connection.prepareStatement(
-                    "SELECT jobid FROM reviews WHERE fromuser=?;");
+                    "SELECT * FROM reviews WHERE touser=?;");
             stm.setString(1,username);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                String from = rs.getString(1);
-                String to = rs.getString(2);
-                int points = rs.getInt(3);
-                int jobid = rs.getInt(4);
+                String from = rs.getString("fromuser");
+                String to = rs.getString("touser");
+                int points = rs.getInt("points");
+                int jobid = rs.getInt("jobid");
                 Review rev = new Review(from, to, points, jobid);
                 result.add(rev);
             }
@@ -78,9 +78,9 @@ public class ReviewDao {
     public double averageReview(String username) {
         List<Review> reviews = selectByEmployee(username);
         double sum = 0;
-        for (int i = 0; i < reviews.size(); i++) {
-            sum += reviews.get(i).getPoints();
+        for (Review review : reviews) {
+            sum += review.getPoints();
         }
-        return sum/reviews.size();
+        return sum/(double) reviews.size();
     }
 }

@@ -29,12 +29,16 @@
 <br>
 <h2><%=pd.getProfileDescription()%></h2>
 <br>
+<br>
+<h2><%="Work History"%></h2>
+<br>
 <%
     AccountDao accDao = (AccountDao) request.getServletContext().getAttribute("accountDao");
     Account acc = accDao.selectByUsername(username);
     Set<Job> workHistory = acc.getWorkHistory();
     for (Job job:workHistory)  {%>
 <label><%=job.getHeader()%></label>
+<br>
 <%
     }
 %>
