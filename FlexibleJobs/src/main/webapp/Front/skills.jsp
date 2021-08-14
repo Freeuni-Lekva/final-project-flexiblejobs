@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Register - FlexibleJobs</title>
-    <link rel="stylesheet" href="/FlexibleJobs/Front/css/register.css">
+    <link rel="stylesheet" href="/FlexibleJobs/Front/css/skills.css">
     <link href = "/FlexibleJobs/Front/logo.png" rel="icon" type="image/gif">
     <script>
         <%State state = (State) request.getSession().getAttribute("state");%>
@@ -72,7 +72,7 @@
     </nav>
 
     <div class="skills-wrapper">
-        <form class="skills-form" id="skills-form" action="https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/Multiple_items" method="post">
+        <div class="skills-form">
             <label class="skills-label" for="skills-common-input">Skills for Dasakmebuli</label>
             <div class="skills-sides-labels-wrapper">
                 <div id="skills-left-side-label" class="skills-left-side-label">
@@ -84,27 +84,26 @@
             </div>
             <div class="skills-sides-wrapper">
                 <div id="skills-left-side-wrapper" class="skills-left-side-wrapper">
-                    <input class="skills-common-input" id="skills-common-input" name="a" type="text" disabled="true"
+                    <input class="skills-common-input" id="skills-common-input"  type="text" disabled="true"
                            value="Java" draggable="true"/>
-                    <input class="skills-common-input" id="skills-common-input2" name="b" type="text" disabled="true"
+                    <input class="skills-common-input" id="skills-common-input2"  type="text" disabled="true"
                            value="Spring" draggable="true"/>
-                    <input class="skills-common-input" id="skills-common-input3" name="c" type="text" disabled="true"
+                    <input class="skills-common-input" id="skills-common-input3"  type="text" disabled="true"
                            value="Python" draggable="true"/>
-                    <input class="skills-common-input" id="skills-common-input4" name="c" type="text" disabled="true"
+                    <input class="skills-common-input" id="skills-common-input4"  type="text" disabled="true"
                            value="CSS" draggable="true"/>
-                    <input class="skills-common-input" id="skills-common-input5" name="c" type="text" disabled="true"
+                    <input class="skills-common-input" id="skills-common-input5"  type="text" disabled="true"
                            value="HTML" draggable="true"/>
-                    <input class="skills-common-input" id="skills-common-input6" name="c" type="text" disabled="true"
+                    <input class="skills-common-input" id="skills-common-input6"  type="text" disabled="true"
                            value="Angular" draggable="true"/>
 
                 </div>
-                <div id="skills-right-side-wrapper" class="skills-right-side-wrapper">
+                <form id="skills-right-side-wrapper" class="skills-right-side-wrapper" action="/FlexibleJobs/existedAccLogin" method="post">
 
-                </div>
+                </form>
             </div>
-
-            <input class="skills-submit-button" type="submit" value="Add skills and continue">
-        </form>
+            <input class="skills-submit-button" type="submit" value="Add skills and continue" form="skills-right-side-wrapper">
+        </div>
     </div>
 </body>
 </html>
