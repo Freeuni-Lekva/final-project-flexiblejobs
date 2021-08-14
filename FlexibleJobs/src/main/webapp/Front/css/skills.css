@@ -1,0 +1,72 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.skills-header {
+    height: 7vh;
+    border-bottom: 2px solid lightgray;
+    display: flex;
+}
+
+.skills-header-logo {
+    width: 150px;
+    height: 40px;
+    margin: auto auto auto 20%;
+}
+
+.skills-header-logo:hover {
+    cursor: pointer;
+}
+
+.skills-wrapper {
+    text-align: center;
+    border: 1px solid lightgray;
+    width: 30vw;
+    height: 60vh;
+    margin: 6vh auto auto;
+    border-radius: 10px;
+}
+
+.skills-form {
+    text-align: center;
+    height: 58vh;
+}
+
+.skills-label {
+    font-size: 2em;
+    display: block;
+    margin-top: 2vh;
+}
+
+.skills-submit-button {
+    font-size: 1em;
+    margin-top: 3vh;
+    height: 5vh;
+    width: 70%;
+    border-radius: 30px;
+    color: white;
+    background-color: #029a02;
+    border: 1px solid #029a02;
+}
+
+.skills-submit-button:hover {
+    background-color: green;
+    cursor: pointer;
+}
+
+.skills-skip-button {
+    font-size: 1em;
+    margin-top: 3vh;
+    height: 5vh;
+    width: 70%;
+    border-radius: 30px;
+    color: #029a02;
+    background-color: white;
+    border: 1px solid #029a02;
+}
+
+.skills-skip-button:hover {
+    background-color: rgba(0, 128, 0, 0.08);
+    cursor: pointer;
+}
