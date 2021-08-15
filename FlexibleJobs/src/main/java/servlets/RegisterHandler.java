@@ -51,7 +51,7 @@ public class RegisterHandler extends HttpServlet {
                     account = new Employee(username, password, 0, new BigDecimal("0.00"));
                     break;
                 case FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER:
-                    account = new Employer(username, password, 0, new BigDecimal("0.00"));
+                    account = new Employer(username, password, 1000, new BigDecimal("0.00"));
                     break;
                 case FlexibleJobsConstants.ACCOUNT_ROLE_ADMINISTRATOR:
                     account = new Administrator(username, password, 0, new BigDecimal("0.00"));
