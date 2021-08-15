@@ -149,6 +149,7 @@ public class AccountDao {
             } else if(type.equals(FlexibleJobsConstants.ACCOUNT_ROLE_ADMINISTRATOR)){
                 result = new Administrator(username, password, balance, rating);
             }
+            result.setPersonalData(PersonalDataDao.selectByUsername(username));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {

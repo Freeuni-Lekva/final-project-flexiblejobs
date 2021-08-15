@@ -27,7 +27,7 @@ border:0px solid #000; background-color: mediumseagreen" align="center">
             <input style="border-radius: 15px; background-color: palegreen" type="submit" value="Login">
         </a>
         <p> or </p>
-        <a href="/Front/register">
+        <a href="/Front/register.jsp">
             <input style="border-radius: 15px; background-color: palegreen" type="submit" value="Sign Up">
         </a>
     </b>
