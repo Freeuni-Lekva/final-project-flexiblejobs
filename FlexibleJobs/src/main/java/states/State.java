@@ -14,9 +14,10 @@ public class State {
     private List<Message> conversation;
     private boolean chatStarted;
     private boolean chatOpened;
+    private boolean reloadForChatPartner;
 
 
-    public State(Account loggedUser, Account userRegistering, List<String> error, List<Account> contacts, Account conversationWith, List<Message> conversation, boolean chatStarted, boolean chatOpened) {
+    public State(Account loggedUser, Account userRegistering, List<String> error, List<Account> contacts, Account conversationWith, List<Message> conversation, boolean chatStarted, boolean chatOpened, boolean reloadForChatPartner) {
         this.loggedUser = loggedUser;
         this.userRegistering = userRegistering;
         this.error = error;
@@ -25,6 +26,15 @@ public class State {
         this.conversation = conversation;
         this.chatStarted = chatStarted;
         this.chatOpened = chatOpened;
+        this.reloadForChatPartner = reloadForChatPartner;
+    }
+
+    public boolean isReloadForChatPartner() {
+        return reloadForChatPartner;
+    }
+
+    public void setReloadForChatPartner(boolean reloadForChatPartner) {
+        this.reloadForChatPartner = reloadForChatPartner;
     }
 
     public List<Message> getConversation() {

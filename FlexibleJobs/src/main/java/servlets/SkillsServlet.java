@@ -27,7 +27,22 @@ public class SkillsServlet extends HttpServlet {
         state.setLoggedUser(state.getUserRegistering());
         state.setUserRegistering(null);
 
-        List<Account> contacts = accountDao.selectAllByType("employer"); //TODO change with real contacts
+        List<Account> employers = accountDao.selectAllByType("employer");//TODO change with real contacts
+        List<Account> employees = accountDao.selectAllByType("employee");
+
+        List<Account> contacts = new ArrayList<>();
+        for(Account acc : employees){
+            if(!acc.getUserName().equals(state.getLoggedUser().getUserName())){
+                contacts.add(acc);
+            }
+        }
+
+        for(Account acc : employers){
+            if(!acc.getUserName().equals(state.getLoggedUser().getUserName())){
+                contacts.add(acc);
+            }
+        }
+
         state.setContacts(contacts);
         //TODO save skills
         req.getRequestDispatcher("/Front/successfulLoginEmployee.jsp").forward(req, resp);

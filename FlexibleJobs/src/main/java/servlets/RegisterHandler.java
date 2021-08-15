@@ -70,7 +70,7 @@ public class RegisterHandler extends HttpServlet {
         }
 
         if (isNull) {
-            State state = new State(null, null, error, null, null, null, false, false);
+            State state = new State(null, null, error, null, null, null, false, false,false);
             req.getSession().setAttribute("state", state);
             req.getRequestDispatcher("/Front/register.jsp").forward(req, resp);
         } else {
@@ -102,7 +102,7 @@ public class RegisterHandler extends HttpServlet {
             account.setPersonalData(personalData);
             accountDao.addAccount(account);
 
-            State state = new State(null, account, null, null, null, null, false, false);
+            State state = new State(null, account, null, null, null, null, false, false,false);
             req.getSession().setAttribute("state", state);
             switch (type) {
                 case FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE:

@@ -35,6 +35,7 @@ public class SendMessageServlet extends HttpServlet {
 
         List<Message> conversation = messageDao.getConversation(loggedUser.getUserName(), conversationWith.getUserName());
 
+        state.setReloadForChatPartner(true);
         state.setConversation(conversation);
         req.getRequestDispatcher("/Front/successfulLoginEmployee.jsp").forward(req, resp);
     }

@@ -24,11 +24,10 @@
 
             chatSocket.onmessage = function (ev) {
                 if (ev.data === "updateChat") {
-
+                    document.getElementById("chatUpdate").submit()
                 }
             };
         <%}%>
-
 
         function goToLogin(){
             this.window.location.href = "/FlexibleJobs/Front/login.jsp"
@@ -56,7 +55,6 @@
             chatOpened = true
             document.getElementsByClassName("opened-chat-wrapper")[0].style.visibility = "visible"
             document.getElementsByClassName("chat-partner-name")[0].innerHTML = to
-            chatSocket.send("updateChat")
         }
 
         function closeChat(){
@@ -80,8 +78,16 @@
 
         <%if(state.isChatStarted()){%>
             window.onload = function (){
-                startChat("<%=state.getConversationWith().getUserName()%>")
+                startChat("<%=state.getConversationWith().getUserName()%>");
+                document.getElementsByClassName("chat-body")[0].scroll(0,document.getElementsByClassName("chat-body")[0].scrollHeight);
+                <%if(state.isReloadForChatPartner()){%>
+                    chatSocket.send("updateChat");
+                <%}%>
             }
+        <%}%>
+
+        <%if(state.isReloadForChatPartner()){%>
+        <%state.setReloadForChatPartner(false);%>
         <%}%>
     </script>
 </head>
@@ -207,6 +213,7 @@
                 <input class="chat-message-send-button" type="submit" value="send">
             </form>
         </div>
+        <form id="chatUpdate" action="/FlexibleJobs/chat" hidden="true" method="get"></form>
     </div>
 </body>
 </html>
