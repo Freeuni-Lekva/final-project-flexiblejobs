@@ -2,6 +2,7 @@ package jobs;
 
 import accounts.Employee;
 import accounts.Employer;
+import servlets.FlexibleJobsConstants;
 
 import javax.activation.DataSource;
 import javax.naming.ldap.PagedResultsControl;
@@ -23,9 +24,9 @@ public class Job {
     private int numApplications;
     private String jobDuration;
     private String date;
+    private String jobStatus;
     private Set<String> hashtags;
     private Set<String> requiredSkills;
-    private String jobStatus;
     private Set<Application> applications;
     private Set<Employee> employees;
 
@@ -37,15 +38,15 @@ public class Job {
         this.budget = budget;
         this.jobDuration = jobDuration;
         this.date = date;
-        hashtags = new HashSet<>();
+        jobStatus = FlexibleJobsConstants.JOB_STATUS_ACTIVE;
         requiredSkills = new HashSet<>();
         employees = new HashSet<>();
         numApplications = 0;
-        jobStatus = "active";
         applications = new HashSet<>();
 
     }
-    public Job(int jobid, int numApplications, String jobStatus, String employer, String header, String description,
+    public Job(int jobid, int numApplications, String jobStatus, String employer,
+               String header, String description,
                double budget, String jobDuration, String date){
         this.jobId = jobid;
         this.numApplications = numApplications;
@@ -56,25 +57,13 @@ public class Job {
         this.budget = budget;
         this.jobDuration = jobDuration;
         this.date = date;
-        hashtags = new HashSet<>();
         requiredSkills = new HashSet<>();
         employees = new HashSet<>();
         applications = new HashSet<>();
+
     }
 
     public Job(){
-
-    }
-    public void addEmployee(Employee employee){
-        employees.add(employee);
-    }
-
-    public void removeEmployee(Employee employee){
-        employees.remove(employee);
-    }
-
-    public String getHashtagsToString(){
-        return setToString(getHashTags());
     }
 
     public String getSkillsToString(){
@@ -105,13 +94,6 @@ public class Job {
         return res;
     }
 
-    public void addHashtag(String hashtag){
-        hashtags.add(hashtag);
-    }
-
-    public void removeHashtag(String hashtag){
-        hashtags.remove(hashtag);
-    }
 
     public void addApplication( Application application) {
         applications.add(application);
@@ -205,20 +187,8 @@ public class Job {
         this.date = date;
     }
 
-    public Set<String> getHashTags() {
-        return hashtags;
-    }
-
     public Set<String> getRequiredSkills() {
         return requiredSkills;
-    }
-
-    public void setJobId(int jobId) {
-        this.jobId = jobId;
-    }
-
-    public void changeJobStatus(String status){
-        jobStatus = status;
     }
 
     public static void main(String[] args) {

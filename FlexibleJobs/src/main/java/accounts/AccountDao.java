@@ -65,7 +65,7 @@ public class AccountDao {
         if(acc==null||acc.getPersonalData()==null)
             return false;
         addAccountDb(acc);
-        addPersonalData(acc.getPersonalData(), acc.getUserName());
+        PersonalDataDao.addPersonalData(acc.getPersonalData(), acc.getUserName());
         return true;
     }
 
@@ -113,10 +113,7 @@ public class AccountDao {
                     "DELETE FROM accounts WHERE username = ?;");
             stm.setString(1, username);
             stm.executeUpdate();
-            stm = connection.prepareStatement(
-                    "DELETE FROM personal_info WHERE username = ?;");
-            stm.setString(1, username);
-            stm.executeUpdate();
+            PersonalDataDao.deletePersonalData(username);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
@@ -194,36 +191,6 @@ public class AccountDao {
         }
     }
 
-    private void addPersonalData(PersonalData data, String username) {
-        PreparedStatement stm;
-        Connection connection = null;
-        try {
-            connection = dataSource.getConnection();
-            stm = connection.prepareStatement(
-                    "INSERT INTO personal_info (username, firstname, lastname,livingplace," +
-                            "profileheading,profiledescription) " +
-                            "VALUES (?, ?, ?, ?, ?, ?);");
-            stm.setString(1, username);
-            stm.setString(2, data.getFirstName());
-            stm.setString(3, data.getLastName());
-            stm.setString(4, data.getLivingPlace());
-            stm.setString(5, data.getProfileHeading());
-            stm.setString(6, data.getProfileDescription());
-            stm.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-            }
-        }
-
-    }
-
     public void logIn(String username){
         PreparedStatement stm;
         Connection connection = null;
@@ -253,8 +220,7 @@ public class AccountDao {
         try {
             connection = dataSource.getConnection();
             stm = connection.prepareStatement(
-                    "DELETE FROM online_users (username) " +
-                            "VALUES (?);");
+                    "DELETE FROM online_users WHERE username=?;");
             stm.setString(1, username);
             stm.executeUpdate();
         } catch (SQLException throwables) {

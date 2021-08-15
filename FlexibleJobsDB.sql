@@ -17,6 +17,10 @@ CREATE TABLE personal_info(
     profiledescription VARCHAR(5000)
 );
 
+CREATE TABLE online_users(
+    username varchar(30)
+);
+
 CREATE TABLE accounts(
 	username VARCHAR(30),
     pass VARCHAR(30),
@@ -39,15 +43,20 @@ CREATE TABLE jobs(
 );
 
 CREATE TABLE applications(
+    applicationId INT NOT NULL AUTO_INCREMENT,
 	jobid INT,
-    usename VARCHAR(30),
-    datesent VARCHAR(25),
-    letter VARCHAR(5000)
+    employee VARCHAR(30),
+    datesent VARCHAR(100),
+    letter VARCHAR(5000),
+    bid INT,
+    applicationstatus VARCHAR (10),
+    PRIMARY KEY (applicationId)
 );
 
 CREATE TABLE hires(
 	jobid INT,
-    username VARCHAR(30)
+    username VARCHAR(30),
+    datehire VARCHAR(100)
 );
 
 CREATE TABLE jobskills(
@@ -65,4 +74,8 @@ CREATE TABLE reviews(
     touser VARCHAR(30),
     points INT,
     jobid INT
+);
+
+CREATE TABLE recomendedjobskills(
+    jobskill VARCHAR (30)
 );

@@ -13,28 +13,28 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-@WebServlet ("/JobCreationServlet")
-public class JobCreationServlet extends HttpServlet {
+@WebServlet ("/JobsServlet")
+public class JobsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         ServletContext servletContext = req.getServletContext();
-        DataSource source = (DataSource) servletContext.getAttribute("datasource");
-        JobDatabase jobDatabase = new JobDatabase(source);
+        JobDatabase jobDatabase = (JobDatabase) servletContext.getAttribute("jobDao");
         String employer = req.getParameter("employer");
         String jobHeader = req.getParameter("title");
         String description = req.getParameter("description");
         double budget = Double.parseDouble(req.getParameter("budget"));
         String duration = req.getParameter("jobduration");
-        Date currDate = new Date();
-        Job job = new Job(employer, jobHeader, description, budget, duration, currDate.toString());
+        String currDate = new Date().toString();
+        Job job = new Job(employer, jobHeader, description, budget, duration, currDate);
 
         jobDatabase.saveJob(job);
-        //jobDatabase.removeJob(1);
-        // RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/egaris.jsp");
-        // dispatcher.forward(req, resp);
+
+
     }
 
 }
