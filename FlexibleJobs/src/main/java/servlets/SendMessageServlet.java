@@ -4,6 +4,7 @@ import accounts.Account;
 import accounts.AccountDao;
 import accounts.Message;
 import accounts.MessageDao;
+import states.State;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,15 +24,18 @@ public class SendMessageServlet extends HttpServlet {
         AccountDao accountDao = (AccountDao) req.getServletContext().getAttribute("accountDao");
         MessageDao messageDao = (MessageDao) req.getServletContext().getAttribute("messageDao");
 
-        Account loggedUser = (Account) req.getSession().getAttribute("loggedUser");
-        String with = req.getParameter("conversationWith");
+        State state = (State) req.getSession().getAttribute("state");
+        Account loggedUser = state.getLoggedUser();
+        String with = state.getConversationWith().getUserName();
         Account conversationWith = accountDao.selectByUsername(with);
         String content = req.getParameter("content");
 
-        List<Message> conversation = messageDao.getConversation(loggedUser.getUserName(), conversationWith.getUserName());
         Message message = new Message(loggedUser.getUserName(), conversationWith.getUserName(), content, LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         messageDao.addMessage(message);
-        req.getSession().setAttribute("sender", loggedUser.getUserName());
-        req.getRequestDispatcher("chat.jsp").forward(req, resp);
+
+        List<Message> conversation = messageDao.getConversation(loggedUser.getUserName(), conversationWith.getUserName());
+
+        state.setConversation(conversation);
+        req.getRequestDispatcher("/Front/successfulLoginEmployee.jsp").forward(req, resp);
     }
 }

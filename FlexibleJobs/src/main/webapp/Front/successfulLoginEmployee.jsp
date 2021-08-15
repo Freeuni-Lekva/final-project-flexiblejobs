@@ -1,6 +1,7 @@
 <%@ page import="states.State" %>
 <%@ page import="accounts.Account" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="accounts.Message" %><%--
   Created by IntelliJ IDEA.
   User: User
   Date: 8/15/2021
@@ -16,6 +17,7 @@
     <script>
         <%State state = (State) request.getSession().getAttribute("state");%>
         <%List<Account> contacts = state.getContacts();%>
+        <%List<Message> conversation = state.getConversation();%>
 
         function goToLogin(){
             this.window.location.href = "/FlexibleJobs/Front/login.jsp"
@@ -176,13 +178,19 @@
             <div class="chat-close-button" onclick="closeChat()">&#10006;</div>
         </div>
         <div class="chat-body">
-            <div class="chat-message-wrapper">
-                <h4 class="chat-message-sender">Tiko :</h4>
-                <h4 class="chat-message-content"> - Hello how are you?</h4>
-            </div>
+            <%if(conversation == null || conversation.size() == 0){%>
+                <div>No messages yet</div>
+            <%} else {%>
+                <%for(Message message : conversation){%>
+                    <div class="chat-message-wrapper">
+                        <h4 class="chat-message-sender"><%=message.getSender()%> :</h4>
+                        <h4 class="chat-message-content"> - <%=message.getText()%></h4>
+                    </div>
+                <%}%>
+            <%}%>
         </div>
         <div class="chat-footer">
-            <form action="/message" method="post">
+            <form action="/FlexibleJobs/message" method="post">
                 <label for="message-input"></label>
                 <input id="message-input" class="chat-message-input" type="text" name="content">
                 <input class="chat-message-send-button" type="submit" value="send">
