@@ -1,8 +1,0 @@
-0:0:0:0:0:0:0:1 - - [11/Aug/2021:12:20:10 +0400] "GET / HTTP/1.1" 200 947 http-bio-8080-exec-3 66662
-0:0:0:0:0:0:0:1 - - [11/Aug/2021:12:20:39 +0400] "GET /favicon.ico HTTP/1.1" 404 973 http-bio-8080-exec-5 340
-0:0:0:0:0:0:0:1 - - [11/Aug/2021:12:21:14 +0400] "GET /Front/updatePassword.jsp HTTP/1.1" 200 325 http-bio-8080-exec-9 717
-0:0:0:0:0:0:0:1 - - [11/Aug/2021:12:26:57 +0400] "GET / HTTP/1.1" 200 947 http-bio-8080-exec-3 2683
-0:0:0:0:0:0:0:1 - - [11/Aug/2021:12:27:14 +0400] "GET /favicon.ico HTTP/1.1" 404 973 http-bio-8080-exec-5 0
-0:0:0:0:0:0:0:1 - - [11/Aug/2021:12:27:35 +0400] "GET /Front/updatePassword.jsp HTTP/1.1" 500 2932 http-bio-8080-exec-7 1823
-0:0:0:0:0:0:0:1 - - [11/Aug/2021:12:29:38 +0400] "GET /Front/updatePassword.jsp HTTP/1.1" 200 457 http-bio-8080-exec-1 1193
-0:0:0:0:0:0:0:1 - - [11/Aug/2021:12:29:48 +0400] "GET /Front/successfulLoginEmployer.jsp HTTP/1.1" 500 2870 http-bio-8080-exec-5 527
