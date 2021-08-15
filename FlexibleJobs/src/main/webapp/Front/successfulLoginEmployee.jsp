@@ -30,19 +30,39 @@
         <% AccountDao accountDao = (AccountDao) request.getServletContext().getAttribute("accountDao");%>
         <% JobDatabase jobDatabase = new JobDatabase((DataSource) request.getServletContext().getAttribute("datasource"));%>
         <%if (state != null && state.getLoggedUser() != null && state.getLoggedUser().getType().equals("employee")) {%>
-            <% Account account = state.getLoggedUser(); %>
-            <% ArrayList<String> skills = accountDao.getSkills(account.getUserName()); %>
-            <% if(skills!= null){ %>
-                <% for(String skill:skills){%>
-                    <% Set<Integer> tmp = jobDatabase.getJobsBySkill(skill);%>
-                    <%if(tmp!=null){%>
-                        <% for(Integer jobId: tmp){%>
-                            <% Job job = jobDatabase.getJob(jobId);%>
-                            <% jobs.add(job);%>
+            <%if(!state.isSearchedByFilter()){%>
+                <% Account account = state.getLoggedUser(); %>
+                <% ArrayList<String> skills = accountDao.getSkills(account.getUserName()); %>
+                <% if(skills!= null){ %>
+                    <% for(String skill:skills){%>
+                        <% Set<Integer> tmp = jobDatabase.getJobsBySkill(skill);%>
+                        <%if(tmp!=null){%>
+                            <% for(Integer jobId: tmp){%>
+                                <% Job job = jobDatabase.getJob(jobId);%>
+                                <% jobs.add(job);%>
+                            <% }%>
                         <% }%>
                     <% }%>
-                <% }%>
+                <%}%>
+            <%} else {%>
+                <%String searchKeyword = state.getSearchKeyword();%>
+                <%ArrayList<String> skills = accountDao.getSkills(state.getLoggedUser().getUserName());%>
+                    <% if(skills!= null){ %>
+                        <% for(String skill:skills){%>
+                            <% Set<Integer> tmp = jobDatabase.getJobsBySkill(skill);%>
+                            <%if(tmp!=null){%>
+                                <% for(Integer jobId: tmp){%>
+                                    <% Job job = jobDatabase.getJob(jobId);%>
+                                    <%if(job.getHeader().equals(searchKeyword)){%>
+                                        <% jobs.add(job);%>
+                                    <%}%>
+                                <% }%>
+                            <% }%>
+                        <% }%>
+                    <%}%>
             <%}%>
+            <%state.setSearchedByFilter(false);%>
+            <%state.setSearchKeyword(null);%>
         <%}%>
 
         <%if(state.isChatStarted()){%>
@@ -120,7 +140,9 @@
 <body>
     <nav class="employee-main-header">
         <img class="employee-main-header-logo" src="/FlexibleJobs/Front/logo.png">
-        <input class="employee-main-header-search" type="text" placeholder="Search">
+        <form class="employee-main-header-search-wrapper" method="post" action="/FlexibleJobs/search">
+            <input class="employee-main-header-search" name="keyword" type="text" placeholder="Search">
+        </form>
         <button class="employee-main-header-profile-button">Profile</button>
         <button class="employee-main-header-logout-button" onclick="logout()">Log out</button>
         <form id="logout" action="/FlexibleJobs/logout" hidden="true" method="post">
@@ -130,7 +152,7 @@
     <div class="employee-main-wrapper">
         <div class="employee-main-find-work-wrapper">
             <div class="employee-main-find-work-label">Find Work</div>
-            <input class="employee-main-find-work-search" type="text" placeholder="Search for jobs">
+<%--            <input class="employee-main-find-work-search" type="text" placeholder="Search for jobs">--%>
         </div>
 
         <div class="employee-main-jobs-feed">

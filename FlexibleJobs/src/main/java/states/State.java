@@ -15,9 +15,10 @@ public class State {
     private boolean chatStarted;
     private boolean chatOpened;
     private boolean reloadForChatPartner;
+    private boolean searchedByFilter;
+    private String searchKeyword;
 
-
-    public State(Account loggedUser, Account userRegistering, List<String> error, List<Account> contacts, Account conversationWith, List<Message> conversation, boolean chatStarted, boolean chatOpened, boolean reloadForChatPartner) {
+    public State(Account loggedUser, Account userRegistering, List<String> error, List<Account> contacts, Account conversationWith, List<Message> conversation, boolean chatStarted, boolean chatOpened, boolean reloadForChatPartner, boolean searchedByFilter, String searchKeyword) {
         this.loggedUser = loggedUser;
         this.userRegistering = userRegistering;
         this.error = error;
@@ -27,6 +28,24 @@ public class State {
         this.chatStarted = chatStarted;
         this.chatOpened = chatOpened;
         this.reloadForChatPartner = reloadForChatPartner;
+        this.searchedByFilter = searchedByFilter;
+        this.searchKeyword = searchKeyword;
+    }
+
+    public boolean isSearchedByFilter() {
+        return searchedByFilter;
+    }
+
+    public void setSearchedByFilter(boolean searchedByFilter) {
+        this.searchedByFilter = searchedByFilter;
+    }
+
+    public String getSearchKeyword() {
+        return searchKeyword;
+    }
+
+    public void setSearchKeyword(String searchKeyword) {
+        this.searchKeyword = searchKeyword;
     }
 
     public boolean isReloadForChatPartner() {

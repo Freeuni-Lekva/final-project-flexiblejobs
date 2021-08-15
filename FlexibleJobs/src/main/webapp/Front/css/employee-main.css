@@ -22,7 +22,7 @@ body {
     cursor: pointer;
 }
 
-.employee-main-header-search {
+.employee-main-header-search-wrapper{
     height: 4vh;
     width: 20%;
     border-radius: 20px;
@@ -30,6 +30,18 @@ body {
     margin: auto 20vw auto 2vw;
     outline: none;
     border: 1px solid #04435a;
+}
+
+.employee-main-header-search-wrapper:hover {
+    border-color: #029a02;
+}
+
+.employee-main-header-search {
+    width: 100%;
+    height: inherit;
+    border-radius: 20px;
+    text-align: center;
+    outline: none;
 }
 
 .employee-main-header-search:hover {

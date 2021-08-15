@@ -42,12 +42,12 @@ public class LoginHandler extends HttpServlet {
 
         if (account == null) {
             error.add(0, FlexibleJobsConstants.NO_ACCOUNT);
-            State state = new State(null, null, error, null, null, null, false, false,false);
+            State state = new State(null, null, error, null, null, null, false, false,false,false,null);
             req.getSession().setAttribute("state", state);
             req.getRequestDispatcher("/Front/login.jsp").forward(req, resp);
         } else if (!account.getPassword().equals(password)) {
             error.add(0, FlexibleJobsConstants.INCORRECT_PASSWORD);
-            State state = new State(null, null, error, null, null, null, false, false,false);
+            State state = new State(null, null, error, null, null, null, false, false,false,false,null);
             req.getSession().setAttribute("state", state);
             req.getRequestDispatcher("/Front/login.jsp").forward(req, resp);
         } else {
@@ -68,7 +68,7 @@ public class LoginHandler extends HttpServlet {
             }
 
 
-            State state = new State(account, null, null, contacts, null, null, false, false,false);
+            State state = new State(account, null, null, contacts, null, null, false, false,false,false,null);
             accountDao.logIn(account.getUserName());
             req.getSession().setAttribute("state", state);
             switch (account.getType()) {
