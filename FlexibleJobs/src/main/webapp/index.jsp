@@ -1,7 +1,12 @@
 <html>
+<head>
+    <script>
+        window.onload = function () {
+            window.location.href = "/FlexibleJobs/Front/login.jsp"
+        }
+    </script>
+</head>
 <body>
-<a href="/FlexibleJobs/Front/login.jsp">Login</a>
-<a href="/FlexibleJobs/Front/register.jsp">Register</a>
-<a href="/FlexibleJobs/Front/skills.jsp">skills</a>
+
 </body>
 </html>

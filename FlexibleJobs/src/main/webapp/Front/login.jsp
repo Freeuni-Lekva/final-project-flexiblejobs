@@ -35,7 +35,7 @@
     </nav>
 
     <div class="login-wrapper">
-        <form class="login-form" action="/FlexibleJobs/existedAccLogin" method="post">
+        <form class="login-form" action="/FlexibleJobs/login" method="post">
             <label class="login-label" for="username">Log in to FlexibleJobs</label>
             <div class="login-username-input-wrapper">
                 <span class="login-username-input-span">&#128231;</span>

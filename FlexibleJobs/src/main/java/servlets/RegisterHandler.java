@@ -61,11 +61,11 @@ public class RegisterHandler extends HttpServlet {
             account.setPersonalData(personalData);
             accountDao.addAccount(account);
 
-            State state = new State(account);
+            State state = new State(null, account);
             req.getSession().setAttribute("state", state);
             switch (type) {
                 case FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE:
-                    req.getRequestDispatcher("/Front/successfulLoginEmployee.jsp").forward(req, resp);
+                    req.getRequestDispatcher("/Front/skills.jsp").forward(req, resp);
                     break;
                 case FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER:
                     req.getRequestDispatcher("/Front/successfulLoginEmployer.jsp").forward(req, resp);
