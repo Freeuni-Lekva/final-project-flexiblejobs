@@ -1,7 +1,7 @@
 <%@ page import="jobs.JobDatabase" %>
 <%@ page import="jobs.Job" %>
 <%@ page import="java.util.Set" %>
-<%@ page import="javax.sql.DataSource" %>
+
 <html>
 <body>
 

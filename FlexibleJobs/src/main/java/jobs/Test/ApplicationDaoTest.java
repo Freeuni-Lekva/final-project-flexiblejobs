@@ -172,5 +172,4 @@ public class ApplicationDaoTest {
         application3 = new Application(jobId, employee, letter, date, bid, status);
     }
 
-
 }

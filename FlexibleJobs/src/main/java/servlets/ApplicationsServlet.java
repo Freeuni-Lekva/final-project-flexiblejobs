@@ -2,7 +2,10 @@ package servlets;
 
 import jobs.Application;
 import jobs.ApplicationDAO;
-import javax.servlet.*;
+import jobs.JobDatabase;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.Date;
-import java.util.Set;
 
 @WebServlet ("/ApplicationsServlet")
 public class ApplicationsServlet extends HttpServlet {
@@ -20,15 +22,18 @@ public class ApplicationsServlet extends HttpServlet {
         ServletContext servletContext = req.getServletContext();
         DataSource dataSource = (DataSource) servletContext.getAttribute("datasource");
         ApplicationDAO database = (ApplicationDAO) servletContext.getAttribute("appDao");
+        JobDatabase jobDao = (JobDatabase) servletContext.getAttribute("jobDao");
         int jobId = Integer.parseInt(req.getParameter("id"));
         String employeeName = req.getParameter("employee_name");
         System.out.println(employeeName);
         String condition = req.getParameter("condition");
         if(condition.equals("send")){
             sendApplication(req, resp, jobId, employeeName, database);
+            jobDao.changeNumApplications(jobId, 1);
         }else{
             String employee = req.getParameter("employee");
             deleteApplication(jobId, employee, database);
+            jobDao.changeNumApplications(jobId, -1);
         }
     }
 

@@ -1,6 +1,5 @@
 package jobs;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.Date;
@@ -237,7 +236,6 @@ public class JobDatabase {
                 String status = result.getString("jobstatus");
                 job = new Job(jobid, numApplications, status, employer, jobHeader, description,
                         budget, duration, date);
-                return job;
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -349,7 +347,6 @@ public class JobDatabase {
                 String status = result.getString("jobstatus");
                 job = new Job(jobId, numApplications, status, employer, jobHeader, description,
                         budget, duration, date);
-                return job;
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -365,5 +362,50 @@ public class JobDatabase {
         return job;
     }
 
+    public void changeNumApplications(int jobid, int action){
+        Connection connection=null;
+        try {
+            connection=dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE jobs SET numapplications=? WHERE jobid = ?;");
+            Job job = getJob(jobid);
+            statement.setInt(1,job.getNumApplications() + action);
+            statement.setInt(2,jobid);
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            if(connection!=null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void changeJobStatus(int jobid, String newStatus){
+            Connection connection=null;
+            try {
+                connection=dataSource.getConnection();
+                PreparedStatement statement = connection.prepareStatement(
+                        "UPDATE jobs SET jobstatus=? WHERE jobid = ?;");
+                Job job = getJob(jobid);
+                statement.setString(1, newStatus);
+                statement.setInt(2,jobid);
+                statement.executeUpdate();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }finally {
+                if(connection!=null) {
+                    try {
+                        connection.close();
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                }
+            }
+    }
 
 }

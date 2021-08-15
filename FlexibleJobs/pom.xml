@@ -57,9 +57,10 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>6.1.7</version>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13</version>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
 
@@ -94,7 +95,7 @@
           <version>2.2</version>
           <configuration>
             <port>8080</port>
-            <path>/</path>
+            <path>/FlexibleJobs</path>
           </configuration>
         </plugin>
         <plugin>

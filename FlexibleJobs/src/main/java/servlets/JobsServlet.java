@@ -3,20 +3,18 @@ package servlets;
 import jobs.Job;
 import jobs.JobDatabase;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-@WebServlet ("/JobsServlet")
+@WebServlet("/JobsServlet")
 public class JobsServlet extends HttpServlet {
 
     @Override
@@ -32,17 +30,17 @@ public class JobsServlet extends HttpServlet {
         String currDate = new Date().toString();
         Job job = new Job(employer, jobHeader, description, budget, duration, currDate);
         Set<String> skills = new HashSet<>();
+
         for(int i = 1; i <= FlexibleJobsConstants.MAX_SKILLS; i++){
             String skill = req.getParameter("skill" + i);
             if(skill != null && !skill.equals("")) {
                 skills.add(skill);
             }
         }
-        
         jobDatabase.saveJob(job);
-
-
-
+        Job temp = jobDatabase.getJobByEmployerAndDate(employer, currDate);
+        System.out.println(temp.getEmployer() + " " + temp.getJobId());
+        jobDatabase.addJobSkills(skills, temp.getJobId());
     }
 
 }
