@@ -1,0 +1,11 @@
+0:0:0:0:0:0:0:1 - - [06/Aug/2021:01:06:05 +0400] "GET / HTTP/1.1" 200 835 http-bio-8080-exec-1 909
+0:0:0:0:0:0:0:1 - - [06/Aug/2021:01:06:06 +0400] "GET /favicon.ico HTTP/1.1" 404 973 http-bio-8080-exec-3 0
+0:0:0:0:0:0:0:1 - - [06/Aug/2021:01:06:35 +0400] "GET / HTTP/1.1" 200 835 http-bio-8080-exec-2 749
+0:0:0:0:0:0:0:1 - - [06/Aug/2021:01:06:59 +0400] "POST /ApplicationCreationServlet HTTP/1.1" 200 - http-bio-8080-exec-3 6
+0:0:0:0:0:0:0:1 - - [06/Aug/2021:01:18:05 +0400] "GET / HTTP/1.1" 200 835 http-bio-8080-exec-1 56
+0:0:0:0:0:0:0:1 - - [06/Aug/2021:01:18:22 +0400] "POST /ApplicationCreationServlet HTTP/1.1" 200 - http-bio-8080-exec-3 1038
+0:0:0:0:0:0:0:1 - - [06/Aug/2021:01:19:25 +0400] "GET / HTTP/1.1" 200 835 http-bio-8080-exec-2 74
+0:0:0:0:0:0:0:1 - - [06/Aug/2021:01:19:39 +0400] "POST /ApplicationCreationServlet HTTP/1.1" 200 - http-bio-8080-exec-3 787
+0:0:0:0:0:0:0:1 - - [06/Aug/2021:01:20:12 +0400] "GET / HTTP/1.1" 200 835 http-bio-8080-exec-2 85
+0:0:0:0:0:0:0:1 - - [06/Aug/2021:01:20:30 +0400] "POST /ApplicationCreationServlet HTTP/1.1" 200 - http-bio-8080-exec-3 858
+0:0:0:0:0:0:0:1 - - [06/Aug/2021:01:20:50 +0400] "GET / HTTP/1.1" 200 835 http-bio-8080-exec-4 8
