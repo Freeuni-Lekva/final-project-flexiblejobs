@@ -159,7 +159,6 @@ body {
     padding-top: 0.6vh;
 }
 
-
 .contacts-wrapper {
     position: fixed;
     width: 15vw;
@@ -226,7 +225,6 @@ body {
     right: 15.8vw;
     bottom: 0;
     background-color: #04435a;
-    visibility: hidden;
 }
 
 .opened-chat-wrapper {
@@ -239,6 +237,7 @@ body {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     background-color: #04435a;
+    visibility: hidden;
 }
 
 .chat-header {

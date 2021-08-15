@@ -41,18 +41,19 @@
 
         function startChat(to) {
             chatStarted = true
-            document.getElementsByClassName("chat-wrapper")[0].style.visibility = "visible"
+            chatOpened = true
+            document.getElementsByClassName("opened-chat-wrapper")[0].style.visibility = "visible"
             document.getElementsByClassName("chat-partner-name")[0].innerHTML = to
 
-            chatSocket.send("updateChat")
+            // chatSocket.send("updateChat")
         }
 
         function closeChat(){
             if (chatOpened) {
                 document.getElementsByClassName("opened-chat-wrapper")[0].style.visibility = "hidden"
-                document.getElementsByClassName("opened-chat-wrapper")[0].className = "chat-wrapper";
             } else {
                 document.getElementsByClassName("chat-wrapper")[0].style.visibility = "hidden"
+                document.getElementsByClassName("chat-wrapper")[0].className = "opened-chat-wrapper";
             }
             chatStarted = false
             chatOpened = false
@@ -161,7 +162,7 @@
             </div>
         </div>
     </div>
-    <div class="chat-wrapper">
+    <div class="opened-chat-wrapper">
         <div class="chat-header" onclick="expandChat()">
             <h3 class="chat-partner-name"></h3>
             <div class="chat-close-button" onclick="closeChat()">&#10006;</div>
