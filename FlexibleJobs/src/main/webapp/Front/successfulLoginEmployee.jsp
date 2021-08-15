@@ -62,6 +62,9 @@
             document.getElementById("chat-" + to).submit()
         }
 
+        function logout(){
+            document.getElementById("logout").submit()
+        }
     </script>
 </head>
 <body>
@@ -70,6 +73,8 @@
         <input class="employee-main-header-search" type="text" placeholder="Search">
         <button class="employee-main-header-profile-button">Profile</button>
         <button class="employee-main-header-logout-button" onclick="logout()">Log out</button>
+        <form id="logout" action="/FlexibleJobs/logout" hidden="true" method="post">
+        </form>
     </nav>
 
     <div class="employee-main-wrapper">

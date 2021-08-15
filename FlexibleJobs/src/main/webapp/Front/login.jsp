@@ -15,7 +15,7 @@
     <script>
         <%State state = (State) request.getSession().getAttribute("state");%>
 
-        <%if(state != null && state.getLoggedUser() != null && !state.getError().get(0).equals(FlexibleJobsConstants.INCORRECT_PASSWORD)){%>
+        <%if(state != null && state.getLoggedUser() != null){%>
             <%if (state.getLoggedUser().getType().equals("employee")){%>
                 window.location.href = "/FlexibleJobs/Front/successfulLoginEmployee.jsp"
             <%} else if(state.getLoggedUser().getType().equals("employer")){%>
