@@ -22,7 +22,7 @@ public class Job {
     private double budget;
     private int numApplications;
     private String jobDuration;
-    private Date date;
+    private String date;
     private Set<String> hashtags;
     private Set<String> requiredSkills;
     private String jobStatus;
@@ -30,7 +30,7 @@ public class Job {
     private Set<Employee> employees;
 
     public Job(String employer, String header, String description,
-               double budget, String jobDuration, Date date){
+               double budget, String jobDuration, String date){
         this.employer = employer;
         this.header = header;
         this.description = description;
@@ -46,7 +46,7 @@ public class Job {
 
     }
     public Job(int jobid, int numApplications, String jobStatus, String employer, String header, String description,
-               double budget, String jobDuration, Date date){
+               double budget, String jobDuration, String date){
         this.jobId = jobid;
         this.numApplications = numApplications;
         this.jobStatus = jobStatus;
@@ -197,11 +197,11 @@ public class Job {
         this.jobDuration = jobDuration;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

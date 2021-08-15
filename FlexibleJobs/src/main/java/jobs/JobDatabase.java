@@ -83,7 +83,7 @@ public class JobDatabase {
                 String description = result.getString("jobdescription");
                 double budget = result.getDouble("budget");
                 String duration = result.getString("jobduration");
-                Date date = new Date(result.getString("dateposted"));
+                String date = result.getString("dateposted");
                 int numApplications = result.getInt("numapplications");
                 String status = result.getString("jobstatus");
                 Job job = new Job(jobid, numApplications, status, employer, jobHeader, description,
@@ -111,14 +111,14 @@ public class JobDatabase {
             connection = dataSource.getConnection();
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(
-                    "select FROM jobs WHERE jobid = \"" + jobid + "\"");
+                    "select * FROM jobs WHERE jobid = \"" + jobid + "\"");
             while (result.next()) {
                 String employer = result.getString("employer");
                 String jobHeader = result.getString("heading");
                 String description = result.getString("jobdescription");
                 double budget = result.getDouble("budget");
                 String duration = result.getString("jobduration");
-                Date date = new Date(result.getString("dateposted"));
+                String date = result.getString("dateposted");
                 int numApplications = result.getInt("numapplications");
                 String status = result.getString("jobstatus");
                 job = new Job(jobid, numApplications, status, employer, jobHeader, description,
@@ -137,5 +137,31 @@ public class JobDatabase {
             }
         }
         return job;
+    }
+
+    public Set<Integer> getJobsBySkill(String skill){
+        Set<Integer> jobs = new HashSet<>();
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM jobskills " +
+                    "WHERE skill = \""+ skill + "\"");
+            while (result.next()){
+                int jobId = result.getInt("jobid");
+                jobs.add(jobId);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            if(connection != null){
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return  jobs;
     }
 }

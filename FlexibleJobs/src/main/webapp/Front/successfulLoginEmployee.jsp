@@ -1,7 +1,14 @@
 <%@ page import="states.State" %>
 <%@ page import="accounts.Account" %>
 <%@ page import="java.util.List" %>
-<%@ page import="accounts.Message" %><%--
+<%@ page import="accounts.Message" %>
+<%@ page import="jobs.Job" %>
+<%@ page import="java.util.HashSet" %>
+<%@ page import="accounts.AccountDao" %>
+<%@ page import="jobs.JobDatabase" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="javax.sql.DataSource" %>
+<%@ page import="java.util.Set" %><%--
   Created by IntelliJ IDEA.
   User: User
   Date: 8/15/2021
@@ -18,6 +25,25 @@
         <%State state = (State) request.getSession().getAttribute("state");%>
         <%List<Account> contacts = state.getContacts();%>
         <%List<Message> conversation = state.getConversation();%>
+
+        <% HashSet<Job> jobs = new HashSet(); %>
+        <% AccountDao accountDao = (AccountDao) request.getServletContext().getAttribute("accountDao");%>
+        <% JobDatabase jobDatabase = new JobDatabase((DataSource) request.getServletContext().getAttribute("datasource"));%>
+        <%if (state != null && state.getLoggedUser() != null && state.getLoggedUser().getType().equals("employee")) {%>
+            <% Account account = state.getLoggedUser(); %>
+            <% ArrayList<String> skills = accountDao.getSkills(account.getUserName()); %>
+            <% if(skills!= null){ %>
+                <% for(String skill:skills){%>
+                    <% Set<Integer> tmp = jobDatabase.getJobsBySkill(skill);%>
+                    <%if(tmp!=null){%>
+                        <% for(Integer jobId: tmp){%>
+                            <% Job job = jobDatabase.getJob(jobId);%>
+                            <% jobs.add(job);%>
+                        <% }%>
+                    <% }%>
+                <% }%>
+            <%}%>
+        <%}%>
 
         <%if(state.isChatStarted()){%>
             const chatSocket = new WebSocket("ws://localhost:8080/FlexibleJobs/chat-endpoint");
@@ -111,65 +137,33 @@
             <div class="employee-main-jobs-label-wrapper">
                 <div class="employee-main-jobs-label">My feed</div>
             </div>
-            <div class="employee-main-job">
-                <div class="employee-job-name">
-                    Business analysis
-                </div>
-                <div class="employee-job-description">
-                    Codeigniter Developers. Long-term projects. Need to fix bugs Free of Charge. Unlimited Revision needed. Let us know your Industry experience in Application developments, type of applications developed etc. Please mention your lowest hourly & monthly rate, working hours per day, (Including the time band), and a number of days per week/month. So, it will be easy for us to evaluate all the offers and select the best offers for us
-                </div>
-                <div class="employee-job-payment">
-                    <div class="employee-job-payment-logo">✔</div>
-                    <div class="employee-job-payment-description">
-                        Payment verified
+            <% for (Job job : jobs) {%>
+                <div class="employee-main-job">
+                    <div class="employee-job-name">
+                        <% String header = job.getHeader(); %>
+                        <%= header%>
                     </div>
-                </div>
-            </div>
+                    <div class="employee-job-description">
+                        <%String desc =  job.getDescription(); %>
+                        <%= desc%>
+                    </div>
+                    <div class="employee-job-payment">
+                        <div class="employee-job-payment-logo">✔</div>
+                        <div class="employee-job-payment-description">
+                            Payment verified
+                        </div>
+                        <div class="employee-job-payment-amount">
+                            <% double budget = job.getBudget();%>
+                            <%= budget%>
+                        </div>
+                    </div>
 
-            <div class="employee-main-job">
-                <div class="employee-job-name">
-                    Business analysis
-                </div>
-                <div class="employee-job-description">
-                    Codeigniter Developers. Long-term projects. Need to fix bugs Free of Charge. Unlimited Revision needed. Let us know your Industry experience in Application developments, type of applications developed etc. Please mention your lowest hourly & monthly rate, working hours per day, (Including the time band), and a number of days per week/month. So, it will be easy for us to evaluate all the offers and select the best offers for us
-                </div>
-                <div class="employee-job-payment">
-                    <div class="employee-job-payment-logo">✔</div>
-                    <div class="employee-job-payment-description">
-                        Payment verified
+                    <div class="employee-job-duration">
+                        <% String duration = job.getJobDuration();%>
+                        <%= duration%>
                     </div>
                 </div>
-            </div>
-
-            <div class="employee-main-job">
-                <div class="employee-job-name">
-                    Business analysis
-                </div>
-                <div class="employee-job-description">
-                    Codeigniter Developers. Long-term projects. Need to fix bugs Free of Charge. Unlimited Revision needed. Let us know your Industry experience in Application developments, type of applications developed etc. Please mention your lowest hourly & monthly rate, working hours per day, (Including the time band), and a number of days per week/month. So, it will be easy for us to evaluate all the offers and select the best offers for us
-                </div>
-                <div class="employee-job-payment">
-                    <div class="employee-job-payment-logo">✔</div>
-                    <div class="employee-job-payment-description">
-                        Payment verified
-                    </div>
-                </div>
-            </div>
-
-            <div class="employee-main-job">
-                <div class="employee-job-name">
-                    Business analysis
-                </div>
-                <div class="employee-job-description">
-                    Codeigniter Developers. Long-term projects. Need to fix bugs Free of Charge. Unlimited Revision needed. Let us know your Industry experience in Application developments, type of applications developed etc. Please mention your lowest hourly & monthly rate, working hours per day, (Including the time band), and a number of days per week/month. So, it will be easy for us to evaluate all the offers and select the best offers for us
-                </div>
-                <div class="employee-job-payment">
-                    <div class="employee-job-payment-logo">✔</div>
-                    <div class="employee-job-payment-description">
-                        Payment verified
-                    </div>
-                </div>
-            </div>
+            <%}%>
         </div>
     </div>
     <div class="contacts-wrapper">

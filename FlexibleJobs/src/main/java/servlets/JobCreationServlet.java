@@ -29,7 +29,7 @@ public class JobCreationServlet extends HttpServlet {
         double budget = Double.parseDouble(req.getParameter("budget"));
         String duration = req.getParameter("jobduration");
         Date currDate = new Date();
-        Job job = new Job(employer, jobHeader, description, budget, duration, currDate);
+        Job job = new Job(employer, jobHeader, description, budget, duration, currDate.toString());
 
         jobDatabase.saveJob(job);
         //jobDatabase.removeJob(1);

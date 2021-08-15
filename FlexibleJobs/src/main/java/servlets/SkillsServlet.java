@@ -45,6 +45,9 @@ public class SkillsServlet extends HttpServlet {
 
         state.setContacts(contacts);
         //TODO save skills
+        if (!skills.isEmpty()) {
+            accountDao.addSkills(state.getLoggedUser().getUserName(), skills);
+        }
         req.getRequestDispatcher("/Front/successfulLoginEmployee.jsp").forward(req, resp);
     }
 }

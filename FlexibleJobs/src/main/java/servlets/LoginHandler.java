@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +23,7 @@ public class LoginHandler extends HttpServlet {
         AccountDao accountDao = (AccountDao) req.getServletContext().getAttribute("accountDao");
 
         String username = req.getParameter("username");
-/*
+
             String receivedPassword = req.getParameter("password");
 
             MessageDigest messageDigest = null;
@@ -33,8 +35,8 @@ public class LoginHandler extends HttpServlet {
             messageDigest.update(receivedPassword.getBytes());
             String password = new String(messageDigest.digest());
 
- */
-        String password = req.getParameter("password");
+
+  //      String password = req.getParameter("password");
         Account account = accountDao.selectByUsername(username);
         ArrayList<String> error = new ArrayList<>();
 

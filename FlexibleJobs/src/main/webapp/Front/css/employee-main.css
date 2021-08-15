@@ -126,7 +126,7 @@ body {
 .employee-main-job {
     padding-top: 1vh;
     text-align: left;
-    height: 18vh;
+    height: 19vh;
     border-bottom: 1px solid lightgray;
 }
 
@@ -142,14 +142,14 @@ body {
 
 .employee-job-description {
     margin-left: 2vw;
-    margin-top: 2vh;
+    margin-top: 1vh;
     font: 0.8em Arial;
 }
 
 
 .employee-job-payment {
     margin-left: 2vw;
-    margin-top: 2vh;
+    margin-top: 1vh;
     display: flex;
 }
 
@@ -157,6 +157,19 @@ body {
     margin-left: 1vw;
     font: 0.7em Arial bold;
     padding-top: 0.6vh;
+}
+
+.employee-job-payment-amount {
+    margin-left: 1vw;
+    font: 0.7em Arial bold;
+    padding-top: 0.6vh;
+}
+
+.employee-job-duration {
+    margin-left: 2vw;
+    margin-top: 1vh;
+    display: flex;
+    font: 0.7em Arial bold;
 }
 
 .contacts-wrapper {
@@ -262,7 +275,7 @@ body {
     margin-right: 20px;
 }
 
-.chat-body{
+.chat-body {
     background-color: white;
     height: 38vh;
     overflow-y: scroll;
@@ -272,34 +285,34 @@ body {
     display: none;
 }
 
-.chat-footer{
+.chat-footer {
     border-top: 1px solid #04435a;
     bottom: 0;
 }
 
-.chat-message-input{
+.chat-message-input {
     margin-top: 0.6vh;
     width: 80%;
     height: 4vh;
     margin-left: 0.4vw;
 }
 
-.chat-message-send-button{
+.chat-message-send-button {
     margin-top: 1vh;
     height: 4vh;
     overflow: hidden;
 }
 
-.chat-message-wrapper{
+.chat-message-wrapper {
     border-bottom: 1px solid #04435a;
 }
 
-.chat-message-sender{
+.chat-message-sender {
     color: black;
     margin-left: 1vw;
 }
 
-.chat-message-content{
+.chat-message-content {
     color: black;
     margin-left: 2vw;
 }

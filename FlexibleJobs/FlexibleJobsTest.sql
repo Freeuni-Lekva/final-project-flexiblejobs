@@ -27,28 +27,29 @@ CREATE TABLE personal_info(
 );
 
 CREATE TABLE accounts(
-	username VARCHAR(30),
-    pass VARCHAR(30),
-    balance INT,
-    rating DECIMAL(3,2),
-    acctype VARCHAR(15)
+                         username VARCHAR(30),
+                         pass VARCHAR(200),
+                         balance INT,
+                         rating DECIMAL(3,2),
+                         acctype VARCHAR(15)
 );
 
 CREATE TABLE online_users(
     username varchar(30)
 );
 
+
 CREATE TABLE jobs(
-	jobid INT NOT NULL AUTO_INCREMENT,
-    employer VARCHAR(30),
-    heading VARCHAR(100),
-    jobdescription VARCHAR(5000),
-    budget INT,
-    dateposted VARCHAR(25),
-    -- numapplications INT,
-     numinterviews INT,
---     numhires INT,
-    PRIMARY KEY(jobid)
+                     jobid INT NOT NULL AUTO_INCREMENT,
+                     employer VARCHAR(30),
+                     heading VARCHAR(100),
+                     jobdescription VARCHAR(5000),
+                     budget INT,
+                     dateposted VARCHAR(100),
+                     numapplications INT,
+                     jobduration VARCHAR(30),
+                     jobstatus VARCHAR (20),
+                     PRIMARY KEY(jobid)
 );
 
 CREATE TABLE applications(
