@@ -4,6 +4,7 @@ import servlets.FlexibleJobsConstants;
 
 import javax.sql.DataSource;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -112,6 +113,7 @@ public class ReviewDao {
         for (Review review : reviews) {
             sum += review.getPoints();
         }
-        return sum/(double) reviews.size();
+        BigDecimal tmp=new BigDecimal(sum/(double) reviews.size());
+        return Double.parseDouble(tmp.setScale(2, RoundingMode.CEILING).toString());
     }
 }

@@ -27,8 +27,6 @@
     Account acc = accDao.selectByUsername(username);
     String type = acc.getType();
     double rev = reviewDao.averageReview(username);
-    BigDecimal tmp=new BigDecimal(rev);
-    tmp=tmp.setScale(2, RoundingMode.CEILING);
 %>
 <h1><%=pd.getFirstName() + " " + pd.getLastName()%></h1>
 <br>
@@ -36,15 +34,18 @@
 <br>
 <h3><%=pd.getLivingPlace()%></h3>
 <br>
+<h2>balance: <%=accDao.getCurrentBalance(username)%></h2>
+<br>
 <%
     if (type.equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE)) {%>
-<h2>rating: <%=tmp.toString()%></h2>
+<h2>rating: <%=rev%></h2>
 <%}
 %>
+<br>
 <h2><%=pd.getProfileDescription()%></h2>
 <br>
 <br>
-<h2><%="Work History"%></h2>
+<h3>Work History</h3>
 <br>
 <%
     Set<Job> workHistory = acc.getWorkHistory();
@@ -53,11 +54,8 @@
 <br>
 <%
     if (type.equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE)) {%>
-<h2>rating: <%=%></h2> <%}
-%>
-
-<%
-    }
+<h2>rating: <%=reviewDao.selectByJob(username, job.getJobId()).getPoints()%></h2><br> <%}
+}
 %>
 </body>
 </html>
