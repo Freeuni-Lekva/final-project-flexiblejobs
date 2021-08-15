@@ -1,0 +1,258 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+.employee-main-header {
+    height: 7vh;
+    border-bottom: 2px solid lightgray;
+    display: flex;
+    background-color: #04435a;
+}
+
+.employee-main-header-logo {
+    width: 150px;
+    height: 40px;
+    margin: auto auto auto 20%;
+}
+
+.employee-main-header-logo:hover {
+    cursor: pointer;
+}
+
+.employee-main-header-search {
+    height: 4vh;
+    width: 20%;
+    border-radius: 20px;
+    text-align: center;
+    margin: auto 20vw auto 2vw;
+    outline: none;
+    border: 1px solid #04435a;
+}
+
+.employee-main-header-search:hover {
+    border-color: #029a02;
+}
+
+.employee-main-header-profile-button {
+    height: 4vh;
+    width: 5%;
+    border-radius: 20px;
+    text-align: center;
+    margin-right: 1vw;
+    margin-top: auto;
+    margin-bottom: auto;
+    outline: none;
+    border: none;
+}
+
+.employee-main-header-logout-button {
+    height: 4vh;
+    width: 5%;
+    border-radius: 20px;
+    text-align: center;
+    margin-right: 20%;
+    margin-top: auto;
+    margin-bottom: auto;
+    /*margin: auto 20% auto 2vw;*/
+    outline: none;
+    border: none;
+}
+
+.employee-main-header-logout-button:hover {
+    cursor: pointer;
+}
+
+.employee-main-header-profile-button:hover {
+    cursor: pointer;
+}
+
+.employee-main-wrapper {
+    text-align: center;
+    width: 60vw;
+    height: 68vh;
+    margin: 6vh auto auto;
+    border-radius: 10px;
+}
+
+.employee-main-find-work-wrapper {
+    display: flex;
+    width: 100%;
+}
+
+.employee-main-find-work-label {
+    font: 2em Arial;
+    margin-left: 2vw;
+    margin-top: 2vh;
+}
+
+.employee-main-find-work-search {
+    border: 1px solid lightgray;
+    text-align: center;
+    width: 30vw;
+    margin-left: 5vw;
+    margin-top: 2vh;
+}
+
+.employee-main-find-work-search:hover {
+    border-color: #029a02;
+}
+
+.employee-main-jobs-feed {
+    border: 1px solid lightgray;
+    background-color: white;
+    width: 30vw;
+    min-height: 68vh;
+    margin: 6vh auto auto;
+    border-radius: 5px;
+}
+
+.employee-main-jobs-label-wrapper {
+    width: 30vw;
+    border-bottom: 1px solid lightgray;
+    height: 6vh;
+    display: flex;
+}
+
+.employee-main-jobs-label {
+    font: 1.5em Arial;
+    margin-top: auto;
+    margin-left: 2vw;
+    margin-bottom: auto;
+}
+
+.employee-main-job {
+    padding-top: 1vh;
+    text-align: left;
+    height: 18vh;
+    border-bottom: 1px solid lightgray;
+}
+
+.employee-main-job:hover {
+    background-color: rgb(246, 246, 246);
+    cursor: pointer;
+}
+
+.employee-job-name {
+    margin-left: 2vw;
+    font: 1.4em Arial bold;
+}
+
+.employee-job-description {
+    margin-left: 2vw;
+    margin-top: 2vh;
+    font: 0.8em Arial;
+}
+
+
+.employee-job-payment {
+    margin-left: 2vw;
+    margin-top: 2vh;
+    display: flex;
+}
+
+.employee-job-payment-description {
+    margin-left: 1vw;
+    font: 0.7em Arial bold;
+    padding-top: 0.6vh;
+}
+
+
+.employee-main-form {
+    text-align: center;
+    border-bottom: 1px solid lightgray;
+    height: 46vh;
+}
+
+.employee-main-label {
+    font-size: 2em;
+    display: block;
+    margin-top: 2vh;
+}
+
+.employee-main-common-input {
+    width: 70%;
+    height: 5vh;
+    margin: 3vh auto auto;
+    border: 1px solid lightgray;
+    outline-color: #029a02;
+    text-align: center;
+}
+
+.employee-main-select-input {
+    width: 70%;
+    height: 5vh;
+    margin: 3vh auto auto;
+    border: 1px solid lightgray;
+    outline-color: #029a02;
+    text-align: center;
+    text-align-last: center;
+}
+
+.employee-main-common-input:hover, .employee-main-select-input:hover {
+    border-color: #029a02;
+}
+
+.employee-main-submit-button {
+    font-size: 1em;
+    margin-top: 3vh;
+    height: 5vh;
+    width: 70%;
+    border-radius: 30px;
+    color: white;
+    background-color: #029a02;
+    border: 1px solid #029a02;
+}
+
+.employee-main-submit-button:hover {
+    background-color: green;
+    cursor: pointer;
+}
+
+.login-button {
+    font-size: 1em;
+    margin-top: 3vh;
+    height: 5vh;
+    width: 40%;
+    border-radius: 30px;
+    color: #029a02;
+    background-color: white;
+    border: 1px solid #029a02;
+}
+
+.login-button:hover {
+    background-color: rgba(0, 128, 0, 0.08);
+    cursor: pointer;
+}
+
+.login-sides-wrapper {
+    width: 60vw;
+    height: 32vh;
+    display: flex;
+}
+
+.employee-main-footer {
+    background-color: #001d00;
+    height: 15vh;
+    margin-top: 3.6vh;
+    text-align: center;
+}
+
+.employee-main-footer-description {
+    padding-top: 3vh;
+    color: white;
+}
+
+.employee-main-footer-terms-of-service {
+    padding-top: 2vh;
+    color: white;
+}
+
+.employee-main-footer-privacy-policy {
+    color: white;
+}
+
+.employee-main-footer-contact {
+    color: white;
+}

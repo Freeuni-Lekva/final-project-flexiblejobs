@@ -41,7 +41,7 @@ public class LoginHandler extends HttpServlet {
             req.getSession().setAttribute("state", state);
             switch (account.getType()) {
                 case FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE:
-                    req.getRequestDispatcher("/Front/successfulLoginEmployee.jsp").forward(req, resp);
+                    req.getRequestDispatcher("/Front/employeeMain.jsp").forward(req, resp);
                     break;
                 case FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER:
                     req.getRequestDispatcher("/Front/successfulLoginEmployer.jsp").forward(req, resp);

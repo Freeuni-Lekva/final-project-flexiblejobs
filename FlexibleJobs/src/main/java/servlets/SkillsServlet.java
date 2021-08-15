@@ -24,7 +24,9 @@ public class SkillsServlet extends HttpServlet {
 
         State state = (State) req.getSession().getAttribute("state");
         Account userRegistering = state.getUserRegistering();
+        state.setLoggedUser(state.getUserRegistering());
+        state.setUserRegistering(null);
         //TODO save skills
-        req.getRequestDispatcher("/Front/successfulLoginEmployee.jsp").forward(req, resp);
+        req.getRequestDispatcher("/Front/employeeMain.jsp").forward(req, resp);
     }
 }

@@ -83,7 +83,7 @@
 
     <div class="skills-wrapper">
         <div class="skills-form">
-            <label class="skills-label" for="skills-common-input">Skills for Dasakmebuli</label>
+            <label class="skills-label" for="skills-common-input">Skills for <%=state.getUserRegistering().getUserName()%></label>
             <div class="skills-sides-labels-wrapper">
                 <div id="skills-left-side-label" class="skills-left-side-label">
                     Skills to choose
@@ -114,6 +114,13 @@
             </div>
             <input class="skills-submit-button" type="submit" value="Add skills and continue" form="skills-right-side-wrapper">
         </div>
+    </div>
+
+    <div class="skills-footer">
+        <div class="skills-footer-description">© 2021 - 2021 FlexibleJobs® National Inc.</div>
+        <div class="skills-footer-terms-of-service">Terms of Service</div>
+        <div class="skills-footer-privacy-policy">Privacy Policy</div>
+        <div class="skills-footer-contact">Contact</div>
     </div>
 </body>
 </html>
