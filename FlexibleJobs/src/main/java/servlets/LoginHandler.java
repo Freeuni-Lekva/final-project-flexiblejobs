@@ -49,7 +49,23 @@ public class LoginHandler extends HttpServlet {
             req.getSession().setAttribute("state", state);
             req.getRequestDispatcher("/Front/login.jsp").forward(req, resp);
         } else {
-            List<Account> contacts = accountDao.selectAllByType("employer"); //TODO change with real contacts
+            List<Account> employers = accountDao.selectAllByType("employer");//TODO change with real contacts
+            List<Account> employees = accountDao.selectAllByType("employee");
+
+            List<Account> contacts = new ArrayList<>();
+            for(Account acc : employees){
+                if(!acc.getUserName().equals(account.getUserName())){
+                    contacts.add(acc);
+                }
+            }
+
+            for(Account acc : employers){
+                if(!acc.getUserName().equals(account.getUserName())){
+                    contacts.add(acc);
+                }
+            }
+
+
             State state = new State(account, null, null, contacts, null, null, false, false);
             accountDao.logIn(account.getUserName());
             req.getSession().setAttribute("state", state);

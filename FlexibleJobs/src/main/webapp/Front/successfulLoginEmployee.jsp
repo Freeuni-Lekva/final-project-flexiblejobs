@@ -19,6 +19,17 @@
         <%List<Account> contacts = state.getContacts();%>
         <%List<Message> conversation = state.getConversation();%>
 
+        <%if(state.isChatStarted()){%>
+            const chatSocket = new WebSocket("ws://localhost:8080/FlexibleJobs/chat-endpoint");
+
+            chatSocket.onmessage = function (ev) {
+                if (ev.data === "updateChat") {
+
+                }
+            };
+        <%}%>
+
+
         function goToLogin(){
             this.window.location.href = "/FlexibleJobs/Front/login.jsp"
         }
@@ -45,7 +56,7 @@
             chatOpened = true
             document.getElementsByClassName("opened-chat-wrapper")[0].style.visibility = "visible"
             document.getElementsByClassName("chat-partner-name")[0].innerHTML = to
-
+            chatSocket.send("updateChat")
         }
 
         function closeChat(){
