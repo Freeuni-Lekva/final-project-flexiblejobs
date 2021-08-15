@@ -15,6 +15,7 @@ body {
     width: 150px;
     height: 40px;
     margin: auto auto auto 20%;
+    background-color: white;
 }
 
 .employee-main-header-logo:hover {

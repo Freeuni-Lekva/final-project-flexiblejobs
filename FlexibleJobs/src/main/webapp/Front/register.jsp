@@ -15,17 +15,44 @@
     <script>
         <%State state = (State) request.getSession().getAttribute("state");%>
 
-        <%if(state != null && state.getLoggedUser() != null){%>
-        <%if (state.getLoggedUser().getType().equals("employee")){%>
-        window.location.href = "/FlexibleJobs/Front/successfulLoginEmployee.jsp"
-        <%} else if(state.getLoggedUser().getType().equals("employer")){%>
-        window.location.href = "/FlexibleJobs/Front/successfulLoginEmployer.jsp"
-        <%} else if(state.getLoggedUser().getType().equals("administrator")){%>
-        window.location.href = "/FlexibleJobs/Front/successfulLoginAdmin.jsp"
+        <%if(state != null && state.getLoggedUser() != null && state.getError() == null){%>
+            <%if (state.getLoggedUser().getType().equals("employee")){%>
+            window.location.href = "/FlexibleJobs/Front/successfulLoginEmployee.jsp"
+            <%} else if(state.getLoggedUser().getType().equals("employer")){%>
+            window.location.href = "/FlexibleJobs/Front/successfulLoginEmployer.jsp"
+            <%} else if(state.getLoggedUser().getType().equals("administrator")){%>
+            window.location.href = "/FlexibleJobs/Front/successfulLoginAdmin.jsp"
+            <%}%>
         <%}%>
-        <%}%>
+
         function goToLogin(){
             this.window.location.href = "/FlexibleJobs/Front/login.jsp"
+        }
+
+        window.onload = function () {
+            <% if(state!=null && state.getError()!= null){ %>
+                <% if(state.getError().contains(FlexibleJobsConstants.NULL_USERNAME) || state.getError().contains(FlexibleJobsConstants.EXISTED_ACCOUNT)) { %>
+                document.getElementById("username").style.border = "1px solid red";
+                <%} %>
+                <% if(state.getError().contains(FlexibleJobsConstants.NULL_PASSWORD)) { %>
+                document.getElementById("password").style.border = "1px solid red";
+                <%}%>
+                <% if(state.getError().contains(FlexibleJobsConstants.NULL_FIRSTNAME)) { %>
+                document.getElementById("firstname").style.border = "1px solid red";
+                <%} %>
+                <% if(state.getError().contains(FlexibleJobsConstants.NULL_LASTNAME)) { %>
+                document.getElementById("lastname").style.border = "1px solid red";
+                <% }%>
+                <% if(state.getError().contains(FlexibleJobsConstants.NULL_LIVING_PLACE)) { %>
+                document.getElementById("livingPlace").style.border = "1px solid red";
+                <%} %>
+                <% if(state.getError().contains(FlexibleJobsConstants.NULL_HEADING)) { %>
+                document.getElementById("profileHeading").style.border = "1px solid red";
+                <%} %>
+                <% if(state.getError().contains(FlexibleJobsConstants.NULL_DESCRIPTION)) { %>
+                document.getElementById("profileDescription").style.border = "1px solid red";
+                <%} %>
+            <%}%>
         }
     </script>
 </head>

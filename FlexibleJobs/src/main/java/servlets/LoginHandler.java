@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 @WebServlet("/login")
@@ -34,14 +35,25 @@ public class LoginHandler extends HttpServlet {
  */
         String password = req.getParameter("password");
         Account account = accountDao.selectByUsername(username);
-        State state = new State(account, null);
+        ArrayList<String> error = new ArrayList<>();
 
-        if (account != null && account.getPassword().equals(password)) {
+        if (account == null) {
+            error.add(0, FlexibleJobsConstants.NO_ACCOUNT);
+            State state = new State(null, null, error);
+            req.getSession().setAttribute("state", state);
+            req.getRequestDispatcher("/Front/login.jsp").forward(req, resp);
+        } else if (!account.getPassword().equals(password)) {
+            error.add(0, FlexibleJobsConstants.INCORRECT_PASSWORD);
+            State state = new State(null, null, error);
+            req.getSession().setAttribute("state", state);
+            req.getRequestDispatcher("/Front/login.jsp").forward(req, resp);
+        } else {
+            State state = new State(account,null, null);
             accountDao.logIn(account.getUserName());
             req.getSession().setAttribute("state", state);
             switch (account.getType()) {
                 case FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE:
-                    req.getRequestDispatcher("/Front/employeeMain.jsp").forward(req, resp);
+                    req.getRequestDispatcher("/Front/successfulLoginEmployee.jsp").forward(req, resp);
                     break;
                 case FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER:
                     req.getRequestDispatcher("/Front/successfulLoginEmployer.jsp").forward(req, resp);
@@ -51,8 +63,6 @@ public class LoginHandler extends HttpServlet {
                     break;
             }
 
-        } else {
-            req.getRequestDispatcher("/Front/invalidUser.jsp").forward(req, resp);
         }
     }
 

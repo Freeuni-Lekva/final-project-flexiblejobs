@@ -1,4 +1,5 @@
-<%@ page import="states.State" %><%--
+<%@ page import="states.State" %>
+<%@ page import="servlets.FlexibleJobsConstants" %><%--
   Created by IntelliJ IDEA.
   User: User
   Date: 02.08.2021
@@ -14,7 +15,7 @@
     <script>
         <%State state = (State) request.getSession().getAttribute("state");%>
 
-        <%if(state != null && state.getLoggedUser() != null){%>
+        <%if(state != null && state.getLoggedUser() != null && !state.getError().get(0).equals(FlexibleJobsConstants.INCORRECT_PASSWORD)){%>
             <%if (state.getLoggedUser().getType().equals("employee")){%>
                 window.location.href = "/FlexibleJobs/Front/successfulLoginEmployee.jsp"
             <%} else if(state.getLoggedUser().getType().equals("employer")){%>
@@ -26,6 +27,16 @@
 
         function goToRegister(){
             this.window.location.href = "/FlexibleJobs/Front/register.jsp"
+        }
+
+        window.onload = function () {
+            <% if(state!=null && state.getError()!= null){ %>
+            <% if(state.getError().get(0).equals(FlexibleJobsConstants.NO_ACCOUNT)) { %>
+            document.getElementsByClassName("login-username-input-wrapper")[0].style.border = "1px solid red";
+            <%} else if(state.getError().get(0).equals(FlexibleJobsConstants.INCORRECT_PASSWORD)){ %>
+            document.getElementsByClassName("login-password-input-wrapper")[0].style.borderColor = "red";
+            <%}%>
+            <%}%>
         }
     </script>
 </head>

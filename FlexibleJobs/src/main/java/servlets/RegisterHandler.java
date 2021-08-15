@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 @WebServlet("/registerHandler")
 public class RegisterHandler extends HttpServlet {
@@ -30,9 +31,50 @@ public class RegisterHandler extends HttpServlet {
         String profileDescription = req.getParameter("profileDescription");
 
 
-        if (accountDao.selectByUsername(username) != null) {
-            req.getRequestDispatcher("/Front/registeredProblem.jsp").forward(req, resp);
+        Account account = null;
+        ArrayList<String> error = new ArrayList<>();
+        boolean isNull = false;
+
+        if (username.equals("")) {
+            error.add(FlexibleJobsConstants.NULL_USERNAME);
+            isNull = true;
+        }
+        if (receivedPassword.equals("")) {
+            error.add(FlexibleJobsConstants.NULL_PASSWORD);
+            isNull = true;
+        }
+        if (firstname.equals("")) {
+            error.add(FlexibleJobsConstants.NULL_FIRSTNAME);
+            isNull = true;
+        }
+        if (lastname.equals("")) {
+            error.add(FlexibleJobsConstants.NULL_LASTNAME);
+            isNull = true;
+        }
+        if (livingPlace.equals("")) {
+            error.add(FlexibleJobsConstants.NULL_LIVING_PLACE);
+            isNull = true;
+        }
+        if (profileHeading.equals("")) {
+            error.add(FlexibleJobsConstants.NULL_HEADING);
+            isNull = true;
+        }
+        if (profileDescription.equals("")) {
+            error.add(FlexibleJobsConstants.NULL_DESCRIPTION);
+            isNull = true;
+        }
+
+        if(accountDao.selectByUsername(username) != null) {
+            error.add(FlexibleJobsConstants.EXISTED_ACCOUNT);
+            isNull = true;
+        }
+
+        if (isNull) {
+            State state = new State(null, null, error);
+            req.getSession().setAttribute("state", state);
+            req.getRequestDispatcher("/Front/register.jsp").forward(req, resp);
         } else {
+
             MessageDigest messageDigest = null;
             try {
                 messageDigest = MessageDigest.getInstance("SHA-256");
@@ -42,7 +84,6 @@ public class RegisterHandler extends HttpServlet {
             messageDigest.update(receivedPassword.getBytes());
             String password = new String(messageDigest.digest());
 
-            Account account = null;
             PersonalData personalData = new PersonalData(username, firstname, lastname, livingPlace, profileHeading, profileDescription);
 
 
@@ -61,7 +102,7 @@ public class RegisterHandler extends HttpServlet {
             account.setPersonalData(personalData);
             accountDao.addAccount(account);
 
-            State state = new State(null, account);
+            State state = new State(null, account, null);
             req.getSession().setAttribute("state", state);
             switch (type) {
                 case FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE:

@@ -27,6 +27,6 @@ public class SkillsServlet extends HttpServlet {
         state.setLoggedUser(state.getUserRegistering());
         state.setUserRegistering(null);
         //TODO save skills
-        req.getRequestDispatcher("/Front/employeeMain.jsp").forward(req, resp);
+        req.getRequestDispatcher("/Front/successfulLoginEmployee.jsp").forward(req, resp);
     }
 }
