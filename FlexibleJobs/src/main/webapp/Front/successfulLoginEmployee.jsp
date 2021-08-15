@@ -44,7 +44,6 @@
             document.getElementsByClassName("opened-chat-wrapper")[0].style.visibility = "visible"
             document.getElementsByClassName("chat-partner-name")[0].innerHTML = to
 
-            // chatSocket.send("updateChat")
         }
 
         function closeChat(){
@@ -65,6 +64,12 @@
         function logout(){
             document.getElementById("logout").submit()
         }
+
+        <%if(state.isChatStarted()){%>
+            window.onload = function (){
+                startChat("<%=state.getConversationWith().getUserName()%>")
+            }
+        <%}%>
     </script>
 </head>
 <body>
