@@ -1,0 +1,127 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.register-header {
+    height: 7vh;
+    border-bottom: 2px solid lightgray;
+    display: flex;
+}
+
+.register-header-logo {
+    width: 150px;
+    height: 40px;
+    margin: auto auto auto 20%;
+}
+
+.register-header-logo:hover {
+    cursor: pointer;
+}
+
+.register-wrapper {
+    text-align: center;
+    border: 1px solid lightgray;
+    width: 60vw;
+    height: 68vh;
+    margin: 6vh auto auto;
+    border-radius: 10px;
+}
+
+.register-form {
+    text-align: center;
+    border-bottom: 1px solid lightgray;
+    height: 46vh;
+}
+
+.register-label {
+    font-size: 2em;
+    display: block;
+    margin-top: 2vh;
+}
+
+.register-common-input {
+    width: 70%;
+    height: 5vh;
+    margin: 3vh auto auto;
+    border: 1px solid lightgray;
+    outline-color: #029a02;
+    text-align: center;
+}
+
+.register-select-input {
+    width: 70%;
+    height: 5vh;
+    margin: 3vh auto auto;
+    border: 1px solid lightgray;
+    outline-color: #029a02;
+    text-align: center;
+    text-align-last: center;
+}
+
+.register-common-input:hover, .register-select-input:hover {
+    border-color: #029a02;
+}
+
+.register-submit-button {
+    font-size: 1em;
+    margin-top: 3vh;
+    height: 5vh;
+    width: 70%;
+    border-radius: 30px;
+    color: white;
+    background-color: #029a02;
+    border: 1px solid #029a02;
+}
+
+.register-submit-button:hover {
+    background-color: green;
+    cursor: pointer;
+}
+
+.login-button {
+    font-size: 1em;
+    margin-top: 3vh;
+    height: 5vh;
+    width: 40%;
+    border-radius: 30px;
+    color: #029a02;
+    background-color: white;
+    border: 1px solid #029a02;
+}
+
+.login-button:hover {
+    background-color: rgba(0, 128, 0, 0.08);
+    cursor: pointer;
+}
+
+.login-sides-wrapper {
+    width: 60vw;
+    height: 32vh;
+    display: flex;
+}
+
+.register-footer {
+    background-color: #001d00;
+    height: 15vh;
+    margin-top: 3.6vh;
+    text-align: center;
+}
+
+.register-footer-description {
+    padding-top: 3vh;
+    color: white;
+}
+
+.register-footer-terms-of-service {
+    padding-top: 2vh;
+    color: white;
+}
+
+.register-footer-privacy-policy {
+    color: white;
+}
+
+.register-footer-contact {
+    color: white;
+}

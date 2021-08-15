@@ -259,4 +259,62 @@ public class AccountDao {
         }
         return rs!=null;
     }
+
+    public ArrayList<String> getSkills(String username){
+        ArrayList<String> skills = new ArrayList<>();
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            PreparedStatement stm = connection.prepareStatement(
+                    "SELECT* FROM employeeskills WHERE username = ?;");
+            stm.setString(1, username);
+            ResultSet rs = stm.executeQuery();
+            if(!rs.next())
+                return null;
+            while (true){
+                skills.add(rs.getString(2));
+                if(!rs.next())break;
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return skills;
+
+    }
+
+    public void addSkills(String username, List<String> skills){
+        PreparedStatement stm;
+        Connection connection = null;
+        try {
+            for(int i=0; i<skills.size(); i++) {
+                String skill = skills.get(i);
+                connection = dataSource.getConnection();
+                stm = connection.prepareStatement(
+                        "INSERT INTO employeeskills (username, skill) " +
+                                "VALUES (?, ?);");
+                stm.setString(1, username);
+                stm.setString(2, skill);
+                stm.executeUpdate();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+    }
 }

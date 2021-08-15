@@ -17,7 +17,7 @@ import java.util.Set;
 import javax.sql.DataSource;
 
 public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
-    implements org.apache.jasper.runtime.JspSourceDependent {
+        implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final javax.servlet.jsp.JspFactory _jspxFactory =
           javax.servlet.jsp.JspFactory.getDefaultFactory();
@@ -40,7 +40,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
   }
 
   public void _jspService(final javax.servlet.http.HttpServletRequest request, final javax.servlet.http.HttpServletResponse response)
-        throws java.io.IOException, javax.servlet.ServletException {
+          throws java.io.IOException, javax.servlet.ServletException {
 
     final javax.servlet.jsp.PageContext pageContext;
     javax.servlet.http.HttpSession session = null;
@@ -55,7 +55,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
     try {
       response.setContentType("text/html");
       pageContext = _jspxFactory.getPageContext(this, request, response,
-      			null, true, 8192, true);
+              null, true, 8192, true);
       _jspx_page_context = pageContext;
       application = pageContext.getServletContext();
       config = pageContext.getServletConfig();
@@ -71,13 +71,13 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<body>\r\n");
       out.write("\r\n");
 
-    JobDatabase database = (JobDatabase) application.getAttribute("jobDao");
-    Set<Job> jobs = database.getJobs();
-    for(Job job : jobs){
+      JobDatabase database = (JobDatabase) application.getAttribute("jobDao");
+      Set<Job> jobs = database.getJobs();
+      for(Job job : jobs){
         out.print("<a href=\"Jobs_Front/adding_application.jsp?id=" + job.getJobId() + "\">"
                 + job.getHeader() + "</a>");
         out.print("<br/>");
-    }
+      }
 
       out.write("\r\n");
       out.write("\r\n");
