@@ -160,100 +160,147 @@ body {
 }
 
 
-.employee-main-form {
-    text-align: center;
-    border-bottom: 1px solid lightgray;
-    height: 46vh;
+.contacts-wrapper {
+    position: fixed;
+    width: 15vw;
+    /*width: 40vw;*/
+    border: 1px solid #04435a;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 50vh;
+    right: 0;
+    bottom: 0;
+    margin-right: 0.5vw;
+    background-color: #04435a;
 }
 
-.employee-main-label {
-    font-size: 2em;
-    display: block;
-    margin-top: 2vh;
+.contacts-header {
+    margin-left: 1vw;
+    border-bottom: 1px solid black;
 }
 
-.employee-main-common-input {
-    width: 70%;
-    height: 5vh;
-    margin: 3vh auto auto;
-    border: 1px solid lightgray;
-    outline-color: #029a02;
-    text-align: center;
-}
-
-.employee-main-select-input {
-    width: 70%;
-    height: 5vh;
-    margin: 3vh auto auto;
-    border: 1px solid lightgray;
-    outline-color: #029a02;
-    text-align: center;
-    text-align-last: center;
-}
-
-.employee-main-common-input:hover, .employee-main-select-input:hover {
-    border-color: #029a02;
-}
-
-.employee-main-submit-button {
-    font-size: 1em;
-    margin-top: 3vh;
-    height: 5vh;
-    width: 70%;
-    border-radius: 30px;
+.contacts-tag {
     color: white;
+}
+
+.contacts-body {
+    margin-top: 1vh;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    height: 43vh;
+    overflow-y: scroll;
+}
+
+.contacts-body::-webkit-scrollbar {
+    display: none;
+}
+
+.contact:hover {
     background-color: #029a02;
-    border: 1px solid #029a02;
-}
-
-.employee-main-submit-button:hover {
-    background-color: green;
     cursor: pointer;
 }
 
-.login-button {
-    font-size: 1em;
-    margin-top: 3vh;
-    height: 5vh;
-    width: 40%;
-    border-radius: 30px;
-    color: #029a02;
-    background-color: white;
-    border: 1px solid #029a02;
-}
-
-.login-button:hover {
-    background-color: rgba(0, 128, 0, 0.08);
-    cursor: pointer;
-}
-
-.login-sides-wrapper {
-    width: 60vw;
-    height: 32vh;
+.contact {
     display: flex;
 }
 
-.employee-main-footer {
-    background-color: #001d00;
-    height: 15vh;
-    margin-top: 3.6vh;
+.contact-picture {
+    padding: 6px;
+    width: 40px;
+    height: 40px;
+}
+
+.contact-name {
+    margin-left: 10px;
+    color: white;
+}
+
+/*closed*/
+.chat-wrapper {
+    position: fixed;
+    width: 16vw;
+    border: 1px solid #04435a;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 5vh;
+    right: 15.8vw;
+    bottom: 0;
+    background-color: #04435a;
+    visibility: hidden;
+}
+
+.opened-chat-wrapper {
+    position: fixed;
+    width: 16vw;
+    height: 50vh;
+    right: 15.8vw;
+    bottom: 0;
+    border: 1px solid #04435a;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: #04435a;
+}
+
+.chat-header {
+    width: inherit;
     text-align: center;
+    height: 5vh;
+    border-bottom: 2px solid black;
+    cursor: pointer;
 }
 
-.employee-main-footer-description {
-    padding-top: 3vh;
+.chat-partner-name {
     color: white;
+    margin-top: 13px;
+    margin-bottom: 13px;
 }
 
-.employee-main-footer-terms-of-service {
-    padding-top: 2vh;
+.chat-close-button {
     color: white;
+    overflow: hidden;
+    float: right;
+    margin-top: -32px;
+    margin-right: 20px;
 }
 
-.employee-main-footer-privacy-policy {
-    color: white;
+.chat-body{
+    background-color: white;
+    height: 38vh;
+    overflow-y: scroll;
 }
 
-.employee-main-footer-contact {
-    color: white;
+.chat-body::-webkit-scrollbar {
+    display: none;
+}
+
+.chat-footer{
+    border-top: 1px solid #04435a;
+    bottom: 0;
+}
+
+.chat-message-input{
+    margin-top: 0.6vh;
+    width: 80%;
+    height: 4vh;
+    margin-left: 0.4vw;
+}
+
+.chat-message-send-button{
+    margin-top: 1vh;
+    height: 4vh;
+    overflow: hidden;
+}
+
+.chat-message-wrapper{
+    border-bottom: 1px solid #04435a;
+}
+
+.chat-message-sender{
+    color: black;
+    margin-left: 1vw;
+}
+
+.chat-message-content{
+    color: black;
+    margin-left: 2vw;
 }
