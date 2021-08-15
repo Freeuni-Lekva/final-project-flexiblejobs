@@ -37,8 +37,18 @@
             const data = ev.dataTransfer.getData("node");
             const target = ev.target.id
             if (document.getElementById(target).className === "skills-common-input") {
+                if(document.getElementById(target).parentElement.className === "skills-right-side-wrapper") {
+                    document.getElementById(data).setAttribute("name", document.getElementById(data).getAttribute("value"))
+                } else if(document.getElementById(target).parentElement.className === "skills-left-side-wrapper"){
+                    document.getElementById(data).removeAttribute("name")
+                }
                 document.getElementById(document.getElementById(target).parentElement.id).append(document.getElementById(data))
             } else {
+                if(document.getElementById(target).className === "skills-right-side-wrapper"){
+                    document.getElementById(data).setAttribute("name", document.getElementById(data).getAttribute("value"))
+                } else {
+                    document.getElementById(data).removeAttribute("name")
+                }
                 ev.target.append(document.getElementById(data));
             }
         }
@@ -84,21 +94,21 @@
             </div>
             <div class="skills-sides-wrapper">
                 <div id="skills-left-side-wrapper" class="skills-left-side-wrapper">
-                    <input class="skills-common-input" id="skills-common-input"  type="text" disabled="true"
+                    <input class="skills-common-input" id="skills-common-input"  type="text" readonly="true"
                            value="Java" draggable="true"/>
-                    <input class="skills-common-input" id="skills-common-input2"  type="text" disabled="true"
+                    <input class="skills-common-input" id="skills-common-input2"  type="text" readonly="true"
                            value="Spring" draggable="true"/>
-                    <input class="skills-common-input" id="skills-common-input3"  type="text" disabled="true"
+                    <input class="skills-common-input" id="skills-common-input3"  type="text" readonly="true"
                            value="Python" draggable="true"/>
-                    <input class="skills-common-input" id="skills-common-input4"  type="text" disabled="true"
+                    <input class="skills-common-input" id="skills-common-input4"  type="text" readonly="true"
                            value="CSS" draggable="true"/>
-                    <input class="skills-common-input" id="skills-common-input5"  type="text" disabled="true"
+                    <input class="skills-common-input" id="skills-common-input5"  type="text" readonly="true"
                            value="HTML" draggable="true"/>
-                    <input class="skills-common-input" id="skills-common-input6"  type="text" disabled="true"
+                    <input class="skills-common-input" id="skills-common-input6"  type="text" readonly="true"
                            value="Angular" draggable="true"/>
 
                 </div>
-                <form id="skills-right-side-wrapper" class="skills-right-side-wrapper" action="/FlexibleJobs/existedAccLogin" method="post">
+                <form id="skills-right-side-wrapper" class="skills-right-side-wrapper" action="/FlexibleJobs/skills" method="post">
 
                 </form>
             </div>
