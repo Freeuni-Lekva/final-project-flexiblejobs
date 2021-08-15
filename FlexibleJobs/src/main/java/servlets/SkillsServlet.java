@@ -23,9 +23,12 @@ public class SkillsServlet extends HttpServlet {
         AccountDao accountDao = (AccountDao) req.getServletContext().getAttribute("accountDao");
 
         State state = (State) req.getSession().getAttribute("state");
-        Account userRegistering = state.getUserRegistering();
+
         state.setLoggedUser(state.getUserRegistering());
         state.setUserRegistering(null);
+
+        List<Account> contacts = accountDao.selectAllByType("employer"); //TODO change with real contacts
+        state.setContacts(contacts);
         //TODO save skills
         req.getRequestDispatcher("/Front/successfulLoginEmployee.jsp").forward(req, resp);
     }

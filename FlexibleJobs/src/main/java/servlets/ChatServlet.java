@@ -4,6 +4,7 @@ import accounts.Account;
 import accounts.AccountDao;
 import accounts.Message;
 import accounts.MessageDao;
+import states.State;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,14 +22,29 @@ public class ChatServlet extends HttpServlet {
         AccountDao accountDao = (AccountDao) req.getServletContext().getAttribute("accountDao");
         MessageDao messageDao = (MessageDao) req.getServletContext().getAttribute("messageDao");
 
-        Account loggedUser = (Account) req.getSession().getAttribute("loggedUser");
+        State state = (State) req.getSession().getAttribute("state");
+        Account loggedUser = state.getLoggedUser();
         String with = req.getParameter("conversationWith");
         Account conversationWith = accountDao.selectByUsername(with);
-
         List<Message> conversation = messageDao.getConversation(loggedUser.getUserName(), conversationWith.getUserName());
 
-        req.getServletContext().setAttribute("messageDao", messageDao);
-        req.getSession().setAttribute("conversationWith", with);
-        req.getRequestDispatcher("chat.jsp").forward(req, resp);
+        state.setConversation(conversation);
+        state.setConversationWith(conversationWith);
+        state.setChatOpened(true);
+        state.setChatStarted(true);
+
+        String type = loggedUser.getType();
+
+        switch (type) {
+            case FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE:
+                req.getRequestDispatcher("/Front/successfulLoginEmployee.jsp").forward(req, resp);
+                break;
+            case FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER:
+                req.getRequestDispatcher("/Front/successfulLoginEmployer.jsp").forward(req, resp);
+                break;
+            case FlexibleJobsConstants.ACCOUNT_ROLE_ADMINISTRATOR:
+                req.getRequestDispatcher("/Front/successfulLoginAdmin.jsp").forward(req, resp);
+                break;
+        }
     }
 }

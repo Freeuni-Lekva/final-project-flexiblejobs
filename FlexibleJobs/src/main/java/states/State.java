@@ -1,18 +1,70 @@
 package states;
 
 import accounts.Account;
+import accounts.Message;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class State {
     private Account loggedUser;
     private Account userRegistering;
-    private ArrayList<String> error;
+    private List<String> error;
+    private List<Account> contacts;
+    private Account conversationWith;
+    private List<Message> conversation;
+    private boolean chatStarted;
+    private boolean chatOpened;
 
-    public State(Account loggedUser, Account userRegistering, ArrayList<String> error) {
+
+    public State(Account loggedUser, Account userRegistering, List<String> error, List<Account> contacts, Account conversationWith, List<Message> conversation, boolean chatStarted, boolean chatOpened) {
         this.loggedUser = loggedUser;
         this.userRegistering = userRegistering;
         this.error = error;
+        this.contacts = contacts;
+        this.conversationWith = conversationWith;
+        this.conversation = conversation;
+        this.chatStarted = chatStarted;
+        this.chatOpened = chatOpened;
+    }
+
+    public List<Message> getConversation() {
+        return conversation;
+    }
+
+    public void setConversation(List<Message> conversation) {
+        this.conversation = conversation;
+    }
+
+    public Account getConversationWith() {
+        return conversationWith;
+    }
+
+    public void setConversationWith(Account conversationWith) {
+        this.conversationWith = conversationWith;
+    }
+
+    public boolean isChatStarted() {
+        return chatStarted;
+    }
+
+    public void setChatStarted(boolean chatStarted) {
+        this.chatStarted = chatStarted;
+    }
+
+    public boolean isChatOpened() {
+        return chatOpened;
+    }
+
+    public void setChatOpened(boolean chatOpened) {
+        this.chatOpened = chatOpened;
+    }
+
+    public List<Account> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<Account> contacts) {
+        this.contacts = contacts;
     }
 
     public Account getUserRegistering() {
@@ -31,11 +83,11 @@ public class State {
         this.loggedUser = loggedUser;
     }
 
-    public ArrayList<String> getError() {
+    public List<String> getError() {
         return error;
     }
 
-    public void setError(ArrayList<String> error) {
+    public void setError(List<String> error) {
         this.error = error;
     }
 }

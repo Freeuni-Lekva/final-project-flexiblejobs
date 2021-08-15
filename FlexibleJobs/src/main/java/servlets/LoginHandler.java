@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 @WebServlet("/login")
@@ -39,16 +40,17 @@ public class LoginHandler extends HttpServlet {
 
         if (account == null) {
             error.add(0, FlexibleJobsConstants.NO_ACCOUNT);
-            State state = new State(null, null, error);
+            State state = new State(null, null, error, null, null, null, false, false);
             req.getSession().setAttribute("state", state);
             req.getRequestDispatcher("/Front/login.jsp").forward(req, resp);
         } else if (!account.getPassword().equals(password)) {
             error.add(0, FlexibleJobsConstants.INCORRECT_PASSWORD);
-            State state = new State(null, null, error);
+            State state = new State(null, null, error, null, null, null, false, false);
             req.getSession().setAttribute("state", state);
             req.getRequestDispatcher("/Front/login.jsp").forward(req, resp);
         } else {
-            State state = new State(account,null, null);
+            List<Account> contacts = accountDao.selectAllByType("employer"); //TODO change with real contacts
+            State state = new State(account, null, null, contacts, null, null, false, false);
             accountDao.logIn(account.getUserName());
             req.getSession().setAttribute("state", state);
             switch (account.getType()) {

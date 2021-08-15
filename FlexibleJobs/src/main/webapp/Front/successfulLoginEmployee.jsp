@@ -1,4 +1,6 @@
-<%@ page import="states.State" %><%--
+<%@ page import="states.State" %>
+<%@ page import="accounts.Account" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: User
   Date: 8/15/2021
@@ -13,18 +15,15 @@
     <link href = "/FlexibleJobs/Front/logo.png" rel="icon" type="image/gif">
     <script>
         <%State state = (State) request.getSession().getAttribute("state");%>
+        <%List<Account> contacts = state.getContacts();%>
 
         function goToLogin(){
             this.window.location.href = "/FlexibleJobs/Front/login.jsp"
         }
 
-        function logout(){
-            <%request.getSession().setAttribute("state", null);%>
-            goToLogin()
-        }
+        let chatStarted = <%=state.isChatStarted()%>;
 
-        let chatStarted = /*<%--<%=sleState.isChatStarted()%>--%>;*/ false
-        let chatOpened = /*<%--<%=sleState.isChatOpened()%>--%>;*/ false
+        let chatOpened = <%=state.isChatOpened()%>;
 
 
         function expandChat() {
@@ -58,6 +57,11 @@
             chatStarted = false
             chatOpened = false
         }
+
+        function submitToChatServlet(to){
+            document.getElementById("chat-" + to).submit()
+        }
+
     </script>
 </head>
 <body>
@@ -144,22 +148,16 @@
             <h3 class="contacts-tag">Contacts</h3>
         </div>
         <div class="contacts-body">
-            <div class="contact"  onclick="startChat(this.children[1].innerHTML)">
-                <img class="contact-picture"
-                     src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png">
-                <h4 class="contact-name">Other</h4>
-                <!--                <form id="chat-<%--<%=acc.getUserName()%>--%>" action="/chat" hidden="true" method="post">-->
-                <!--                    <input type="text" name="conversationWith" value="Other">-->
-                <!--                </form>-->
-            </div>
-            <div class="contact"  onclick="startChat(this.children[1].innerHTML)">
-                <img class="contact-picture"
-                     src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png">
-                <h4 class="contact-name">Mother</h4>
-                <!--                <form id="chat-<%--<%=acc.getUserName()%>"--%> action="/chat" hidden="true" method="post">-->
-                <!--                    <input type="text" name="conversationWith" value="Other">-->
-                <!--                </form>-->
-            </div>
+            <%for(Account contact : contacts){%>
+                <div class="contact"  onclick="submitToChatServlet(this.children[1].innerHTML)">
+                    <img class="contact-picture"
+                         src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png">
+                    <h4 class="contact-name"><%=contact.getUserName()%></h4>
+                    <form id="chat-<%=contact.getUserName()%>" action="/FlexibleJobs/chat" hidden="true" method="post">
+                        <input type="text" name="conversationWith" value="<%=contact.getUserName()%>">
+                    </form>
+                </div>
+            <%}%>
         </div>
     </div>
     <div class="opened-chat-wrapper">
