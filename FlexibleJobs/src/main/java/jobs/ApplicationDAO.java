@@ -1,5 +1,7 @@
 package jobs;
 
+import accounts.PersonalData;
+
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.HashSet;
@@ -222,6 +224,33 @@ public class ApplicationDAO {
                 }
             }
         }
+    }
+
+    public int getBid(int jobId, String employee){
+        Connection connection = null;
+        int bid=0;
+        try {
+            connection = dataSource.getConnection();
+            PreparedStatement stm = connection.prepareStatement(
+                    "SELECT bid FROM applications WHERE employee = ? AND jobid=?;");
+            stm.setString(1, employee);
+            stm.setInt(2, jobId);
+            ResultSet rs = stm.executeQuery();
+            if(!rs.next())
+                return 0;
+            bid=rs.getInt("bid");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return bid;
     }
 
 }

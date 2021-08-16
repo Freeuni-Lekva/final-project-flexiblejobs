@@ -39,6 +39,7 @@ public class LoginHandler extends HttpServlet {
   //      String password = req.getParameter("password");
         Account account = accountDao.selectByUsername(username);
         ArrayList<String> error = new ArrayList<>();
+        req.getSession().setAttribute("loggedUser",account);
 
         if (account == null) {
             error.add(0, FlexibleJobsConstants.NO_ACCOUNT);

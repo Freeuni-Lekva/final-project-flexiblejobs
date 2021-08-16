@@ -26,6 +26,10 @@ public class SendMessageServlet extends HttpServlet {
 
         State state = (State) req.getSession().getAttribute("state");
         Account loggedUser = state.getLoggedUser();
+        double d=accountDao.getRating(loggedUser.getUserName());
+        int b=accountDao.getCurrentBalance(loggedUser.getUserName());
+        loggedUser.setBalance(b);
+        loggedUser.setRating(d);
         String with = state.getConversationWith().getUserName();
         Account conversationWith = accountDao.selectByUsername(with);
         String content = req.getParameter("content");
@@ -37,6 +41,16 @@ public class SendMessageServlet extends HttpServlet {
 
         state.setReloadForChatPartner(true);
         state.setConversation(conversation);
-        req.getRequestDispatcher("/Front/successfulLoginEmployee.jsp").forward(req, resp);
+        switch (state.getLoggedUser().getType()) {
+            case FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE:
+                req.getRequestDispatcher("/Front/successfulLoginEmployee.jsp").forward(req, resp);
+                break;
+            case FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER:
+                req.getRequestDispatcher("/Front/successfulLoginEmployer.jsp").forward(req, resp);
+                break;
+            case FlexibleJobsConstants.ACCOUNT_ROLE_ADMINISTRATOR:
+                req.getRequestDispatcher("/Front/successfulLoginAdmin.jsp").forward(req, resp);
+                break;
+        }
     }
 }

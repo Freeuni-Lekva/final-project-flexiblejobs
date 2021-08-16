@@ -19,16 +19,17 @@ public class ApplicationManager extends HttpServlet {
         String employee=req.getParameter("employee");
         String parameter=req.getParameter("jobId");
         int jobId;
-        if(parameter.charAt(0)=='+') {
-            jobId=Integer.parseInt(parameter.substring(1));
+        if(req.getParameter("be").equals("hire")) {
+            jobId=Integer.parseInt(parameter);
             appDao.changeApplicationStatus(FlexibleJobsConstants.APPLICATION_STATUS_HIRED,employee,
                     jobId);
             jobDao.addEmployeeToJob(employee, jobId);
+            req.getRequestDispatcher("/Front/EmployerJob.jsp?jobId="+jobId).forward(req,resp);
         }else{
             jobId=Integer.parseInt(parameter);
             appDao.changeApplicationStatus(FlexibleJobsConstants.APPLICATION_STATUS_REJECTED,employee,
                     jobId);
+            req.getRequestDispatcher("/Front/EmployerJob.jsp?jobId="+jobId).forward(req,resp);
         }
-       req.getRequestDispatcher("/Front/EmployerJob.jsp?jobId="+jobId).forward(req,resp);
     }
 }

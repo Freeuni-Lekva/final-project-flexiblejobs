@@ -1,6 +1,7 @@
 <%@ page import="accounts.Account" %>
 <%@ page import="servlets.FlexibleJobsConstants" %>
-<%@ page import="accounts.Employer" %><%--
+<%@ page import="accounts.Employer" %>
+<%@ page import="accounts.AccountDao" %><%--
   Created by IntelliJ IDEA.
   User: gioch
   Date: 11-Aug-21
@@ -11,7 +12,12 @@
 <html>
 <%
     Account acc=(Account) request.getSession().getAttribute("loggedUser");
-    String webpage="/Front/successfulLogin";
+    AccountDao accountDao=(AccountDao) request.getServletContext().getAttribute("accountDao");
+    double d=accountDao.getRating(acc.getUserName());
+    int b=accountDao.getCurrentBalance(acc.getUserName());
+    acc.setBalance(b);
+    acc.setRating(d);
+    String webpage="/FlexibleJobs/Front/successfulLogin";
     if(acc.getType().equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE))
         webpage += "Employee.jsp";
     else if(acc.getType().equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER))
@@ -27,7 +33,7 @@
 <br>
 <a href=<%=webpage%>>Back</a><br>
 
-<form action="/updatePassword" method="post">
+<form action="/FlexibleJobs/updatePassword" method="post">
     <label for="password">New Password: </label>
     <input name="password" type="password" id="password" placeholder="Enter New Password"><br>
     <input type="submit" value="Update">

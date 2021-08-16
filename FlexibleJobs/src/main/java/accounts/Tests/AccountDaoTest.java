@@ -5,6 +5,7 @@ import com.mysql.cj.jdbc.MysqlConnectionPoolDataSource;
 import org.junit.jupiter.api.*;
 import servlets.FlexibleJobsConstants;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,7 +16,6 @@ import java.util.List;
 public class AccountDaoTest {
     private MysqlConnectionPoolDataSource datasource;
     private AccountDao dao;
-
     private Account test1;
     private Account test2;
     private Account test3;
@@ -30,6 +30,7 @@ public class AccountDaoTest {
         datasource.setUser(FlexibleJobsConstants.USER);
         datasource.setPassword(FlexibleJobsConstants.PASSWORD);
         datasource.setDatabaseName(FlexibleJobsConstants.DB_NAME_TEST);
+        PersonalDataDao pd = new PersonalDataDao(datasource);
         dao=new AccountDao(datasource);
         createTestObjects();
     }
@@ -97,6 +98,54 @@ public class AccountDaoTest {
         Assertions.assertEquals("hidroeleqtrosadguri",acc.getPassword());
     }
 
+    @Test
+    void testLogIn() {
+        Assertions.assertFalse(dao.isOnline("liziko"));
+        dao.logIn("liziko");
+        Assertions.assertTrue(dao.isOnline("liziko"));
+    }
+
+    @Test
+    void singOut() {
+        dao.logIn("liziko");
+        Assertions.assertTrue(dao.isOnline("liziko"));
+        dao.signOut("liziko");
+        Assertions.assertFalse(dao.isOnline("liziko"));
+    }
+
+    @Test
+    void testIsOnline() {
+        Assertions.assertFalse(dao.isOnline("liziko"));
+        dao.logIn("liziko");
+        Assertions.assertTrue(dao.isOnline("liziko"));
+        dao.signOut("liziko");
+        Assertions.assertFalse(dao.isOnline("liziko"));
+    }
+
+    @Test
+    void testUpdateRating() {
+        dao.addAccount(test1);
+        Assertions.assertEquals(0.0, dao.getRating(test1.getUserName()));
+        dao.updateRating(test1.getUserName(), 3);
+        Assertions.assertEquals(3.0,dao.getRating(test1.getUserName()));
+        dao.addAccount(test2);
+        Assertions.assertEquals(0.0, dao.getRating(test2.getUserName()));
+        dao.updateRating(test2.getUserName(), 4.0);
+        Assertions.assertEquals(4.0, dao.getRating(test2.getUserName()));
+    }
+
+    @Test
+    void getCurrentBalance() {
+        dao.addAccount(test1);
+        Assertions.assertEquals(0, dao.getCurrentBalance(test1.getUserName()));
+        AccountDao.updateBalance(test1.getUserName(), 100);
+        Assertions.assertEquals(100, dao.getCurrentBalance(test1.getUserName()));
+        dao.addAccount(test3);
+        Assertions.assertEquals(0, dao.getCurrentBalance(test3.getUserName()));
+        AccountDao.updateBalance(test3.getUserName(), 1000);
+        Assertions.assertEquals(1000, dao.getCurrentBalance(test3.getUserName()));
+    }
+
     @AfterEach
     void clearTables(){
         Connection connection=null;
@@ -105,6 +154,7 @@ public class AccountDaoTest {
             Statement stm=connection.createStatement();
             stm.execute("TRUNCATE TABLE accounts");
             stm.execute("TRUNCATE TABLE personal_info");
+            stm.execute("TRUNCATE TABLE online_users");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }finally {

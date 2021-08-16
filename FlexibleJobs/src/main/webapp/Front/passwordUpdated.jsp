@@ -2,6 +2,7 @@
 <%@ page import="servlets.FlexibleJobsConstants" %>
 <%@ page import="accounts.Employee" %>
 <%@ page import="java.math.BigDecimal" %>
+<%@ page import="accounts.*" %>
 <%@ page import="accounts.Employer" %>
 <%@ page import="accounts.Administrator" %>
 <%@ page import="states.State" %><%--
@@ -13,6 +14,21 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<%
+    Account acc=(Account) request.getSession().getAttribute("loggedUser");
+    AccountDao accountDao=(AccountDao) request.getServletContext().getAttribute("accountDao");
+    double d=accountDao.getRating(acc.getUserName());
+    int b=accountDao.getCurrentBalance(acc.getUserName());
+    acc.setBalance(b);
+    acc.setRating(d);
+    String webpage="/FlexibleJobs/Front/successfulLogin";
+    if(acc.getType().equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE))
+        webpage += "Employee.jsp";
+    else if(acc.getType().equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER))
+        webpage+="Employer.jsp";
+    else
+        webpage+="Admin.jsp";
+%>
 
     <script>
         <%State state = (State) request.getSession().getAttribute("state");%>
@@ -20,16 +36,6 @@
             window.location.href = "/FlexibleJobs/Front/login.jsp";
         <%}%>
     </script>
-    <%
-        Account acc=(Account) request.getSession().getAttribute("loggedUser");
-        String webpage="/Front/successfulLogin";
-        if(acc.getType().equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE))
-            webpage += "Employee.jsp";
-        else if(acc.getType().equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER))
-            webpage+="Employer.jsp";
-        else
-            webpage+="Admin.jsp";
-    %>
 <head>
     <title>FlexibleJobs | World's best freelancing Webpage</title>
 </head>

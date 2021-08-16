@@ -15,9 +15,9 @@
 
 <h1>Enter following information:</h1>
 <%
-    int jobId = Integer.parseInt(request.getParameter("id"));
+    int jobId = Integer.parseInt(request.getParameter("jobId"));
 %>
-<form action = "/ApplicationsServlet" method="post">
+<form action = "/FlexibleJobs/ApplicationsServlet" method="post">
 
     <label for = "employee_name">Your Name: </label>
     <input type = "text" id = "employee_name" name = "employee_name">
@@ -34,14 +34,7 @@
     <input type="submit" name="send_application" value="Send Application">
 </form>
 
-<form action="/ApplicationsServlet" method="post">
-    <label for = "employee_name">Your Name: </label>
-    <input type = "text" id = "employee" name = "employee">
-    <br><br>
-    <input type = "hidden" name="condition" value="delete">
-    <input type="hidden" name = "id" value="<%=jobId%>">
-    <input type = "submit" name = "condition" value="Delete">
-</form>
+
 
 </body>
 </html>

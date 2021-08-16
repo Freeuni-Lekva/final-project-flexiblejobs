@@ -1,7 +1,8 @@
 <%@ page import="accounts.Account" %>
 <%@ page import="accounts.PersonalData" %>
 <%@ page import="accounts.PersonalDataDao" %>
-<%@ page import="servlets.FlexibleJobsConstants" %><%--
+<%@ page import="servlets.FlexibleJobsConstants" %>
+<%@ page import="accounts.AccountDao" %><%--
   Created by IntelliJ IDEA.
   User: gioch
   Date: 10-Aug-21
@@ -12,8 +13,13 @@
 <html>
 <%
     Account acc=(Account) request.getSession().getAttribute("loggedUser");
+    AccountDao accountDao=(AccountDao) request.getServletContext().getAttribute("accountDao");
+    double d=accountDao.getRating(acc.getUserName());
+    int b=accountDao.getCurrentBalance(acc.getUserName());
+    acc.setBalance(b);
+    acc.setRating(d);
     PersonalData data= acc.getPersonalData();
-    String webpage="/Front/successfulLogin";
+    String webpage="/FlexibleJobs/Front/successfulLogin";
     if(acc.getType().equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE))
         webpage += "Employee.jsp";
     else if(acc.getType().equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER))
@@ -28,7 +34,7 @@
 <body>
 <br>
 <a href=<%=webpage%>>Back</a><br>
-<form action="/updateData" method="post">
+<form action="/FlexibleJobs/updateData" method="post">
     <label for="firstname">Firstname: </label>
     <input name="firstname" type="text" id="firstname" value="<%=data.getFirstName()%>"><br>
     <label for="lastname">Lastname: </label>
@@ -39,8 +45,6 @@
     <input name="heading" type="text" id="heading" value="<%=data.getProfileHeading()%>"><br>
     <label for="description">Profile Description: </label>
     <input name="description" type="text" id="description" value="<%=data.getProfileDescription()%>"><br>
-    <label for="password">Password: </label>
-    <input name="password" type="password" id="password" value="es cota xans davikidot"><br>
     <input type="submit" value="Update">
 </form>
 </body>

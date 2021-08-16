@@ -2,6 +2,9 @@ package servlets;
 
 import jobs.Application;
 import jobs.ApplicationDAO;
+import jobs.Job;
+import jobs.JobDatabase;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +24,11 @@ public class ApplicationsServlet extends HttpServlet {
         DataSource dataSource = (DataSource) servletContext.getAttribute("datasource");
         ApplicationDAO database = (ApplicationDAO) servletContext.getAttribute("appDao");
         int jobId = Integer.parseInt(req.getParameter("id"));
+        JobDatabase jobDatabase=(JobDatabase) req.getServletContext().getAttribute("jobDao");
+        Job job=jobDatabase.getJob(jobId);
+        if(job.getJobStatus().equals(FlexibleJobsConstants.JOB_STATUS_FINISHED)){
+            req.getRequestDispatcher("/Front/jobIsClosed.jsp").forward(req,resp);
+        }
         String employeeName = req.getParameter("employee_name");
         System.out.println(employeeName);
         String condition = req.getParameter("condition");
@@ -34,7 +42,7 @@ public class ApplicationsServlet extends HttpServlet {
 
     private void sendApplication(HttpServletRequest req, HttpServletResponse resp,
                                  int jobId, String employeeName, ApplicationDAO database){
-        Double bid = Double.parseDouble(req.getParameter("bid"));
+        double bid = Double.parseDouble(req.getParameter("bid"));
         String letter = req.getParameter("letter");
         String sendingDate = new Date().toString();
         Application application = new Application(jobId, employeeName, letter,
@@ -42,9 +50,7 @@ public class ApplicationsServlet extends HttpServlet {
         database.addApplication(application);
         try {
             req.getRequestDispatcher("/Jobs_Front/ApplicationSent.jsp").forward(req, resp);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ServletException | IOException e) {
             e.printStackTrace();
         }
     }

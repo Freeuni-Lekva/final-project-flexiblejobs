@@ -1,6 +1,7 @@
 package servlets;
 
 import accounts.Account;
+import accounts.AccountDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +17,11 @@ public class PasswordUpdater extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Account acc=(Account) req.getSession().getAttribute("loggedUser");
+        AccountDao accountDao=(AccountDao) req.getServletContext().getAttribute("accountDao");
+        double d=accountDao.getRating(acc.getUserName());
+        int b=accountDao.getCurrentBalance(acc.getUserName());
+        acc.setBalance(b);
+        acc.setRating(d);
         String receivedPassword=req.getParameter("password");
         MessageDigest messageDigest = null;
         try {

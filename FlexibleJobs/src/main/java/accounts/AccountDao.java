@@ -5,6 +5,7 @@ import servlets.FlexibleJobsConstants;
 
 import javax.sql.DataSource;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,7 +103,6 @@ public class AccountDao {
             }
         }
         return result;
-
     }
 
     public void delete(String username) {
@@ -240,12 +240,14 @@ public class AccountDao {
     public boolean isOnline(String username){
         Connection connection = null;
         ResultSet rs = null;
+        boolean tmp = false;
         try {
             connection = dataSource.getConnection();
             PreparedStatement stm = connection.prepareStatement(
                     "SELECT * FROM online_users WHERE username = ?");
             stm.setString(1, username);
              rs = stm.executeQuery();
+             tmp = rs.next();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
@@ -257,7 +259,82 @@ public class AccountDao {
                 }
             }
         }
-        return rs!=null;
+        return tmp;
+    }
+
+    public void updateRating(String username, double rating){
+        Connection connection=null;
+        try {
+            connection=dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE accounts SET rating=? WHERE username = ?;");
+            BigDecimal tmp=new BigDecimal(rating);
+            tmp=tmp.setScale(2, RoundingMode.CEILING);
+            statement.setBigDecimal(1,tmp);
+            statement.setString(2, username);
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            if(connection!=null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public double getRating(String username) {
+        double rating = 0;
+        Connection connection = null;
+        ResultSet rs = null;
+        try {
+            connection = dataSource.getConnection();
+            PreparedStatement stm = connection.prepareStatement(
+                    "SELECT rating FROM accounts WHERE username = ?");
+            stm.setString(1, username);
+            rs = stm.executeQuery();
+            rs.next();
+            rating = rs.getDouble("rating");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return rating;
+    }
+
+    public int getCurrentBalance(String username){
+        Connection connection = null;
+        int n=0;
+        try {
+            connection = dataSource.getConnection();
+            PreparedStatement stm = connection.prepareStatement(
+                    "SELECT * FROM accounts WHERE username = ?");
+            stm.setString(1, username);
+            ResultSet rs = stm.executeQuery();
+            rs.next();
+            n=rs.getInt(3);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return n;
     }
 
     public ArrayList<String> getSkills(String username){

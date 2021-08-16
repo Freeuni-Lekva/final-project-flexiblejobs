@@ -2,7 +2,10 @@ package jobs;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.sql.DataSource;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.*;
+import java.util.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -10,7 +13,7 @@ import java.util.Set;
 
 public class JobDatabase {
 
-    private DataSource dataSource;
+    private static DataSource dataSource;
 
     public JobDatabase(DataSource dataSource) {
         this.dataSource = dataSource;
@@ -184,7 +187,7 @@ public class JobDatabase {
         return jobs;
     }
 
-    public Set<Job> getJobsByEmployer(String employer){
+    public static Set<Job> getJobsByEmployer(String employer){
         Set<Job> jobs = new HashSet<>();
         Connection connection = null;
         try {
@@ -253,7 +256,7 @@ public class JobDatabase {
         return job;
     }
 
-    public void addJobSkills(List<String> jobSkills, int jobId){
+    public void addJobSkills(Set<String> jobSkills, int jobId){
         Connection connection = null;
         PreparedStatement statement = null;
         try {
@@ -330,6 +333,89 @@ public class JobDatabase {
         return  jobs;
     }
 
+    public void updateJobStatus(int jobId, String status){
+        Connection connection=null;
+        try {
+            connection=dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE jobs SET jobstatus=? WHERE jobid = ?;");
+            statement.setString(1,status);
+            statement.setInt(2, jobId);
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            if(connection!=null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public static Set<Job> getJobsByEmployee(String employee) {
+        List<Integer> jobidebi = selectJobidebi(employee);
+        Set<Job> jobs = new HashSet<>();
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            Statement statement = connection.createStatement();
+            for (Integer integer : jobidebi) {
+                ResultSet result = statement.executeQuery(
+                        "select * FROM jobs WHERE jobid = \"" + integer + "\"");
+                result.next();
+                int jobid = result.getInt("jobid");
+                String jobHeader = result.getString("heading");
+                String description = result.getString("jobdescription");
+                double budget = result.getDouble("budget");
+                String duration = result.getString("jobduration");
+                String dateString = result.getString("dateposted");
+                int numApplications = result.getInt("numapplications");
+                String status = result.getString("jobstatus");
+                Job job = new Job(jobid, numApplications, status, employee, jobHeader, description,
+                        budget, duration, dateString);
+                jobs.add(job);
+                result.close();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return jobs;
+    }
+
+    private static List<Integer> selectJobidebi(String username) {
+        List<Integer> jobidebi = new ArrayList<>();
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(
+                    "select jobid FROM hires WHERE username = \"" + username + "\"");
+            result.next();
+            jobidebi.add(result.getInt("jobid"));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return jobidebi;
+    }
     public Job getJobByEmployerAndDate(String employer, String date){
         Connection connection = null;
         Job job = null;

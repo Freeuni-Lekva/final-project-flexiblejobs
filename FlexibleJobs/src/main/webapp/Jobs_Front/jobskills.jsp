@@ -1,4 +1,4 @@
-<%--
+<%@ page import="states.State" %><%--
   Created by IntelliJ IDEA.
   User: Toko
   Date: 8/16/2021
@@ -9,10 +9,14 @@
 <html>
 <head>
     <title>Post a job</title>
-
     <link rel="stylesheet" href="/FlexibleJobs/Front/css/skills.css">
     <link href = "/FlexibleJobs/Front/logo.png" rel="icon" type="image/gif">
     <script>
+        <%State state = (State) request.getSession().getAttribute("state");%>
+
+        <%if(state == null || state.getLoggedUser() == null){%>
+        window.location.href = "/FlexibleJobs/Front/login.jsp";
+        <%}%>
 
         function allowDrop(ev) {
             ev.preventDefault();
@@ -98,8 +102,8 @@
                        value="Angular" draggable="true"/>
 
             </div>
-            <form id="skills-right-side-wrapper" class="skills-right-side-wrapper" action="/FlexibleJobs/JobSkillsServlet" method="post">
-                <input type="hidden" name = "id" id = ="id" value = "<%=request.getParameter("id") %>">
+            <form id="skills-right-side-wrapper" class="skills-right-side-wrapper" action="/FlexibleJobs/JobSkillsServlet?id=<%=request.getParameter("id")%>" method="post">
+<%--                <input type="hidden" name = "id" id = ="id" value = "<%=request.getParameter("id") %>">--%>
             </form>
         </div>
         <input class="skills-submit-button" type="submit" value="Add skills and continue" form="skills-right-side-wrapper">

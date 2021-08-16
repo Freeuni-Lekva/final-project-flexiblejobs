@@ -178,6 +178,7 @@
             </div>
             <% for (Job job : jobs) {%>
                 <div class="employee-main-job">
+                    <a href="/FlexibleJobs/Jobs_Front/display_job.jsp?jobId=<%=job.getJobId()%>"> See more</a>
                     <div class="employee-job-name">
                         <% String header = job.getHeader(); %>
                         <%= header%>
