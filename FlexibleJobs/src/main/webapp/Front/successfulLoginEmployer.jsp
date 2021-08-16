@@ -31,10 +31,7 @@ Account acc=(Account) request.getSession().getAttribute("loggedUser");
     acc.setRating(d);
 Set<Job> jobs=JobDatabase.getJobsByEmployer(acc.getUserName());
 %>
-<head>
 
-    State state = (State) request.getSession().getAttribute("state");
-%>
 <head>
 
     <script>

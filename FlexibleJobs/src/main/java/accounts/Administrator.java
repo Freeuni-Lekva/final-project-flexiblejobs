@@ -30,6 +30,11 @@ public class Administrator implements Account{
     }
 
     @Override
+    public void setRating(double rating) {
+
+    }
+
+    @Override
     public String getUserName() {
         return username;
     }

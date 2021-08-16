@@ -21,7 +21,7 @@ public class JobSkillsServlet extends HttpServlet {
 
         Set<String> skills = new HashSet<>(req.getParameterMap().keySet());
 
-        JobDatabase jobDatabase = (JobDatabase) req.getAttribute("jobDao");
+        JobDatabase jobDatabase = (JobDatabase) req.getServletContext().getAttribute("jobDao");
 
         if (!skills.isEmpty()) {
             jobDatabase.addJobSkills(skills, ID);

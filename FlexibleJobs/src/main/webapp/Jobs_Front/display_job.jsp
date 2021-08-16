@@ -22,7 +22,8 @@
 <label>Status:<%=job.getJobStatus()%></label><br>
 <label>Date posted:<%=job.getDate()%></label><br>
 <label><%=job.getDescription()%></label><br>
-<form action="/FlexibleJobs/Jobs_Front/adding_application.jsp?id=<%=jobId%>">
+<form action="/FlexibleJobs/Jobs_Front/adding_application.jsp">
+    <input type="hidden" id="jobId" name="jobId" value="<%=jobId%>">
     <input type="submit" value="send application">
 </form>
 </body>

@@ -48,10 +48,12 @@
         <%
         if(app.getStatus().equals(FlexibleJobsConstants.APPLICATION_STATUS_WAITING)){
             %>
-<form action="/FlexibleJobs/appManager?jobId=+<%=jobId%>&?employee=<%=app.getEmployee()%>" method="post">
+<form action="/FlexibleJobs/appManager?jobId=<%=jobId%>&?employee=<%=app.getEmployee()%>" method="post">
+    <input type="hidden" id="be" name="be" value="hire">
     <input type="submit" value="Hire">
 </form>
 <form action="/FlexibleJobs/appManager?jobId=<%=jobId%>&?employee=<%=app.getEmployee()%>" method="post">
+    <input type="hidden" id="b" name="be" value="rej">
     <input type="submit" value="Reject">
 </form><br>
             <%
@@ -61,6 +63,7 @@
     <input type="submit" value="Approve">
 </form>
 <form action="/FlexibleJobs/appManager?jobId=<%=jobId%>&?employee=<%=app.getEmployee()%>" method="post">
+    <input type="hidden" id="bee" name="be" value="rej">
     <input type="submit" value="Reject">
 </form><br>
             <%

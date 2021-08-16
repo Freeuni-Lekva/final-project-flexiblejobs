@@ -75,9 +75,7 @@
                 <div class="register-right-side-wrapper">
                     <select class="register-select-input" id="userTypes" name="type" form="register-form">
                         <option class="register-select-option" value="employee">employee</option>
-                        <option class="register-select-option" value="employer">employer</option>
-                        <option class="register-select-option" value="administrator">administrator</option>
-                    </select>
+                        <option class="register-select-option" value="employer">employer</option></select>
                     <input class="register-common-input" id="livingPlace" name="livingPlace" type="text" placeholder="Enter Living Place"/>
                     <input class="register-common-input" id="profileHeading" name="profileHeading" type="text" placeholder="Enter Profile Heading"/>
                     <input class="register-common-input" id="profileDescription" name="profileDescription" type="text" placeholder="Enter Profile Description"/>

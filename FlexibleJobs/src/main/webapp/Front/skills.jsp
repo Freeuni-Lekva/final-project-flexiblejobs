@@ -14,9 +14,9 @@
     <script>
         <%State state = (State) request.getSession().getAttribute("state");%>
 
-        <%if(state == null || state.getLoggedUser() == null){%>
-            window.location.href = "/FlexibleJobs/Front/login.jsp";
-        <%}%>
+<%--        <%if(state == null || state.getLoggedUser() == null){%>--%>
+<%--            window.location.href = "/FlexibleJobs/Front/login.jsp";--%>
+<%--        <%}%>--%>
 
         <%if(state != null && state.getLoggedUser() != null){%>
         <%if (state.getLoggedUser().getType().equals("employee")){%>
