@@ -1,6 +1,11 @@
+<%@ page import="accounts.Account" %>
 <%@ page import="servlets.FlexibleJobsConstants" %>
+<%@ page import="accounts.Employee" %>
 <%@ page import="java.math.BigDecimal" %>
-<%@ page import="accounts.*" %><%--
+<%@ page import="accounts.*" %>
+<%@ page import="accounts.Employer" %>
+<%@ page import="accounts.Administrator" %>
+<%@ page import="states.State" %><%--
   Created by IntelliJ IDEA.
   User: gioch
   Date: 10-Aug-21
@@ -24,6 +29,13 @@
     else
         webpage+="Admin.jsp";
 %>
+
+    <script>
+        <%State state = (State) request.getSession().getAttribute("state");%>
+        <%if(state == null || state.getLoggedUser() == null){%>
+            window.location.href = "/FlexibleJobs/Front/login.jsp";
+        <%}%>
+    </script>
 <head>
     <title>FlexibleJobs | World's best freelancing Webpage</title>
 </head>

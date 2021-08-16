@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Create job</title>
+    <title>Post a job</title>
 </head>
 <body>
 <h1>Enter following information</h1>
@@ -20,13 +20,11 @@
     <label for = "budget">Job Budget: </label>
     <input type  = "number" step = "0.01" id = "budget" name = "budget">
     <br> <br>
-    <label for = "employer">Employer Name: </label>
-    <input type = "text" id = "employer" name = "employer">
-    <br><br>
+
     <label for = "jobduration">Estimated Time: </label>
     <input type="text" id = "jobduration" name="jobduration">
     <br> <br>
-
+    <br><br>
     <label for = "description">Job Description: </label>
     <br>
     <textarea id="description" name="description" rows="10" cols="100">

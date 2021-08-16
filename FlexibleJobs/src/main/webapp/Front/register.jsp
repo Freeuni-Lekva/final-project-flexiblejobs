@@ -15,6 +15,7 @@
     <script>
         <%State state = (State) request.getSession().getAttribute("state");%>
 
+
         <%if(state != null && state.getLoggedUser() != null && state.getError() == null){%>
             <%if (state.getLoggedUser().getType().equals("employee")){%>
             window.location.href = "/FlexibleJobs/Front/successfulLoginEmployee.jsp"

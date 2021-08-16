@@ -4,6 +4,10 @@
 
 <%@ page import="java.util.Set" %>
 <%@ page import="jobs.Job" %>
+<%@ page import="java.util.HashSet" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="states.State" %>
+<%@ page import="servlets.FlexibleJobsConstants" %>
 <%@ page import="java.util.List" %>
 <%@ page import="accounts.Message" %>
 <%@ page import="accounts.AccountDao" %>
@@ -29,6 +33,31 @@ Set<Job> jobs=JobDatabase.getJobsByEmployer(acc.getUserName());
 %>
 <head>
 
+    State state = (State) request.getSession().getAttribute("state");
+%>
+<head>
+
+    <script>
+        <%if(state == null || state.getLoggedUser() == null){%>
+        window.onload = function () {
+            window.location.href = "/FlexibleJobs/Front/login.jsp";
+        }
+        <%}%>
+
+        <%if(state != null && state.getLoggedUser() != null){%>
+        <%if(state.getLoggedUser().getType().equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE)){%>
+        window.onload = function () {
+            window.location.href = "/FlexibleJobs/Front/successfulLoginEmployee.jsp";
+        }
+        <%}%>
+        <%}%>
+
+        <%if(state == null)return;%>
+    </script>
+
+    <%
+        JobDatabase dao=(JobDatabase) request.getServletContext().getAttribute("jobDao");
+    %>
     <title>FlexibleJobs | World's best freelancing Webpage</title>
     <link rel="stylesheet" href="/FlexibleJobs/Front/css/employee-main.css">
 

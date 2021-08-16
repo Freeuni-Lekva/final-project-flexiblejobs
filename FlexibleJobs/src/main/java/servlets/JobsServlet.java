@@ -1,5 +1,6 @@
 package servlets;
 
+import accounts.Account;
 import jobs.Job;
 import jobs.JobDatabase;
 
@@ -24,7 +25,8 @@ public class JobsServlet extends HttpServlet {
             throws ServletException, IOException {
         ServletContext servletContext = req.getServletContext();
         JobDatabase jobDatabase = (JobDatabase) servletContext.getAttribute("jobDao");
-        String employer = req.getParameter("employer");
+        Account acc = (Account) req.getSession().getAttribute("loggedUser");
+        String employer = acc.getUserName();
         String jobHeader = req.getParameter("title");
         String description = req.getParameter("description");
         double budget = Double.parseDouble(req.getParameter("budget"));
@@ -33,8 +35,9 @@ public class JobsServlet extends HttpServlet {
         Job job = new Job(employer, jobHeader, description, budget, duration, currDate);
 
         jobDatabase.saveJob(job);
-        req.getRequestDispatcher("/Front/successfulLoginEmployer.jsp").forward(req,resp);
+        Job temp = jobDatabase.getJobByEmployerAndDate(employer, currDate);
+        int newId = temp.getJobId();
 
+        req.getRequestDispatcher("/Jobs_Front/jobskills.jsp?id=" + newId).forward(req,resp);
     }
-
 }
