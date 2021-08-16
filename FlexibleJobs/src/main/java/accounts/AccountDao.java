@@ -240,12 +240,14 @@ public class AccountDao {
     public boolean isOnline(String username){
         Connection connection = null;
         ResultSet rs = null;
+        boolean tmp = false;
         try {
             connection = dataSource.getConnection();
             PreparedStatement stm = connection.prepareStatement(
                     "SELECT * FROM online_users WHERE username = ?");
             stm.setString(1, username);
              rs = stm.executeQuery();
+             tmp = rs.next();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
@@ -257,7 +259,7 @@ public class AccountDao {
                 }
             }
         }
-        return rs!=null;
+        return tmp;
     }
 
     public void updateRating(String username, double rating){
@@ -284,16 +286,43 @@ public class AccountDao {
         }
     }
 
+    public double getRating(String username) {
+        double rating = 0;
+        Connection connection = null;
+        ResultSet rs = null;
+        try {
+            connection = dataSource.getConnection();
+            PreparedStatement stm = connection.prepareStatement(
+                    "SELECT rating FROM accounts WHERE username = ?");
+            stm.setString(1, username);
+            rs = stm.executeQuery();
+            rs.next();
+            rating = rs.getDouble("rating");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return rating;
+    }
+
     public int getCurrentBalance(String username){
         Connection connection = null;
         int n=0;
         try {
             connection = dataSource.getConnection();
             PreparedStatement stm = connection.prepareStatement(
-                    "SELECT balance FROM accounts WHERE username = ?");
+                    "SELECT * FROM accounts WHERE username = ?");
             stm.setString(1, username);
             ResultSet rs = stm.executeQuery();
-            n=rs.getInt("balance");
+            rs.next();
+            n=rs.getInt(3);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
@@ -307,5 +336,4 @@ public class AccountDao {
         }
         return n;
     }
-
 }

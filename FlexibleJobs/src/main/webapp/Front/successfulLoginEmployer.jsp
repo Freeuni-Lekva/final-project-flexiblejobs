@@ -22,7 +22,7 @@
     <a href="/updateData">Settings</a><br>
     <a href="/Front/updatePassword.jsp">Change Password</a><br>
     <a href="/Jobs_Front/Jobcreation.jsp">Post a job</a><br>
-
+    <a href="/Front/UserProfile.jsp?username=<%=acc.getUserName()%>">Profile</a><br>
 
 </head>
 <body>

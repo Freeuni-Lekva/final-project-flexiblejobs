@@ -1,7 +1,10 @@
 <%@ page import="jobs.Job" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Set" %>
-<%@ page import="accounts.*" %><%--
+<%@ page import="accounts.*" %>
+<%@ page import="servlets.FlexibleJobsConstants" %>
+<%@ page import="java.math.BigDecimal" %>
+<%@ page import="java.math.RoundingMode" %><%--
   Created by IntelliJ IDEA.
   User: Lizi
   Date: 8/13/2021
@@ -20,6 +23,10 @@
 <%
     PersonalData pd =  PersonalDataDao.selectByUsername(username);
     ReviewDao reviewDao = (ReviewDao) request.getServletContext().getAttribute("reviewDao");
+    AccountDao accDao = (AccountDao) request.getServletContext().getAttribute("accountDao");
+    Account acc = accDao.selectByUsername(username);
+    String type = acc.getType();
+    double rev = reviewDao.averageReview(username);
 %>
 <h1><%=pd.getFirstName() + " " + pd.getLastName()%></h1>
 <br>
@@ -27,16 +34,28 @@
 <br>
 <h3><%=pd.getLivingPlace()%></h3>
 <br>
-<h2><%=pd.getProfileDescription()%></h2>
+<h2>balance: <%=accDao.getCurrentBalance(username)%></h2>
 <br>
 <%
-    AccountDao accDao = (AccountDao) request.getServletContext().getAttribute("accountDao");
-    Account acc = accDao.selectByUsername(username);
+    if (type.equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE)) {%>
+<h2>rating: <%=rev%></h2>
+<%}
+%>
+<br>
+<h2><%=pd.getProfileDescription()%></h2>
+<br>
+<br>
+<h3>Work History</h3>
+<br>
+<%
     Set<Job> workHistory = acc.getWorkHistory();
     for (Job job:workHistory)  {%>
 <label><%=job.getHeader()%></label>
+<br>
 <%
-    }
+    if (type.equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE)) {%>
+<h2>rating: <%=reviewDao.selectByJob(username, job.getJobId()).getPoints()%></h2><br> <%}
+}
 %>
 </body>
 </html>

@@ -37,6 +37,10 @@ public class WorkApproval extends HttpServlet {
         AccountDao accountDao=(AccountDao)req.getServletContext().getAttribute("accountDao");
         Account employer=(Account) req.getSession().getAttribute("loggedUser");
         int bid=applicationDAO.getBid(jobId,employee);
+        if (bid > employer.getBalance()) {
+            req.getRequestDispatcher("/Front/paymentFailed.jsp?jobId="+jobId+"&?employee="+employee);
+            return;
+        }
         employer.withdraw(bid);
         Review review=new Review(employer.getUserName(),employee,rate,jobId);
         reviewDao.addReview(review);

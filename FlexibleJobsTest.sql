@@ -55,7 +55,8 @@ CREATE TABLE applications(
 );
 CREATE TABLE hires(
                       jobid INT,
-                      username VARCHAR(30)
+                      username VARCHAR(30),
+                      datehire VARCHAR(100)
 );
 
 CREATE TABLE jobskills(
