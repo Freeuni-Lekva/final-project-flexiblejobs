@@ -4,7 +4,9 @@
 <%@ page import="java.util.Set" %>
 <%@ page import="jobs.Job" %>
 <%@ page import="java.util.HashSet" %>
-<%@ page import="java.util.Date" %><%--
+<%@ page import="java.util.Date" %>
+<%@ page import="states.State" %>
+<%@ page import="servlets.FlexibleJobsConstants" %><%--
   Created by IntelliJ IDEA.
   User: User
   Date: 03.08.2021
@@ -14,12 +16,33 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <%
-    Account acc=(Account) request.getSession().getAttribute("loggedUser");
-    JobDatabase dao=(JobDatabase) request.getServletContext().getAttribute("jobDao");
-    Set<Job> jobs=dao.getJobsByEmployer(acc.getUserName());
+    State state = (State) request.getSession().getAttribute("state");
 %>
 <head>
 
+    <script>
+        <%if(state == null || state.getLoggedUser() == null){%>
+        window.onload = function () {
+            window.location.href = "/FlexibleJobs/Front/login.jsp";
+        }
+        <%}%>
+
+        <%if(state != null && state.getLoggedUser() != null){%>
+        <%if(state.getLoggedUser().getType().equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE)){%>
+        window.onload = function () {
+            window.location.href = "/FlexibleJobs/Front/successfulLoginEmployee.jsp";
+        }
+        <%}%>
+        <%}%>
+
+        <%if(state == null)return;%>
+    </script>
+
+    <%
+        Account acc=(Account) request.getSession().getAttribute("loggedUser");
+        JobDatabase dao=(JobDatabase) request.getServletContext().getAttribute("jobDao");
+        Set<Job> jobs=dao.getJobsByEmployer(acc.getUserName());
+    %>
     <title>FlexibleJobs | World's best freelancing Webpage</title>
     Welcome <%=acc.getPersonalData().getFirstName()%><br>
     <a href="/updateData">Settings</a><br>
