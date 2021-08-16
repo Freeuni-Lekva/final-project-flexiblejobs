@@ -38,6 +38,7 @@ public class FlexibleJobsContextListener implements ServletContextListener {
         sce.getServletContext().setAttribute("personalDataDao",personalDataDao);
         sce.getServletContext().setAttribute("jobDao",jobDatabase);
         sce.getServletContext().setAttribute("appDao", appDao);
+        sce.getServletContext().setAttribute("datasource", datasource);
         sce.getServletContext().setAttribute("reviewDao",reviewDao);
     }
 

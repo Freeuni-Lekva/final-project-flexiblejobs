@@ -1,32 +1,90 @@
 package servlets;
 
+import accounts.Account;
 import accounts.AccountDao;
+import states.State;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 
 
-@WebServlet ("/loginHandler")
-public class LoginHandler extends HttpServlet{
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
-    }
-
+@WebServlet("/login")
+public class LoginHandler extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         AccountDao accountDao = (AccountDao) req.getServletContext().getAttribute("accountDao");
 
         String username = req.getParameter("username");
 
-        if(accountDao.selectByUsername(username)!=null){
-            req.getRequestDispatcher("/Front/existedAccount.jsp").forward(req,resp);
-        } else{
-            req.getRequestDispatcher("/Front/invalidUser.jsp").forward(req,resp);
+            String receivedPassword = req.getParameter("password");
+
+            MessageDigest messageDigest = null;
+            try {
+                messageDigest = MessageDigest.getInstance("SHA-256");
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+            messageDigest.update(receivedPassword.getBytes());
+            String password = new String(messageDigest.digest());
+
+
+  //      String password = req.getParameter("password");
+        Account account = accountDao.selectByUsername(username);
+        ArrayList<String> error = new ArrayList<>();
+        req.getSession().setAttribute("loggedUser",account);
+
+        if (account == null) {
+            error.add(0, FlexibleJobsConstants.NO_ACCOUNT);
+            State state = new State(null, null, error, null, null, null, false, false,false,false,null);
+            req.getSession().setAttribute("state", state);
+            req.getRequestDispatcher("/Front/login.jsp").forward(req, resp);
+        } else if (!account.getPassword().equals(password)) {
+            error.add(0, FlexibleJobsConstants.INCORRECT_PASSWORD);
+            State state = new State(null, null, error, null, null, null, false, false,false,false,null);
+            req.getSession().setAttribute("state", state);
+            req.getRequestDispatcher("/Front/login.jsp").forward(req, resp);
+        } else {
+            List<Account> employers = accountDao.selectAllByType("employer");//TODO change with real contacts
+            List<Account> employees = accountDao.selectAllByType("employee");
+
+            List<Account> contacts = new ArrayList<>();
+            for(Account acc : employees){
+                if(!acc.getUserName().equals(account.getUserName())){
+                    contacts.add(acc);
+                }
+            }
+
+            for(Account acc : employers){
+                if(!acc.getUserName().equals(account.getUserName())){
+                    contacts.add(acc);
+                }
+            }
+
+
+            State state = new State(account, null, null, contacts, null, null, false, false,false,false,null);
+            accountDao.logIn(account.getUserName());
+            req.getSession().setAttribute("state", state);
+            switch (account.getType()) {
+                case FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE:
+                    req.getRequestDispatcher("/Front/successfulLoginEmployee.jsp").forward(req, resp);
+                    break;
+                case FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER:
+                    req.getRequestDispatcher("/Front/successfulLoginEmployer.jsp").forward(req, resp);
+                    break;
+                case FlexibleJobsConstants.ACCOUNT_ROLE_ADMINISTRATOR:
+                    req.getRequestDispatcher("/Front/successfulLoginAdmin.jsp").forward(req, resp);
+                    break;
+            }
+
         }
     }
+
 }

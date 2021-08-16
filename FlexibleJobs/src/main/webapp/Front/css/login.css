@@ -1,0 +1,144 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.login-header {
+    height: 7vh;
+    border-bottom: 2px solid lightgray;
+    display: flex;
+}
+
+.login-header-logo {
+    width: 150px;
+    height: 40px;
+    margin: auto auto auto 20%;
+}
+
+.login-header-logo:hover {
+    cursor: pointer;
+}
+
+.login-wrapper {
+    text-align: center;
+    border: 1px solid lightgray;
+    width: 30vw;
+    height: 50vh;
+    margin: 6vh auto auto;
+    border-radius: 10px;
+}
+
+.login-form {
+    text-align: center;
+    border-bottom: 1px solid lightgray;
+    height: 30vh;
+}
+
+.login-label {
+    font-size: 2em;
+    display: block;
+    margin-top: 2vh;
+}
+
+.login-username-input-wrapper {
+    display: flex;
+    width: 70%;
+    height: 5vh;
+    margin: 3vh auto auto;
+    border: 1px solid lightgray;
+    outline-color: #029a02;
+}
+
+.login-username-input-span {
+    margin: auto auto auto 1vw;
+}
+
+.login-username-input {
+    border: none;
+    outline: none;
+    width: 85%;
+}
+
+.login-username-input-wrapper:hover {
+    border: 1px solid #029a02;
+}
+
+.login-password-input-wrapper {
+    display: flex;
+    width: 70%;
+    height: 5vh;
+    margin: 3vh auto auto;
+    border: 1px solid lightgray;
+    outline-color: #029a02;
+}
+
+.login-password-input-span {
+    margin: auto auto auto 1vw;
+}
+
+.login-password-input {
+    border: none;
+    outline: none;
+    width: 85%;
+}
+
+.login-password-input-wrapper:hover {
+    border: 1px solid #029a02;
+}
+
+.login-submit-button {
+    font-size: 1em;
+    margin-top: 3vh;
+    height: 5vh;
+    width: 70%;
+    border-radius: 30px;
+    color: white;
+    background-color: #029a02;
+    border: 1px solid #029a02;
+}
+
+.login-submit-button:hover {
+    background-color: green;
+    cursor: pointer;
+}
+
+.register-button {
+    font-size: 1em;
+    margin-top: 3vh;
+    height: 5vh;
+    width: 40%;
+    border-radius: 30px;
+    color: #029a02;
+    background-color: white;
+    border: 1px solid #029a02;
+}
+
+.register-button:hover {
+    background-color: rgba(0, 128, 0, 0.08);
+    cursor: pointer;
+}
+
+.login-footer {
+    background-color: #001d00;
+    height: 15vh;
+    margin-top: 21.6vh;
+    text-align: center;
+}
+
+.login-footer-description {
+    padding-top: 3vh;
+    color: white;
+}
+
+.login-footer-terms-of-service {
+    padding-top: 2vh;
+    color: white;
+}
+
+.login-footer-privacy-policy {
+    color: white;
+}
+
+.login-footer-contact {
+    color: white;
+}

@@ -35,8 +35,8 @@
 <label>Date posted:<%=job.getDate()%></label><br>
 <label><%=job.getDescription()%></label><br>
 <label>Applications:<%=apps.size()%></label><br>
-<a href=/Front/successfulLoginEmployer.jsp>Back</a><br>
-<a href=/approve?jobId=<%=jobId%>>Close Job</a><br>
+<a href=/FlexibleJobs/Front/successfulLoginEmployer.jsp>Back</a><br>
+<a href=/FlexibleJobs/approve?jobId=<%=jobId%>>Close Job</a><br>
 <br><br><br>
 <label>Applications</label><br>
 <%
@@ -44,31 +44,31 @@
         Account employee=accDao.selectByUsername(app.getEmployee());
         PersonalData data= employee.getPersonalData();
         %>
-<a href=/Front/UserProfile.jsp?username=<%=employee.getUserName()%>><%=data.getFirstName()+" "+data.getLastName()%></a><br>
+<a href=/FlexibleJobs/Front/UserProfile.jsp?username=<%=employee.getUserName()%>><%=data.getFirstName()+" "+data.getLastName()%></a><br>
         <%
         if(app.getStatus().equals(FlexibleJobsConstants.APPLICATION_STATUS_WAITING)){
             %>
 <form>
     <input type="submit" value="Interview">
 </form>
-<form action="/appManager?jobId=+<%=jobId%>&?employee=<%=app.getEmployee()%>" method="post">
+<form action="/FlexibleJobs/appManager?jobId=+<%=jobId%>&?employee=<%=app.getEmployee()%>" method="post">
     <input type="submit" value="Hire">
 </form>
-<form action="/appManager?jobId=<%=jobId%>&?employee=<%=app.getEmployee()%>" method="post">
+<form action="/FlexibleJobs/appManager?jobId=<%=jobId%>&?employee=<%=app.getEmployee()%>" method="post">
     <input type="submit" value="Reject">
 </form><br>
             <%
         }else if(app.getStatus().equals(FlexibleJobsConstants.APPLICATION_STATUS_HIRED)){
             %>
-<form action="/Front/approveWork.jsp?jobId=<%=jobId%>&?employee=<%=app.getEmployee()%>">
+<form action="/FlexibleJobs/Front/approveWork.jsp?jobId=<%=jobId%>&?employee=<%=app.getEmployee()%>">
     <input type="submit" value="Approve">
 </form>
-<form action="/appManager?jobId=<%=jobId%>&?employee=<%=app.getEmployee()%>" method="post">
+<form action="/FlexibleJobs/appManager?jobId=<%=jobId%>&?employee=<%=app.getEmployee()%>" method="post">
     <input type="submit" value="Reject">
 </form><br>
             <%
         }
-        %> <a href="/Front/Application.jsp?jobid=<%=jobId%>&?employee=<%=app.getEmployee()%>"Application></a><br><%
+        %> <a href="/FlexibleJobs/Front/Application.jsp?jobid=<%=jobId%>&?employee=<%=app.getEmployee()%>"Application></a><br><%
     }
             %>
 </body>

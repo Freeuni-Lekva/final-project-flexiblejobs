@@ -8,8 +8,8 @@
     String employee=request.getParameter("employee");
 %>
 <body>
-<a href=/Front/EmployerJob.jsp?jobId=<%=jobId%>>Back</a><br><br>
-<form action="/approve?jobId=<%=jobId%>&?employee=<%=employee%>" method="post">
+<a href=/FlexibleJobs/Front/EmployerJob.jsp?jobId=<%=jobId%>>Back</a><br><br>
+<form action="/FlexibleJobs/approve?jobId=<%=jobId%>&?employee=<%=employee%>" method="post">
 <label for="rate"> Rate the work:</label>
 <select name="rate" id="rate">
     <option value="1"> 1</option>

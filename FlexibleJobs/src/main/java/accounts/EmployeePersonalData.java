@@ -1,16 +1,16 @@
 package accounts;
 
-public class PersonalData {
+public class EmployeePersonalData extends PersonalData {
 
-    private String username;
     private String firstname;
     private String lastname;
     private String livingPlace;
     private String profileHeading;
     private String profileDescription;
 
-    public PersonalData(String username, String firstname, String lastname, String livingPlace, String profileHeading, String profileDescription) {
-        this.username = username;
+
+    public EmployeePersonalData(String firstname, String lastname, String livingPlace,
+                                String profileHeading, String profileDescription) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.livingPlace = livingPlace;
@@ -18,39 +18,43 @@ public class PersonalData {
         this.profileDescription = profileDescription;
     }
 
-    protected PersonalData() {
-    }
-
+    @Override
     public String getFirstName() {
         return firstname;
     }
 
+    @Override
     public String getLastName() {
         return lastname;
     }
 
+    @Override
     public void setLivingPlace(String country) {
-        this.livingPlace = country;
+        livingPlace=country;
     }
 
+    @Override
     public String getLivingPlace() {
         return livingPlace;
     }
 
+    @Override
     public void setProfileHeading(String heading) {
-        this.profileHeading = heading;
+        profileHeading=heading;
     }
 
+    @Override
     public String getProfileHeading() {
         return profileHeading;
     }
 
+    @Override
     public void setProfileDescription(String description) {
-        this.profileDescription = description;
+        profileDescription=description;
     }
 
+    @Override
     public String getProfileDescription() {
         return profileDescription;
     }
-
 }

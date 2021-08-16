@@ -12,8 +12,8 @@
 </head>
 <body style="background-color: darkseagreen">
 <nav class = "menu">
-    <a href="/webapp/index.jsp">
-        <img src="/Front/logo.png" style="width:100px;height:40px;">
+    <a href="/FlexibleJobs/webapp/index.jsp">
+        <img src="/FlexibleJobs/Front/logo.png" style="width:100px;height:40px;">
     </a>
 </nav>
 <hr style="border-color: darkslategray">
@@ -23,11 +23,11 @@ border:0px solid #000; background-color: mediumseagreen" align="center">
     <b>
 <p> Entered information is not correct</p>
 <br>
-        <a href="/Front/login.jsp">
+        <a href="/FlexibleJobs/Front/login.jsp">
             <input style="border-radius: 15px; background-color: palegreen" type="submit" value="Login">
         </a>
         <p> or </p>
-        <a href="/Front/register.jsp">
+        <a href="/FlexibleJobs/Front/register.jsp">
             <input style="border-radius: 15px; background-color: palegreen" type="submit" value="Sign Up">
         </a>
     </b>

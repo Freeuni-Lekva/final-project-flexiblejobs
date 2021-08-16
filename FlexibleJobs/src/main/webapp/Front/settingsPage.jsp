@@ -13,7 +13,7 @@
 <%
     Account acc=(Account) request.getSession().getAttribute("loggedUser");
     PersonalData data= acc.getPersonalData();
-    String webpage="/Front/successfulLogin";
+    String webpage="/FlexibleJobs/Front/successfulLogin";
     if(acc.getType().equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE))
         webpage += "Employee.jsp";
     else if(acc.getType().equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER))
@@ -28,7 +28,7 @@
 <body>
 <br>
 <a href=<%=webpage%>>Back</a><br>
-<form action="/updateData" method="post">
+<form action="/FlexibleJobs/updateData" method="post">
     <label for="firstname">Firstname: </label>
     <input name="firstname" type="text" id="firstname" value="<%=data.getFirstName()%>"><br>
     <label for="lastname">Lastname: </label>

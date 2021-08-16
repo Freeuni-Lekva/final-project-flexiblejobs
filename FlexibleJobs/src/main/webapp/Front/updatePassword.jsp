@@ -11,7 +11,7 @@
 <html>
 <%
     Account acc=(Account) request.getSession().getAttribute("loggedUser");
-    String webpage="/Front/successfulLogin";
+    String webpage="/FlexibleJobs/Front/successfulLogin";
     if(acc.getType().equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE))
         webpage += "Employee.jsp";
     else if(acc.getType().equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER))
@@ -27,7 +27,7 @@
 <br>
 <a href=<%=webpage%>>Back</a><br>
 
-<form action="/updatePassword" method="post">
+<form action="/FlexibleJobs/updatePassword" method="post">
     <label for="password">New Password: </label>
     <input name="password" type="password" id="password" placeholder="Enter New Password"><br>
     <input type="submit" value="Update">

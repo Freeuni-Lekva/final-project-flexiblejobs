@@ -6,6 +6,6 @@
 </head>
 <body>
 <br>
-<a href="/Front/successfulLoginEmployee.jsp" Back to homepage></a>
+<a href="/FlexibleJobs/Front/successfulLoginEmployee.jsp" Back to homepage></a>
 </body>
 </html>

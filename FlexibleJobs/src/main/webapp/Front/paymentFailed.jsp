@@ -16,7 +16,7 @@
 </head>
 <body>
 <h1>Payment not accepted. Please, check your balance.</h1><br>
-<form action="/fillBalance?jobId=<%=jobId%>&?employee=<%=employee%>" method="post">
+<form action="/FlexibleJobs/fillBalance?jobId=<%=jobId%>&?employee=<%=employee%>" method="post">
     <input type="submit"value="Fill balance">
 </form>
 </body>
