@@ -3,7 +3,7 @@
 
 <%@ page import="java.util.Set" %>
 <%@ page import="jobs.Job" %>
-Created by IntelliJ IDEA.
+<%--Created by IntelliJ IDEA.
   User: User
   Date: 03.08.2021
   Time: 14:23
@@ -41,7 +41,7 @@ Created by IntelliJ IDEA.
                 <h1><%=job.getHeader()%></h1>
                 <label>Status:<%=job.getJobStatus()%></label><br>
                 <label>Date posted:<%=job.getDate()%></label><br>
-                <a href="EmployerJob.jsp?jobId=<%=job.getJobId()%>">See More</a>
+                <a href="/Front/EmployerJob.jsp?jobId=<%=job.getJobId()%>">See More</a>
                 <hr>
             </li>
     <%

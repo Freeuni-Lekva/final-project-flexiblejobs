@@ -6,7 +6,8 @@
 <%@ page import="servlets.FlexibleJobsConstants" %>
 <%@ page import="accounts.AccountDao" %>
 <%@ page import="accounts.Account" %>
-<%@ page import="accounts.PersonalData" %><%--
+<%@ page import="accounts.PersonalData" %>
+<%--
   Created by IntelliJ IDEA.
   User: gioch
   Date: 09-Aug-21
@@ -30,12 +31,12 @@
     <%=job.getHeader()%><br>
 </head>
 <body>
-<a href=/Front/successfulLoginEmployer.jsp>Back</a><br>
 <label>Status:<%=job.getJobStatus()%></label><br>
 <label>Date posted:<%=job.getDate()%></label><br>
 <label><%=job.getDescription()%></label><br>
-<a href=/approve?jobId=<%=jobId%>>Close Job</a><br>
 <label>Applications:<%=apps.size()%></label><br>
+<a href=/Front/successfulLoginEmployer.jsp>Back</a><br>
+<a href=/approve?jobId=<%=jobId%>>Close Job</a><br>
 <br><br><br>
 <label>Applications</label><br>
 <%

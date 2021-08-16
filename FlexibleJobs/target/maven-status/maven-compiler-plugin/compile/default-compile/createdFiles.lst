@@ -1,6 +1,8 @@
 servlets\ExistedAccountLogin.class
 accounts\Review.class
 servlets\ChatHandler.class
+accounts\Tests\ReviewTests.class
+servlets\WorkApproval.class
 accounts\MessageDao.class
 jobs\ApplicationDAO.class
 servlets\JobsServlet.class
