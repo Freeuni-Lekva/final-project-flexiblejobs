@@ -17,29 +17,39 @@
 <html>
 <%
     State state = (State) request.getSession().getAttribute("state");
-    Account acc=(Account) request.getSession().getAttribute("loggedUser");
-    JobDatabase dao=(JobDatabase) request.getServletContext().getAttribute("jobDao");
-    Set<Job> jobs=dao.getJobsByEmployer(acc.getUserName());
 %>
 <head>
 
+    <script>
+        <%if(state == null || state.getLoggedUser() == null){%>
+        window.onload = function () {
+            window.location.href = "/FlexibleJobs/Front/login.jsp";
+        }
+        <%}%>
+
+        <%if(state != null && state.getLoggedUser() != null){%>
+        <%if(state.getLoggedUser().getType().equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE)){%>
+        window.onload = function () {
+            window.location.href = "/FlexibleJobs/Front/successfulLoginEmployee.jsp";
+        }
+        <%}%>
+        <%}%>
+
+        <%if(state == null)return;%>
+    </script>
+
+    <%
+        Account acc=(Account) request.getSession().getAttribute("loggedUser");
+        JobDatabase dao=(JobDatabase) request.getServletContext().getAttribute("jobDao");
+        Set<Job> jobs=dao.getJobsByEmployer(acc.getUserName());
+    %>
     <title>FlexibleJobs | World's best freelancing Webpage</title>
     Welcome <%=acc.getPersonalData().getFirstName()%><br>
     <a href="/updateData">Settings</a><br>
     <a href="/Front/updatePassword.jsp">Change Password</a><br>
     <a href="/Jobs_Front/Jobcreation.jsp">Post a job</a><br>
 
-    <script>
-        <%if(state == null || state.getLoggedUser() == null){%>
-            window.location.href = "/FlexibleJobs/Front/login.jsp";
-        <%}%>
 
-        <%if(state != null && state.getLoggedUser() != null){%>
-            <%if(state.getLoggedUser().getType().equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE)){%>
-                window.location.href = "/FlexibleJobs/Front/successfulLoginEmployee.jsp";
-            <%}%>
-        <%}%>
-    </script>
 </head>
 <body>
 

@@ -26,15 +26,20 @@
         <%State state = (State) request.getSession().getAttribute("state");%>
 
         <%if(state == null || state.getLoggedUser() == null){%>
-            window.location.href = "/FlexibleJobs/Front/login.jsp";
+            window.onload = function () {
+                window.location.href = "/FlexibleJobs/Front/login.jsp";
+            }
         <%}%>
 
-        <%if(state != null && state.getLoggedUser() != null){%>
+        <%if(state!= null && state.getLoggedUser()!=null){%>
             <%if(state.getLoggedUser().getType().equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYER)){%>
-                window.location.href = "/FlexibleJobs/Front/successfulLoginEmployer.jsp";
+                window.onload = function () {
+                    window.location.href = "/FlexibleJobs/Front/successfulLoginEmployer.jsp";
+                }
             <%}%>
         <%}%>
 
+        <%if(state == null)return;%>
         <%List<Account> contacts = state.getContacts();%>
         <%List<Message> conversation = state.getConversation();%>
 
