@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class JobDatabase {
@@ -237,7 +238,6 @@ public class JobDatabase {
                 String status = result.getString("jobstatus");
                 job = new Job(jobid, numApplications, status, employer, jobHeader, description,
                         budget, duration, date);
-                return job;
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -253,7 +253,7 @@ public class JobDatabase {
         return job;
     }
 
-    public void addJobSkills(Set<String> jobSkills, int jobId){
+    public void addJobSkills(List<String> jobSkills, int jobId){
         Connection connection = null;
         PreparedStatement statement = null;
         try {
@@ -328,6 +328,86 @@ public class JobDatabase {
             }
         }
         return  jobs;
+    }
+
+    public Job getJobByEmployerAndDate(String employer, String date){
+        Connection connection = null;
+        Job job = null;
+        try {
+            connection = dataSource.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(
+                    "select * FROM jobs WHERE employer = \"" + employer + "\" " +
+                            "and dateposted = \"" + date + "\"");
+            while (result.next()) {
+                int jobId = result.getInt("jobid");
+                String jobHeader = result.getString("heading");
+                String description = result.getString("jobdescription");
+                double budget = result.getDouble("budget");
+                String duration = result.getString("jobduration");
+                int numApplications = result.getInt("numapplications");
+                String status = result.getString("jobstatus");
+                job = new Job(jobId, numApplications, status, employer, jobHeader, description,
+                        budget, duration, date);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return job;
+    }
+
+    public void changeNumApplications(int jobid, int action){
+        Connection connection=null;
+        try {
+            connection=dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE jobs SET numapplications=? WHERE jobid = ?;");
+            Job job = getJob(jobid);
+            statement.setInt(1,job.getNumApplications() + action);
+            statement.setInt(2,jobid);
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            if(connection!=null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void changeJobStatus(int jobid, String newStatus){
+        Connection connection=null;
+        try {
+            connection=dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE jobs SET jobstatus=? WHERE jobid = ?;");
+            Job job = getJob(jobid);
+            statement.setString(1, newStatus);
+            statement.setInt(2,jobid);
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            if(connection!=null) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
     }
 
 }
