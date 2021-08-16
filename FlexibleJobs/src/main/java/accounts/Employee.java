@@ -50,6 +50,16 @@ public class Employee implements Account{
     }
 
     @Override
+    public void setBalance(int balance) {
+        this.balance=balance;
+    }
+
+    @Override
+    public void setRating(double rating) {
+        this.rating=new BigDecimal(rating);
+    }
+
+    @Override
     public synchronized void deposit(int amount) {
         balance+=amount;
         AccountDao.updateBalance(username,balance);

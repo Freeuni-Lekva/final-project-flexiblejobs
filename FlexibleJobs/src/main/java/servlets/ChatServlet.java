@@ -24,6 +24,10 @@ public class ChatServlet extends HttpServlet {
 
         State state = (State) req.getSession().getAttribute("state");
         Account loggedUser = state.getLoggedUser();
+        double d=accountDao.getRating(loggedUser.getUserName());
+        int b=accountDao.getCurrentBalance(loggedUser.getUserName());
+        loggedUser.setBalance(b);
+        loggedUser.setRating(d);
         String with = req.getParameter("conversationWith");
         Account conversationWith = accountDao.selectByUsername(with);
         List<Message> conversation = messageDao.getConversation(loggedUser.getUserName(), conversationWith.getUserName());
@@ -54,6 +58,11 @@ public class ChatServlet extends HttpServlet {
 
         State state = (State) req.getSession().getAttribute("state");
         Account loggedUser = state.getLoggedUser();
+        AccountDao accountDao=(AccountDao) req.getServletContext().getAttribute("accountDao");
+        double d=accountDao.getRating(loggedUser.getUserName());
+        int b=accountDao.getCurrentBalance(loggedUser.getUserName());
+        loggedUser.setBalance(b);
+        loggedUser.setRating(d);
         Account conversationWith = state.getConversationWith();
         List<Message> conversation = messageDao.getConversation(loggedUser.getUserName(), conversationWith.getUserName());
 

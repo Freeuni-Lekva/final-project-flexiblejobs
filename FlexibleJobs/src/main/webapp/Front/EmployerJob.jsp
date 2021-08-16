@@ -48,9 +48,6 @@
         <%
         if(app.getStatus().equals(FlexibleJobsConstants.APPLICATION_STATUS_WAITING)){
             %>
-<form>
-    <input type="submit" value="Interview">
-</form>
 <form action="/FlexibleJobs/appManager?jobId=+<%=jobId%>&?employee=<%=app.getEmployee()%>" method="post">
     <input type="submit" value="Hire">
 </form>

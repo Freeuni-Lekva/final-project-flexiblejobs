@@ -24,7 +24,12 @@ public class PersonalDataUpdater extends HttpServlet {
         String livingplace=req.getParameter("livingplace");
         String heading=req.getParameter("heading");
         String description=req.getParameter("description");
-	    Account acc=(Account)req.getSession().getAttribute("loggedUser");
+        Account acc=(Account)req.getSession().getAttribute("loggedUser");
+        AccountDao accountDao=(AccountDao) req.getServletContext().getAttribute("accountDao");
+        double d=accountDao.getRating(acc.getUserName());
+        int b=accountDao.getCurrentBalance(acc.getUserName());
+        acc.setBalance(b);
+        acc.setRating(d);
         PersonalData data=new PersonalData(acc.getUserName(),firstname,lastname,livingplace,heading,description);
 	    acc.setPersonalData(data);
         dao.updateData(data,acc.getUserName());

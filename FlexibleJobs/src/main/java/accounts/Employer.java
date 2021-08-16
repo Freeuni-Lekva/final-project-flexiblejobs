@@ -41,7 +41,8 @@ public class Employer implements Account{
 
     @Override
     public void changePassword(String newPassword) {
-
+        password=newPassword;
+        AccountDao.updatePassword(username,password);
     }
 
     @Override
@@ -51,12 +52,14 @@ public class Employer implements Account{
 
     @Override
     public void deposit(int amount) {
-
+        balance+=amount;
+        AccountDao.updateBalance(username,balance);
     }
 
     @Override
     public void withdraw(int amount) {
-
+        balance-=amount;
+        AccountDao.updateBalance(username,balance);
     }
 
     @Override
@@ -77,6 +80,15 @@ public class Employer implements Account{
     @Override
     public void addJob(Job job) {
 
+    }
+
+    @Override
+    public void setBalance(int balance) {
+        this.balance=balance;
+    }
+
+    @Override
+    public void setRating(double rating) {
     }
 
     @Override

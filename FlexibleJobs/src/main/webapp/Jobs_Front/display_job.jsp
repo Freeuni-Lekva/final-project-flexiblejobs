@@ -18,11 +18,11 @@
     <%=job.getHeader()%><br>
 </head>
 <body>
-<a href=/Front/successfulLoginEmployee.jsp>Back</a><br>
+<a href=/FlexibleJobs/Front/successfulLoginEmployee.jsp>Back</a><br>
 <label>Status:<%=job.getJobStatus()%></label><br>
 <label>Date posted:<%=job.getDate()%></label><br>
 <label><%=job.getDescription()%></label><br>
-<form action="/Jobs_Front/adding_application.jsp?id=<%=jobId%>">
+<form action="/FlexibleJobs/Jobs_Front/adding_application.jsp?id=<%=jobId%>">
     <input type="submit" value="send application">
 </form>
 </body>

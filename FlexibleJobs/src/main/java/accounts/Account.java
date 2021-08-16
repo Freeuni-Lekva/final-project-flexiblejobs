@@ -16,6 +16,10 @@ public interface Account {
 
     public int getBalance();
 
+    public void setBalance(int balance);
+
+    public void setRating(double  rating);
+
     public void deposit(int amount);
 
     public void withdraw(int amount);

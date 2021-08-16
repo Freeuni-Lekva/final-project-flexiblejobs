@@ -1,9 +1,6 @@
-<%@ page import="accounts.Account" %>
 <%@ page import="servlets.FlexibleJobsConstants" %>
-<%@ page import="accounts.Employee" %>
 <%@ page import="java.math.BigDecimal" %>
-<%@ page import="accounts.Employer" %>
-<%@ page import="accounts.Administrator" %><%--
+<%@ page import="accounts.*" %><%--
   Created by IntelliJ IDEA.
   User: gioch
   Date: 10-Aug-21
@@ -14,6 +11,11 @@
 <html>
 <%
     Account acc=(Account) request.getSession().getAttribute("loggedUser");
+    AccountDao accountDao=(AccountDao) request.getServletContext().getAttribute("accountDao");
+    double d=accountDao.getRating(acc.getUserName());
+    int b=accountDao.getCurrentBalance(acc.getUserName());
+    acc.setBalance(b);
+    acc.setRating(d);
     String webpage="/FlexibleJobs/Front/successfulLogin";
     if(acc.getType().equals(FlexibleJobsConstants.ACCOUNT_ROLE_EMPLOYEE))
         webpage += "Employee.jsp";

@@ -25,6 +25,11 @@ public class Administrator implements Account{
     }
 
     @Override
+    public void setBalance(int balance) {
+
+    }
+
+    @Override
     public String getUserName() {
         return username;
     }
